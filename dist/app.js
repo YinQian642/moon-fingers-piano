@@ -1,4 +1,5 @@
 import {KEYS,buildSong,pitchName,Transport} from './lib/music.js';
+import {archivedSong} from './lib/library.js';
 import {Piano} from './lib/audio.js';
 import {HandWorker} from './lib/hand-client.js';
 import {Sky} from './lib/visuals.js';
@@ -52,8 +53,29 @@ function renderState(){
   $('upcoming').replaceChildren();if(!free)for(const c of song.cues.slice(transport.index+1,transport.index+6)){const span=document.createElement('span');span.textContent=KEYS[c.slot].en;span.title=c.pitch;$('upcoming').append(span);}
 }
 
-function loadSong(midi,options){const next=buildSong(midi,options);song=next;transport.load(song);sky.reset();safeText('song-kicker',song.builtin?'CLAUDE DEBUSSY':'MIDI');$('song-title').replaceChildren();if(song.builtin){$('song-title').append('月光 ');const em=document.createElement('em');em.textContent='Clair de lune';$('song-title').append(em);}else $('song-title').textContent=song.title;safeText('song-details',`${song.key} · ${clock(song.duration)}`);renderState();}
-async function loadBuiltin(){const token=++loadToken;try{if(!builtinMidi){const res=await fetch('./assets/clair-de-lune.mid');if(!res.ok)throw Error('《月光》乐谱未能加载，请刷新重试。');builtinMidi=new window.Midi(await res.arrayBuffer());}if(token===loadToken)loadSong(builtinMidi,{title:'月光',trackIndex:0,builtin:true});}catch(e){toast(e.message);safeText('feedback','乐谱加载失败，点击曲库中的月光重试。');}}
+function installSong(next,display={}){song=next;transport.load(song);sky.reset();dreamStroke.reset();safeText('feedback','');safeText('song-kicker',display.composer||(song.builtin?'CLAUDE DEBUSSY':'MIDI'));$('song-title').replaceChildren();if(song.builtin){$('song-title').append('月光 ');const em=document.createElement('em');em.textContent='Clair de lune';$('song-title').append(em);}else $('song-title').textContent=display.title||song.title;safeText('song-details',`${song.key} · ${clock(song.duration)}`);renderState();}
+function loadSong(midi,options){installSong(buildSong(midi,options));}
+async function loadBuiltin(){const token=++loadToken;try{if(!builtinMidi){const res=await fetch('./assets/clair-de-lune.mid');if(!res.ok)throw Error('《月光》乐谱未能加载，请刷新重试。');builtinMidi=new window.Midi(await res.arrayBuffer());}if(token===loadToken)loadSong(builtinMidi,{title:'月光',trackIndex:0,builtin:true});}catch(e){if(token===loadToken){toast(e.message);safeText('feedback','乐谱加载失败，点击曲库中的月光重试。');}}}
+async function loadArchived(entry){
+  const token=++loadToken;transport.pause();
+  try{const response=await fetch(`./assets/music-library/${entry.performance}`);if(!response.ok)throw Error('乐谱未能加载，请在曲库中重试。');const next=archivedSong(await response.json(),entry);if(token===loadToken)installSong(next,entry);}
+  catch(error){if(token===loadToken)toast(error.message);}
+}
+async function loadLibrary(){
+  const container=$('archived-songs');
+  try{
+    const response=await fetch('./assets/music-library/catalog.json');if(!response.ok)throw Error('曲库未能加载');
+    const catalog=await response.json();if(catalog.schemaVersion!==1||!Array.isArray(catalog.entries))throw Error('曲库格式错误');
+    const rows=catalog.entries.map(entry=>{
+      if(!/^[a-z0-9-]+\/r\d{4}\/performance\.json$/.test(entry.performance)||typeof entry.title!=='string'||!Number.isFinite(entry.duration))throw Error('曲库条目错误');
+      const button=document.createElement('button');button.className='library-song';button.dataset.songId=entry.id;
+      const icon=document.createElement('span');icon.className='library-moon';icon.textContent='♬';icon.setAttribute('aria-hidden','true');
+      const details=document.createElement('div'),title=document.createElement('strong'),subtitle=document.createElement('small'),arrow=document.createElement('span');
+      title.textContent=entry.title;subtitle.textContent=`钢琴版 / ${clock(entry.duration)}`;details.append(title,subtitle);arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');button.append(icon,details,arrow);
+      button.onclick=()=>{loadArchived(entry);$('library-dialog').close();};return button;
+    });container.replaceChildren(...rows);
+  }catch{const retry=document.createElement('button');retry.className='subtle-button';retry.textContent='重新加载曲库';retry.onclick=loadLibrary;container.replaceChildren(retry);}
+}
 document.querySelectorAll('button[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 $('play-button').onclick=start;$('reset-button').onclick=()=>{transport.reset();dreamStroke.reset();piano.stopAll();renderState();sky.reset();safeText('feedback','');};
 $('accompaniment-toggle').onclick=()=>{transport.setDreamAccompaniment(!transport.dreamAccompaniment);$('accompaniment-toggle').setAttribute('aria-pressed',String(transport.dreamAccompaniment));};
@@ -63,7 +85,7 @@ for(const [button,dialog] of [['help-button','help-dialog'],['library-button','l
 document.querySelectorAll('.close-dialog').forEach(b=>b.onclick=()=>b.closest('dialog').close());document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}}));
 $('builtin-song').onclick=()=>{loadBuiltin();$('library-dialog').close();};$('import-button').onclick=$('library-import').onclick=()=>$('midi-file').click();
 $('midi-file').onchange=async e=>{const file=e.target.files[0];if(!file)return;const token=++loadToken;try{if(file.size>5*1024*1024)throw Error('请选择小于 5 MB 的 MIDI 文件。');const bytes=await file.arrayBuffer();if(new TextDecoder().decode(new Uint8Array(bytes,0,4))!=='MThd')throw Error('这不是标准 MIDI 文件，请选择 .mid 或 .midi 乐谱。');const parsed=new window.Midi(bytes);if(token!==loadToken)return;const title=file.name.replace(/\.midi?$/i,'');const track=parsed.tracks.findIndex(t=>t.notes.length&&t.channel!==9);const candidate=buildSong(parsed,{title,trackIndex:track});importedMidi=parsed;importTitle=title;loadSong(parsed,{title,trackIndex:candidate.trackIndex});$('imported-section').hidden=false;safeText('imported-name',title);$('melody-track').replaceChildren(...candidate.tracks.map(t=>{const o=document.createElement('option');o.value=t.index;o.textContent=`${t.name} · ${t.count} 音符`;return o;}));$('melody-track').value=candidate.trackIndex;$('library-dialog').showModal();toast('MIDI 已载入，可选择旋律音轨。');}catch(err){toast(`导入失败：${err.message}`);}finally{e.target.value='';}};
-$('melody-track').onchange=e=>{if(importedMidi)loadSong(importedMidi,{title:importTitle,trackIndex:Number(e.target.value)});};
+$('melody-track').onchange=e=>{if(importedMidi){++loadToken;loadSong(importedMidi,{title:importTitle,trackIndex:Number(e.target.value)});}};
 
 async function startCamera(){
   if(stream||startingCamera){stopCamera();return;}
@@ -112,8 +134,8 @@ let lastUi=0,lastPaint=0;
 function frame(now){const released=pinch.expire(now);if(mode==='free')released.forEach(slot=>piano.release(KEYS[slot].midi));transport.tick();if(!video.requestVideoFrameCallback)detectHands(now);if(now-lastPaint>16){sky.draw(now,mode,song,transport);lastPaint=now;}if(now-lastUi>150){safeText('position-label',clock(transport.position));lastUi=now;}requestAnimationFrame(frame);}
 document.addEventListener('visibilitychange',()=>{if(document.hidden){transport.pause();piano.stopAll();pinch.reset();}});window.addEventListener('pagehide',()=>{stopCamera();piano.stopAll();detector?.close();});
 // Introspection is read-only, useful for verifying timing without camera hardware.
-window.moonlight=Object.freeze({snapshot:()=>({mode,state:transport.state,position:transport.position,index:transport.index,hits:transport.hits,misses:transport.misses,cameraReady:!!detector?.ready,workerFrames:detector?.frames||0,inferenceMs:detector?.inferenceMs||0,cue:transport.cue?{slot:transport.cue.slot,midi:transport.cue.midi,time:transport.cue.time}:null,notes:song?.notes.length,cues:song?.cues.length,audioReady:piano.ready,dreamAccompaniment:transport.dreamAccompaniment,voices:piano.voices.size,contacts:pinch.states.map(s=>s.closed),sensitivity:pinch.threshold,contactStates:pinch.states.map(s=>({phase:s.phase,ratio:s.ratio,depthBlocked:s.depthBlocked})),audioAttacks:piano.attacks,inputCounts:[...inputCounts],lastInputBatch:[...lastInputBatch]})});
-document.body.dataset.mode=mode;await loadBuiltin();requestAnimationFrame(frame);
+window.moonlight=Object.freeze({snapshot:()=>({songId:song?.songId||(song?.builtin?"debussy-clair-de-lune-piano":null),title:song?.title,revision:song?.revision,mode,state:transport.state,position:transport.position,index:transport.index,hits:transport.hits,misses:transport.misses,cameraReady:!!detector?.ready,workerFrames:detector?.frames||0,inferenceMs:detector?.inferenceMs||0,cue:transport.cue?{slot:transport.cue.slot,midi:transport.cue.midi,time:transport.cue.time}:null,notes:song?.notes.length,cues:song?.cues.length,audioReady:piano.ready,dreamAccompaniment:transport.dreamAccompaniment,voices:piano.voices.size,contacts:pinch.states.map(s=>s.closed),sensitivity:pinch.threshold,contactStates:pinch.states.map(s=>({phase:s.phase,ratio:s.ratio,depthBlocked:s.depthBlocked})),audioAttacks:piano.attacks,inputCounts:[...inputCounts],lastInputBatch:[...lastInputBatch]})});
+document.body.dataset.mode=mode;loadLibrary();await loadBuiltin();requestAnimationFrame(frame);
 
 
 

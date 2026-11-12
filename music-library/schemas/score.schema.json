@@ -1,0 +1,362 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 100
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "composer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "description",
+        "license"
+      ],
+      "additionalProperties": false
+    },
+    "quality": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "draft",
+            "needs-review",
+            "ready"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        },
+        "uncertainSpans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "startTicks": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "endTicks": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "startTicks",
+              "endTicks",
+              "reason"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "status",
+        "notes",
+        "uncertainSpans"
+      ],
+      "additionalProperties": false
+    },
+    "header": {
+      "type": "object",
+      "properties": {
+        "ppq": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32767
+        },
+        "tempos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ticks": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "bpm": {
+                "type": "number",
+                "minimum": 4,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "ticks",
+              "bpm"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "timeSignatures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ticks": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "numerator": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 255
+              },
+              "denominator": {
+                "enum": [
+                  1,
+                  2,
+                  4,
+                  8,
+                  16,
+                  32,
+                  64,
+                  128
+                ]
+              }
+            },
+            "required": [
+              "ticks",
+              "numerator",
+              "denominator"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "keySignatures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ticks": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "fifths": {
+                "type": "integer",
+                "minimum": -7,
+                "maximum": 7
+              },
+              "mode": {
+                "enum": [
+                  "major",
+                  "minor"
+                ]
+              }
+            },
+            "required": [
+              "ticks",
+              "fifths",
+              "mode"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "ppq",
+        "tempos",
+        "timeSignatures",
+        "keySignatures"
+      ],
+      "additionalProperties": false
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/track"
+      },
+      "minItems": 1
+    },
+    "melodyNoteIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "composer",
+    "provenance",
+    "quality",
+    "header",
+    "tracks",
+    "melodyNoteIds"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:moon-fingers:score:1",
+  "title": "Moon Fingers canonical score v1",
+  "$defs": {
+    "note": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "midi": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "ticks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "durationTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "velocity": {
+          "type": "number",
+          "minimum": 0.007874015748031496,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "id",
+        "midi",
+        "ticks",
+        "durationTicks",
+        "velocity"
+      ],
+      "additionalProperties": false
+    },
+    "track": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "channel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "not": {
+            "const": 9
+          }
+        },
+        "program": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/note"
+          },
+          "minItems": 0
+        },
+        "controlChanges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 127
+              },
+              "ticks": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "value": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "number",
+              "ticks",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "pitchBends": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ticks": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "value": {
+                "type": "number",
+                "minimum": -1,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "ticks",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "channel",
+        "program",
+        "notes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "description": "Semantic checks (unique note ids, increasing cue onsets, existing note references, file checksums and MIDI round trip) are enforced by tools/archive.mjs."
+}

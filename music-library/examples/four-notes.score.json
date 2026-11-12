@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "id": "example-four-notes",
+  "title": "格式示例：四音与低音",
+  "composer": "Example",
+  "provenance": {
+    "kind": "text",
+    "description": "Original short format example, not a transcription of an existing song.",
+    "license": "CC0-1.0"
+  },
+  "quality": {
+    "status": "draft",
+    "notes": "仅用于学习文件格式，不自动加入正式曲库。",
+    "uncertainSpans": []
+  },
+  "header": {
+    "ppq": 480,
+    "tempos": [
+      {
+        "ticks": 0,
+        "bpm": 90
+      },
+      {
+        "ticks": 1440,
+        "bpm": 100
+      }
+    ],
+    "timeSignatures": [
+      {
+        "ticks": 0,
+        "numerator": 4,
+        "denominator": 4
+      }
+    ],
+    "keySignatures": [
+      {
+        "ticks": 0,
+        "fifths": 0,
+        "mode": "major"
+      }
+    ]
+  },
+  "tracks": [
+    {
+      "id": "melody",
+      "name": "Melody",
+      "channel": 0,
+      "program": 0,
+      "notes": [
+        {
+          "id": "m1",
+          "midi": 64,
+          "ticks": 0,
+          "durationTicks": 720,
+          "velocity": 0.75
+        },
+        {
+          "id": "m2",
+          "midi": 60,
+          "ticks": 480,
+          "durationTicks": 360,
+          "velocity": 0.75
+        },
+        {
+          "id": "m3",
+          "midi": 60,
+          "ticks": 960,
+          "durationTicks": 360,
+          "velocity": 0.75
+        },
+        {
+          "id": "m4",
+          "midi": 67,
+          "ticks": 1440,
+          "durationTicks": 360,
+          "velocity": 0.75
+        }
+      ]
+    },
+    {
+      "id": "backing",
+      "name": "Backing",
+      "channel": 1,
+      "program": 0,
+      "notes": [
+        {
+          "id": "b1",
+          "midi": 48,
+          "ticks": 0,
+          "durationTicks": 1920,
+          "velocity": 0.5
+        }
+      ]
+    }
+  ],
+  "melodyNoteIds": [
+    "m1",
+    "m2",
+    "m3",
+    "m4"
+  ]
+}

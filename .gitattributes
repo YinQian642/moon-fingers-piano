@@ -1,0 +1,12 @@
+* text=auto eol=lf
+# Checksummed archives and deployed files must retain their exact bytes on every OS.
+music-library/** -text -whitespace
+dist/** -text
+dist/assets/music-library/** -text -whitespace
+serve.mjs -text
+*.png -text
+*.jpg -text
+*.mp3 -text
+*.mid -text
+*.wasm -text
+*.task -text

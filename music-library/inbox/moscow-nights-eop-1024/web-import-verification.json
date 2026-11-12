@@ -1,0 +1,19 @@
+{
+  "valid": true,
+  "check": "existing v5 webpage actual import in headless Chrome",
+  "webMidi": "C:\\Users\\殷千\\Documents\\ChatGPT\\piane\\music-library\\songs\\moscow-nights-eop-1024-piano\\revisions\\r0001\\web.mid",
+  "webMidiSha256": "22eccbb708af40fc7a99c853bc7d61c1eee806d82ca1af5dfcaa582f96672aff",
+  "notes": 199,
+  "melody": 58,
+  "firstMelodyMidi": 69,
+  "trackOptions": [
+    "Melody · 58 音符",
+    "Backing 1 · 2 音符",
+    "Backing 2 · 139 音符"
+  ],
+  "selectedTrack": 0,
+  "browserErrors": [],
+  "actualListening": false,
+  "codeModified": false,
+  "published": false
+}

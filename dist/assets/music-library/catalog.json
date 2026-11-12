@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "moscow-nights-eop-1024-piano",
+      "revision": "r0001",
+      "title": "莫斯科郊外的晚上",
+      "composer": "Vasily Solovyov-Sedoy",
+      "status": "needs-review",
+      "duration": 31.25,
+      "performance": "moscow-nights-eop-1024-piano/r0001/performance.json"
+    }
+  ]
+}

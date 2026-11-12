@@ -1,0 +1,64 @@
+{
+  "valid": true,
+  "scope": "two image readings, canonical events, exported MIDI and v5 extractor; not auditory verification",
+  "sourcePagesRead": 2,
+  "writtenMeasures": 18,
+  "playbackMeasures": 25,
+  "notes": 199,
+  "melody": 58,
+  "accompaniment": 141,
+  "durationSeconds": 31.25,
+  "pitchRange": [
+    38,
+    83
+  ],
+  "key": "A minor",
+  "ppq": 480,
+  "timeSignature": "2/4",
+  "tempoBpm": 96,
+  "tempoChangeCount": 0,
+  "sharpNoteCount": 11,
+  "tieMergeCount": 2,
+  "lhQuarterRests": [
+    {
+      "sourceBar": 12,
+      "playbackBar": 12,
+      "ticks": 11040,
+      "durationTicks": 480
+    },
+    {
+      "sourceBar": 12,
+      "playbackBar": 21,
+      "ticks": 19680,
+      "durationTicks": 480
+    }
+  ],
+  "repeatedMelodyPairs": [
+    {
+      "previous": "p05-s05-rh-3-1",
+      "current": "p05-s05-rh-4-1",
+      "midi": 79,
+      "previousTicks": 4320,
+      "ticks": 4560
+    },
+    {
+      "previous": "p15-s15-rh-1-1",
+      "current": "p16-s16-rh-1-1",
+      "midi": 69,
+      "previousTicks": 13440,
+      "ticks": 14400
+    },
+    {
+      "previous": "p24-s17-rh-1-1",
+      "current": "p25-s18-rh-1-3",
+      "midi": 81,
+      "previousTicks": 22080,
+      "ticks": 23100
+    }
+  ],
+  "fullMidiRoundtrip": true,
+  "webMidiRoundtrip": true,
+  "webMelodyMatches": true,
+  "shortenedMelodyCount": 0,
+  "actualListening": false
+}

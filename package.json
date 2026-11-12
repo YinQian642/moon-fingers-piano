@@ -1,12 +1,19 @@
 {
-  "name": "moon-fingers-replica",
-  "version": "5.0.0",
+  "name": "moon-fingers-piano",
+  "version": "6.0.0",
   "private": true,
   "type": "module",
-  "description": "指间月光 · 手势钢琴 — 第 5 版完整复刻（离线可运行）",
+  "description": "指间月光 · 手势钢琴，共享曲库与 GitHub Pages",
   "scripts": {
     "start": "node serve.mjs",
     "verify": "node verify-dist.mjs",
-    "test:browser": "node tools/verify-replica.mjs"
+    "test": "node --test tests/*.test.mjs music-library/tools/archive.test.mjs",
+    "test:browser": "node tools/verify-replica.mjs",
+    "test:library": "node tests/library-browser.mjs",
+    "prepare:site": "node scripts/prepare-site.mjs"
+  },
+  "devDependencies": {
+    "@tonejs/midi": "2.0.28",
+    "@playwright/test": "1.58.2"
   }
 }

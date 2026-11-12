@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "id": "moscow-nights-eop-1024-piano",
+  "revision": "r0001",
+  "title": "莫斯科郊外的晚上 · EOP 1024 钢琴版",
+  "composer": "Vasily Solovyov-Sedoy（瓦西里·索洛维约夫-谢多伊）",
+  "createdAt": "2026-11-12T18:06:12.910Z",
+  "status": "needs-review",
+  "sourceFiles": [
+    {
+      "name": "score.json",
+      "sha256": "3a0813c24fc30f0ec0fc11db8ca20236db0b6302e42046fa542427f8ad4cc683",
+      "bytes": 40524
+    },
+    {
+      "name": "0001024-j-b-1.png",
+      "sha256": "57e334224d46d88e6049915391f8443e2442fdcc3c80b1fc5efb83e38b440301",
+      "bytes": 113988
+    },
+    {
+      "name": "0001024-j-s-1.jpg",
+      "sha256": "4cb7d0426cf9456a61a2ba2f619b2dd76fe1559ee1f09a664cc71e5adb7ccdd5",
+      "bytes": 16439
+    },
+    {
+      "name": "0001024-w-b-1.png",
+      "sha256": "d93bc18e3db6438bea42adb8350a807c7e39ee0671d0099baf91b2973f4b0d81",
+      "bytes": 144547
+    },
+    {
+      "name": "0001024-w-s-1.jpg",
+      "sha256": "1bf580ae6e890505dfdfcbe6443f4d60b5f0b6c2feee750fc85e7e547283422d",
+      "bytes": 23705
+    },
+    {
+      "name": "number-page.html",
+      "sha256": "16939e180e0f5dd3c5dc4eb1218a9abce67b23d6f89fd423ad65f30fd55e5df1",
+      "bytes": 34996
+    },
+    {
+      "name": "program-verification.json",
+      "sha256": "42457b8d583524f594eae00af3aa46b8d117787d52cc43ce89a64edcbceea9a2",
+      "bytes": 1352
+    },
+    {
+      "name": "source-notes.txt",
+      "sha256": "339e8a187554fb55a507eea7c8a97982c26768ad058a82653647abf6b8b156a3",
+      "bytes": 4377
+    },
+    {
+      "name": "source-page.html",
+      "sha256": "9b97f40d401a4065b4c0b13827b1ce4abea2420515fa3a5252c125b8aff16114",
+      "bytes": 63524
+    },
+    {
+      "name": "stave-page.html",
+      "sha256": "321c12e7d5c86dadfbf00be2f2796fcc5eb2108a341a2989f3d1683365783078",
+      "bytes": 19100
+    },
+    {
+      "name": "transcribe.mjs",
+      "sha256": "6fbb6e4a41286262e90032d54f526e398dd3db7007ea0b66f49ffa1fa3eeaabe",
+      "bytes": 9325
+    },
+    {
+      "name": "transcription-map.json",
+      "sha256": "d97689548488d7cb879cb575513dd95700b0b788490fbdd12b5a4ba6c34d6da5",
+      "bytes": 65213
+    },
+    {
+      "name": "user-material.txt",
+      "sha256": "a6cd79c0e19ad6e8f91c3a8b2f6c92878a4e16f8aa562ab8543f911994ec9af6",
+      "bytes": 465
+    },
+    {
+      "name": "verify-transcription.mjs",
+      "sha256": "8ea51a10fc5497af68b777bb5d70f03279b123b58f864e2ce5d37646c24012ae",
+      "bytes": 5738
+    }
+  ],
+  "noteCount": 199,
+  "melodyCount": 58,
+  "accompanimentCount": 141,
+  "durationSeconds": 31.25,
+  "keyChanges": [
+    {
+      "ticks": 0,
+      "fifths": 0,
+      "mode": "minor",
+      "key": "A"
+    }
+  ],
+  "webAdaptation": {
+    "melodyTrack": 0,
+    "shortenedMelodyNoteIds": [],
+    "reason": "Only web.mid clips overlapping melody durations so the v5 importer does not discard lower legato notes. score.json, full.mid and performance.json retain original durations."
+  },
+  "files": {
+    "score.json": {
+      "sha256": "3a0813c24fc30f0ec0fc11db8ca20236db0b6302e42046fa542427f8ad4cc683",
+      "bytes": 40524
+    },
+    "performance.json": {
+      "sha256": "b26500f6e618a583b667c3fc1c1370faaa0ecee77ae0a6e55fb36a1034dc4713",
+      "bytes": 90360
+    },
+    "full.mid": {
+      "sha256": "3ae3e1b562dfa0c596bc392548092d1c9bab750bf49993beb72d4fecf2f21e8e",
+      "bytes": 1835
+    },
+    "web.mid": {
+      "sha256": "22eccbb708af40fc7a99c853bc7d61c1eee806d82ca1af5dfcaa582f96672aff",
+      "bytes": 1824
+    },
+    "sources/score.json": {
+      "sha256": "3a0813c24fc30f0ec0fc11db8ca20236db0b6302e42046fa542427f8ad4cc683",
+      "bytes": 40524
+    },
+    "sources/0001024-j-b-1.png": {
+      "sha256": "57e334224d46d88e6049915391f8443e2442fdcc3c80b1fc5efb83e38b440301",
+      "bytes": 113988
+    },
+    "sources/0001024-j-s-1.jpg": {
+      "sha256": "4cb7d0426cf9456a61a2ba2f619b2dd76fe1559ee1f09a664cc71e5adb7ccdd5",
+      "bytes": 16439
+    },
+    "sources/0001024-w-b-1.png": {
+      "sha256": "d93bc18e3db6438bea42adb8350a807c7e39ee0671d0099baf91b2973f4b0d81",
+      "bytes": 144547
+    },
+    "sources/0001024-w-s-1.jpg": {
+      "sha256": "1bf580ae6e890505dfdfcbe6443f4d60b5f0b6c2feee750fc85e7e547283422d",
+      "bytes": 23705
+    },
+    "sources/number-page.html": {
+      "sha256": "16939e180e0f5dd3c5dc4eb1218a9abce67b23d6f89fd423ad65f30fd55e5df1",
+      "bytes": 34996
+    },
+    "sources/program-verification.json": {
+      "sha256": "42457b8d583524f594eae00af3aa46b8d117787d52cc43ce89a64edcbceea9a2",
+      "bytes": 1352
+    },
+    "sources/source-notes.txt": {
+      "sha256": "339e8a187554fb55a507eea7c8a97982c26768ad058a82653647abf6b8b156a3",
+      "bytes": 4377
+    },
+    "sources/source-page.html": {
+      "sha256": "9b97f40d401a4065b4c0b13827b1ce4abea2420515fa3a5252c125b8aff16114",
+      "bytes": 63524
+    },
+    "sources/stave-page.html": {
+      "sha256": "321c12e7d5c86dadfbf00be2f2796fcc5eb2108a341a2989f3d1683365783078",
+      "bytes": 19100
+    },
+    "sources/transcribe.mjs": {
+      "sha256": "6fbb6e4a41286262e90032d54f526e398dd3db7007ea0b66f49ffa1fa3eeaabe",
+      "bytes": 9325
+    },
+    "sources/transcription-map.json": {
+      "sha256": "d97689548488d7cb879cb575513dd95700b0b788490fbdd12b5a4ba6c34d6da5",
+      "bytes": 65213
+    },
+    "sources/user-material.txt": {
+      "sha256": "a6cd79c0e19ad6e8f91c3a8b2f6c92878a4e16f8aa562ab8543f911994ec9af6",
+      "bytes": 465
+    },
+    "sources/verify-transcription.mjs": {
+      "sha256": "8ea51a10fc5497af68b777bb5d70f03279b123b58f864e2ce5d37646c24012ae",
+      "bytes": 5738
+    }
+  }
+}

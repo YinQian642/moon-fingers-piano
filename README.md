@@ -1,138 +1,63 @@
 # 指间月光 · 手势钢琴
 
-**第 5 版完整复刻 · Moon Fingers v5**
+正式网站：[GitHub Pages](https://yinqian642.github.io/moon-fingers-piano/) · 唯一共享仓库：[YinQian642/moon-fingers-piano](https://github.com/YinQian642/moon-fingers-piano)
 
-对一个开源手势钢琴网页第 5 版快照（`a22d8816fd7b017a05acefc00a6da9cbe8605dd6`）的完整、离线可运行复刻。页面结构、样式、逻辑、MediaPipe 手部模型与 WASM、28 个钢琴采样、内置《月光》MIDI 和 LilyPond 乐谱全部保持原样，**没有改写任何运行时文件**。
+全部音乐、模式、UI、手势代码及交接资料均在本仓库维护。原 ChatGPT Sites 地址已弃用。本机目录只作可替换的工作副本；无需原作者电脑即可读取源码、复核音乐、继续开发和发布。
 
-**在线地址（GitHub Pages）：** https://yinqian642.github.io/moon-fingers-piano/
+## 从哪里开始
 
-**GitHub 仓库：** https://github.com/YinQian642/moon-fingers-piano
+- 新接手的智能体：先读 [AGENTS.md](AGENTS.md) 和 [交接大纲](docs/交接大纲.md)。
+- 录入音乐：读 [固定工作提示词](music-library/固定工作提示词.txt)、[曲库说明](music-library/README.txt)、[曲目索引](music-library/catalog.json)。
+- 修改网页：`dist/` 包含全部网页代码、识别模型、WASM、钢琴采样与运行曲库。
+- 浏览器开发：从仓库的 **Code → Codespaces** 创建环境，依赖安装后运行 `npm start`，打开 4192 转发端口预览。提交推送后由 Actions 检查与部署。Codespaces 由 GitHub 账户额度管理，本仓库未替用户创建实例。
 
-![音乐引导界面](screenshots/01-guided-ready.png)
+## 当前曲目与模式
 
-## 快速开始
+| 曲目 | 网页版本 | 音符 / 旋律事件 | 原谱时长 |
+| --- | --- | --- | --- |
+| 德彪西《月光》 | 保留第 5 版 MIDI 播放；档案另存 r0001、r0002 | 1,468 / 306 | 322.5 秒 |
+| 《莫斯科郊外的晚上》EOP 1024 钢琴版 | 显式旋律档案 r0001，A 小调 | 199 / 58 | 31.25 秒 |
 
-只需要 Node.js（本复刻在 Node.js 24.22.0 上验证），不需要 `npm install`、不需要构建、不需要联网。
+《莫斯科郊外的晚上》按用户存入的版本接入，并非完整商业录音转写。档案标记 `needs-review`，琶音时序与反复展开仍待试听。《月光》档案也保留声部复核标记。
 
-```bash
-node verify-dist.mjs     # 校验 52 个运行时文件
-node serve.mjs           # 启动本地服务器
-```
+自由演奏使用 C4–C5 钢琴音；音乐引导按照原曲音高和指法提示推进；梦想模式由每次独立触碰推进一枚旋律音，伴奏默认关闭、可自行开启。重复同音逐次触发。按键从左至右对应左手小指至食指、右手食指至小指；也支持鼠标和 `A S D F / J K L ;`。
 
-然后在 Chrome 或 Edge 打开：
+## 完全通过 GitHub 继续工作
 
-```
-http://127.0.0.1:4192
-```
+`main` 是源码与音乐档案的权威分支。`.github/workflows/pages.yml` 在推送 `main` 时校验档案、生成网站曲库、执行测试并把 `dist/` 部署到 GitHub Pages；PR 运行验证但不发布。无需本机长期运行服务。
 
-Windows 也可以双击 `启动复刻网页.cmd`，并保持命令行窗口开启。
+仓库 **Settings → Pages → Build and deployment → Source** 应设为 **GitHub Actions**。发布状态见 **Actions → Validate and deploy piano**；deploy 成功才表示网站已更新，推送成功不等于上线。原 `gh-pages` 保留作迁移记录，启用 Actions 后不再手工维护两套网页。
 
-首次使用：点击「开始 / 开启声音」，等钢琴采样加载完成；再点击「开启摄像头」并授权。摄像头只在浏览器本机推理，画面不上传。摄像头要求 `localhost` / `127.0.0.1` 或 HTTPS，**不要**直接双击 `dist/index.html` 用 `file://` 打开。
+新歌在 `music-library/` 形成完整、校验通过的档案后，云端构建自动接入曲库。《月光》继续使用已有播放版本，切换到档案版本需另行核对。`dist/assets/music-library/` 是可再生成的发布数据，`music-library/` 是权威乐谱与来源。
 
-> 端口 4192 被占用时，先结束旧的同名服务再启动。本目录的 `serve.mjs` 与原版一致，固定监听 `127.0.0.1:4192`。
+协作前同步最新 `main`。遇到远端更新，应合并合作者修改，禁止强推覆盖。音乐旧修订不可覆盖；新修改由归档工具生成修订。无写权限的智能体应交付补丁或 PR，明确尚未发布。
 
-## 发布为独立网站
+## 可选的本地运行与验证
 
-这是纯静态站点，把 `dist/` 的全部内容原样上传即可。服务器需要：
+仅运行网页不需要安装依赖：`node serve.mjs`，打开 `http://127.0.0.1:4192`。也可用 `启动复刻网页.cmd`。摄像头需 HTTPS 或 localhost，不能直接双击 HTML。
 
-- 使用 **HTTPS**（摄像头在非 localhost 环境要求安全上下文）；
-- 正确返回 `.mjs` / `.js`（`text/javascript`）、`.wasm`（`application/wasm`）、`.task`、`.mp3`（`audio/mpeg`）、`.mid`（`audio/midi`）等类型；
-- 保留 `assets/`、`vendor/`、`vendor/wasm/` 的相对目录结构，不要只上传 `index.html`；
-- 允许 Web Worker 与 WebAssembly 正常加载。
-
-不要复用原项目的托管身份或 `.openai/hosting.json`；本复刻未包含该配置，发布时应使用自己的站点。
-
-当前在线版使用 GitHub Pages：`main` 分支保存完整源码，`gh-pages` 分支保存 `dist/` 的站点内容并附带 `.nojekyll`，Pages 从 `gh-pages` 根目录发布。修改 `dist/` 后重新生成并推送 `gh-pages` 即可更新线上页面：
+开发验证使用 Node.js 24：
 
 ```bash
-git subtree split --prefix=dist -b gh-pages
-git push origin gh-pages
+npm ci
+npm run prepare:site
+npm test
+npm run verify
+npm start
+# 另一个终端，使用已安装的 Chrome：
+npm run test:library
 ```
 
-更新后通常一到两分钟生效。
+`prepare:site` 校验档案、同步新歌、更新运行时 SHA-256 清单。单曲同步：`node scripts/sync-song.mjs music-library <song-id>`。新曲浏览器测试支持 `TEST_URL`、`CHROME_PATH` 环境变量；旧无依赖浏览器测试保留为 `npm run test:browser`。
 
-## 三个演奏模式
+自动测试不能证明真人手势识别准确率或音乐已完成试听。原 26 项复刻记录及截图见 [VERIFICATION.md](VERIFICATION.md)，属于历史记录。
 
-| 模式 | 行为 |
-| --- | --- |
-| 自由演奏 | 左手小指 → 无名指 → 中指 → 食指为 Do Re Mi Fa；右手食指 → 中指 → 无名指 → 小指为 Sol La Si 高 Do。固定 C4–C5，双手、多指可同时发声，保留钢琴采样和适度尾音。 |
-| 音乐引导 | 按提示的指法触碰对应手指，乐曲按原谱继续；停手时等待。原谱决定实际音高与八度，不转调。 |
-| 梦想模式 | 任意指尖触碰拇指，立即奏响下一枚旋律音并推进画面，节奏完全由触碰决定；同一次合击只推进一音。伴奏可单独开启，默认关闭。 |
+## 文件与历史
 
-屏幕琴键和 `A S D F / J K L ;` 与摄像头输入等价，空格暂停 / 继续，`↺` 从头开始。右侧「识别设置」可调触碰灵敏度（0.22–0.46，默认 0.34）和交换左右手标签；曲库支持导入 `.mid` / `.midi`、选择旋律音轨。
+`dist/` 为网页；`music-library/` 为档案、来源及规范；`scripts/` 为生成工具；`tests/` 为测试；`.github/` 为云端验证和部署；`.devcontainer/` 为 Codespaces 环境；`docs/` 为交接与历史说明。
 
-## 页面能力
+`MANIFEST.sha256.json` 校验当前运行文件。`docs/v5-MANIFEST.sha256.json`、`docs/v5-SNAPSHOT.json`、`docs/v5-复刻说明.md` 保留初次复刻记录。当前更新以 Git 历史为准。
 
-- 深空蓝紫暖色主题、细小慢移星点背景、由输入驱动的下落音符与触碰涟漪。
-- 三个模式共用八指输入、Salamander 钢琴采样、Web Audio 包络与同音重击处理。
-- MediaPipe Hand Landmarker 在 Web Worker 内本地推理，GPU 不可用时回退 CPU；同一时刻只处理一帧，不堆积旧画面。
-- 内置德彪西《月光》完整钢琴 MIDI：1,468 个音符、306 个手势提示、322.5 秒；保留原调与实际音高。
-- 曲库、MIDI 导入、帮助弹窗、来源弹窗、进度拖动、速度选择、音量控制。
-- 桌面、平板与手机布局（800px / 450px 断点），并遵循 `prefers-reduced-motion`。
+## 来源
 
-## 项目结构
-
-```
-moon-fingers-replica/
-├─ dist/                     # 完整静态网站（51 个文件，逐字节来自源快照）
-│  ├─ index.html
-│  ├─ style.css / cosmos.css
-│  ├─ app.js
-│  ├─ lib/                   # music / gestures / audio / visuals / hand worker
-│  ├─ assets/                # 28 个钢琴 MP3、MIDI、LilyPond 乐谱
-│  └─ vendor/                # MediaPipe 模型、WASM、midi.js 及第三方授权
-├─ serve.mjs                 # 零依赖本地静态服务器（127.0.0.1:4192）
-├─ verify-dist.mjs           # 运行时文件 SHA-256 校验
-├─ MANIFEST.sha256.json      # 源快照逐文件校验清单
-├─ SNAPSHOT.json             # 源快照版本元数据
-├─ 启动复刻网页.cmd
-├─ tools/verify-replica.mjs  # 无 npm 依赖的 CDP 端到端浏览器验证
-├─ screenshots/              # 复刻实机截图与验证报告
-├─ docs/                     # 原版 README 与源码交接说明
-└─ README.md / VERIFICATION.md
-```
-
-## 完整性校验
-
-```bash
-node verify-dist.mjs
-```
-
-输出：
-
-```
-Verified 52 runtime files (dist/ + serve.mjs).
-Source snapshot a22d8816fd7b017a05acefc00a6da9cbe8605dd6.
-```
-
-源包校验清单共 68 个文件；其中真正构成网页运行的 51 个 `dist/` 文件和 `serve.mjs` 全部纳入并逐字节校验。原包的开发测试、浏览器测试运行器、资源下载脚本和 `.openai/hosting.json` 托管身份配置不参与网页运行，因此未纳入本复刻；原始说明仍保存在 `docs/`。
-
-## 验证结果
-
-已在 Windows + Chrome 157.0.8103.51 上通过无头浏览器完整跑通：三种模式、8 个键盘音、MIDI 导入、曲库恢复、进度跳转、屏幕琴键、MediaPipe 模型加载与实时推理、28 个钢琴采样解码、移动端布局。**26 项检查全部通过**，没有页面异常、失败请求、4xx/5xx 或外部网络依赖。
-
-详见 [VERIFICATION.md](VERIFICATION.md) 与 [screenshots/report.json](screenshots/report.json)。
-
-| 音乐引导 | 自由演奏 |
-| --- | --- |
-| ![音乐引导](screenshots/03-guided-playing.png) | ![自由演奏](screenshots/04-free-play.png) |
-| **梦想模式** | **移动端** |
-| ![梦想模式](screenshots/05-dream-mode.png) | ![移动端](screenshots/08-mobile.png) |
-
-## 已知限制
-
-- 源快照第 5 版的手势识别尚未经过使用者真实摄像头复测。本复刻的自动化验证使用 Chrome 假摄像头，只证明模型能加载并以约 150 ms/帧推理，**不代表真实手指触碰的识别率**。
-- 实际识别表现受摄像头、光照、遮挡、双手交叉、浏览器和系统字体影响；不同设备的音量、延迟与像素级外观可能不同。
-- 音频验证覆盖采样解码、Web Audio 声部与触键事件；实际扬声器响度与听感取决于设备。
-- 验证浏览器为 Chrome；Safari / Firefox 未做现场验证。
-- MIDI 导入采用高声部旋律提取策略，复杂乐曲可通过切换音轨改善结果；不支持 MP3/WAV 自动转谱、踏板控制器、弯音或多乐器音色。
-
-## 来源与授权
-
-- 乐谱与 MIDI：[Mutopia Project #1778](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1778)，Keith OHara 制谱，依据 E. Fromont（1905），Public Domain。原始 LilyPond 文件保留在 `dist/assets/clair-de-lune.ly`。
-- 钢琴采样：[Salamander Grand Piano / Alexander Holm](https://github.com/Tonejs/audio/blob/master/salamander/README)，CC BY 3.0，使用 Tone.js 托管的 MP3 采样，授权文件在 `dist/assets/piano/LICENSE.txt`。
-- 手部识别：Google MediaPipe Hand Landmarker，Apache 2.0，模型、WASM 与授权文件在 `dist/vendor/`。
-- [@tonejs/midi](https://github.com/Tonejs/Midi) 2.0.28，MIT，浏览器解析器与授权文件在 `dist/vendor/`。
-- 原网页快照与线上地址见 `SNAPSHOT.json`；原版技术说明与交接文档保存在 `docs/`。
-
-本复刻仅重新打包与验证，页面运行时文件未做修改。若需二次发布，请保留上述第三方授权文件与来源标注。
+《月光》来自 Mutopia Project #1778，Keith OHara 制谱，原谱和 MIDI 标为 Public Domain。新曲为用户归档的 EOP 1024 钢琴谱，来源、质量、授权状态保存在修订的 `score.json` 与 `metadata.json`。钢琴采样为 Salamander Grand Piano / Alexander Holm（CC BY 3.0）；MediaPipe、MIDI 库授权随 `assets/`、`vendor/` 保留。技术细节见 [当前技术说明](docs/当前技术说明.md)。

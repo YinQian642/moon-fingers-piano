@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "id": "debussy-clair-de-lune-piano",
+  "revision": "r0002",
+  "title": "月光 · Clair de lune",
+  "composer": "Claude Debussy",
+  "createdAt": "2026-11-12T17:45:30.513Z",
+  "status": "needs-review",
+  "sourceFiles": [
+    {
+      "name": "clair-de-lune-r2.score.json",
+      "sha256": "8ea6949db93516bbf25f5e25529b1c825320a838a7bece4ab3d07e71b9ff465b",
+      "bytes": 261107
+    },
+    {
+      "name": "clair-de-lune.mid",
+      "sha256": "4eee9a1546ffde1ff74cb9824ba0e57cbc821185a15185bfea9faed97820bf8c",
+      "bytes": 12476
+    },
+    {
+      "name": "clair-de-lune.ly",
+      "sha256": "c1c58f806a8939fc5a157707ea479403abb9655a4820b25bb6b98e39fd781e7a",
+      "bytes": 17978
+    }
+  ],
+  "noteCount": 1468,
+  "melodyCount": 306,
+  "accompanimentCount": 1162,
+  "durationSeconds": 322.5,
+  "keyChanges": [
+    {
+      "ticks": 0,
+      "fifths": -5,
+      "mode": "major",
+      "key": "Db"
+    },
+    {
+      "ticks": 62208,
+      "fifths": 4,
+      "mode": "minor",
+      "key": "C#"
+    },
+    {
+      "ticks": 72576,
+      "fifths": -5,
+      "mode": "major",
+      "key": "Db"
+    }
+  ],
+  "webAdaptation": {
+    "melodyTrack": 0,
+    "shortenedMelodyNoteIds": [],
+    "reason": "Only web.mid clips overlapping melody durations so the v5 importer does not discard lower legato notes. score.json, full.mid and performance.json retain original durations."
+  },
+  "files": {
+    "score.json": {
+      "sha256": "6624555e28c4a016bbee3bfbebae5df7fde80d32efd7ac15561fc564bc4821c3",
+      "bytes": 250451
+    },
+    "performance.json": {
+      "sha256": "421c8a47105286cc95d9c43097a077c30c48f1599d73cb783dc101942bba8cd8",
+      "bytes": 613775
+    },
+    "full.mid": {
+      "sha256": "c1b5da3c94c642c43397124e4e6a26d2f20abc938302c1e0a84502e203d51721",
+      "bytes": 12403
+    },
+    "web.mid": {
+      "sha256": "f9d516e39c23349464d224ead7ecb893014878ce2cd323f0003554bde04ff4e5",
+      "bytes": 12687
+    },
+    "sources/clair-de-lune-r2.score.json": {
+      "sha256": "8ea6949db93516bbf25f5e25529b1c825320a838a7bece4ab3d07e71b9ff465b",
+      "bytes": 261107
+    },
+    "sources/clair-de-lune.mid": {
+      "sha256": "4eee9a1546ffde1ff74cb9824ba0e57cbc821185a15185bfea9faed97820bf8c",
+      "bytes": 12476
+    },
+    "sources/clair-de-lune.ly": {
+      "sha256": "c1c58f806a8939fc5a157707ea479403abb9655a4820b25bb6b98e39fd781e7a",
+      "bytes": 17978
+    }
+  }
+}

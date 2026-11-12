@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "debussy-clair-de-lune-piano",
+      "title": "月光 · Clair de lune",
+      "composer": "Claude Debussy",
+      "currentRevision": "r0002",
+      "status": "needs-review",
+      "metadata": "songs/debussy-clair-de-lune-piano/revisions/r0002/metadata.json",
+      "score": "songs/debussy-clair-de-lune-piano/revisions/r0002/score.json",
+      "performance": "songs/debussy-clair-de-lune-piano/revisions/r0002/performance.json",
+      "webMidi": "songs/debussy-clair-de-lune-piano/revisions/r0002/web.mid",
+      "fullMidi": "songs/debussy-clair-de-lune-piano/revisions/r0002/full.mid",
+      "revisions": [
+        "r0001",
+        "r0002"
+      ]
+    },
+    {
+      "id": "moscow-nights-eop-1024-piano",
+      "title": "莫斯科郊外的晚上 · EOP 1024 钢琴版",
+      "composer": "Vasily Solovyov-Sedoy（瓦西里·索洛维约夫-谢多伊）",
+      "currentRevision": "r0001",
+      "status": "needs-review",
+      "metadata": "songs/moscow-nights-eop-1024-piano/revisions/r0001/metadata.json",
+      "score": "songs/moscow-nights-eop-1024-piano/revisions/r0001/score.json",
+      "performance": "songs/moscow-nights-eop-1024-piano/revisions/r0001/performance.json",
+      "webMidi": "songs/moscow-nights-eop-1024-piano/revisions/r0001/web.mid",
+      "fullMidi": "songs/moscow-nights-eop-1024-piano/revisions/r0001/full.mid",
+      "revisions": [
+        "r0001"
+      ]
+    }
+  ]
+}

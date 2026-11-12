@@ -1,0 +1,52 @@
+莫斯科郊外的晚上 · 入库与校验报告
+
+曲目 id：moscow-nights-eop-1024-piano
+修订号：r0001
+质量状态：needs-review
+采用版本：人人钢琴网 EOP 0001024，一页双手钢琴编配，谱面署名“生如夏花”。
+谱源：https://www.everyonepiano.cn/Music-1024-Moscow-Nights.html
+用户未指定演奏版；具体版本仍待确认。
+
+文件：
+C:\Users\殷千\Documents\ChatGPT\piane\music-library\songs\moscow-nights-eop-1024-piano\revisions\r0001\score.json
+C:\Users\殷千\Documents\ChatGPT\piane\music-library\songs\moscow-nights-eop-1024-piano\revisions\r0001\web.mid
+C:\Users\殷千\Documents\ChatGPT\piane\music-library\songs\moscow-nights-eop-1024-piano\revisions\r0001\full.mid
+C:\Users\殷千\Documents\ChatGPT\piane\music-library\songs\moscow-nights-eop-1024-piano\revisions\r0001\performance.json
+C:\Users\殷千\Documents\ChatGPT\piane\music-library\songs\moscow-nights-eop-1024-piano\revisions\r0001\metadata.json
+C:\Users\殷千\Documents\ChatGPT\piane\music-library\songs\moscow-nights-eop-1024-piano\revisions\r0001\sources
+
+内容：A小调（原图无升降调号，按主音/终止和弦判断），2/4，四分音符96，PPQ480。
+没有移调；保留11个带F#或G#音高的事件。音域D2–B5。
+18个书写小节暂按1–16、8–14、17–18展开，共25个播放小节、31.25秒。
+总音符199；主旋律58；伴奏141。旋律重复音高保留为3对独立起音。
+9→10小节延音在两次演奏中各合并一次；12小节左手四分休止保留两次。
+
+程序校验：
+JSON Schema Draft 2020-12：通过，0错误。
+五线谱字母音名转录与简谱唱名转录的18小节数据比较：通过。
+full.mid 与 web.mid 的音高、起音、时值、力度往返比较：通过。
+MIDI调号0/minor、2/4、96 BPM、PPQ480：通过。原谱无速度变化点。
+58个显式旋律事件经现有v5提取器再读：全部保留。
+web.mid 兼容性裁短：0个音符。
+现有网页实际导入（无头Chrome）：199音符，Melody 58，起始音A4，0浏览器错误。
+网页伴奏轨：Backing 1为结尾右手和弦的2个内声部；Backing 2为139个左手音。
+曲库工具测试：7项通过，0失败。
+整库命令：node music-library/tools/archive.mjs validate
+整库结果：valid=true，2首曲目、3个修订；文件SHA-256、派生数据、MIDI往返均通过。
+原始材料及转录/核对资料共14个来源文件，均随修订保存并列入摘要检查。
+原有《月光》r0001与r0002均保留。
+
+实际试听：未进行。视觉核对、程序校验、网页导入不能代替实际试听。
+该站MIDI/MP3页面要求VIP，本次未读取这些文件，没有声称经过录音核对。
+
+待确认（以下为谱面小节号）：
+全曲：是否采用这份编配；固定力度（旋律96/127，伴奏70/127）与整体听感。
+第12小节（播放12与21；13.75–15秒、25–26.25秒）：左手琶音时差；后半小节休止已保留。
+第15–18小节及反复跳转：第17小节缺少“2.”标记，暂采用上述25小节走法。
+第18小节（播放25；30–31.25秒）：右手琶音时差。
+琶音暂每音间隔30 ticks（39.0625ms），属于明确标注的演奏假设。
+以上均已写入score.json的quality.notes / uncertainSpans，未标为ready。
+
+使用：网页“导入乐曲”选择本修订web.mid，再选择Melody（序号0）。
+修改：复制score.json到inbox，编辑后通过archive.mjs add创建新修订；不要改写历史修订。
+未修改手势识别、网页UI、音色或播放逻辑；未发布网站。

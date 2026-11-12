@@ -1,0 +1,9 @@
+{
+  "name": "Moon Fingers Piano",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-24-bookworm",
+  "postCreateCommand": "npm ci",
+  "forwardPorts": [4192],
+  "portsAttributes": {
+    "4192": {"label": "指间月光预览", "onAutoForward": "notify"}
+  }
+}

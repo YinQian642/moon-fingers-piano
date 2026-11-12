@@ -1,0 +1,138 @@
+{
+  "songId": "moscow-nights-eop-1024-piano",
+  "revision": "r0001",
+  "status": "needs-review",
+  "score": "C:\\Users\\殷千\\Documents\\ChatGPT\\piane\\music-library\\songs\\moscow-nights-eop-1024-piano\\revisions\\r0001\\score.json",
+  "webMidi": "C:\\Users\\殷千\\Documents\\ChatGPT\\piane\\music-library\\songs\\moscow-nights-eop-1024-piano\\revisions\\r0001\\web.mid",
+  "jsonSchemaDraft202012": {
+    "valid": true,
+    "errors": 0
+  },
+  "programChecks": {
+    "valid": true,
+    "scope": "two image readings, canonical events, exported MIDI and v5 extractor; not auditory verification",
+    "sourcePagesRead": 2,
+    "writtenMeasures": 18,
+    "playbackMeasures": 25,
+    "notes": 199,
+    "melody": 58,
+    "accompaniment": 141,
+    "durationSeconds": 31.25,
+    "pitchRange": [
+      38,
+      83
+    ],
+    "key": "A minor",
+    "ppq": 480,
+    "timeSignature": "2/4",
+    "tempoBpm": 96,
+    "tempoChangeCount": 0,
+    "sharpNoteCount": 11,
+    "tieMergeCount": 2,
+    "lhQuarterRests": [
+      {
+        "sourceBar": 12,
+        "playbackBar": 12,
+        "ticks": 11040,
+        "durationTicks": 480
+      },
+      {
+        "sourceBar": 12,
+        "playbackBar": 21,
+        "ticks": 19680,
+        "durationTicks": 480
+      }
+    ],
+    "repeatedMelodyPairs": [
+      {
+        "previous": "p05-s05-rh-3-1",
+        "current": "p05-s05-rh-4-1",
+        "midi": 79,
+        "previousTicks": 4320,
+        "ticks": 4560
+      },
+      {
+        "previous": "p15-s15-rh-1-1",
+        "current": "p16-s16-rh-1-1",
+        "midi": 69,
+        "previousTicks": 13440,
+        "ticks": 14400
+      },
+      {
+        "previous": "p24-s17-rh-1-1",
+        "current": "p25-s18-rh-1-3",
+        "midi": 81,
+        "previousTicks": 22080,
+        "ticks": 23100
+      }
+    ],
+    "fullMidiRoundtrip": true,
+    "webMidiRoundtrip": true,
+    "webMelodyMatches": true,
+    "shortenedMelodyCount": 0,
+    "actualListening": false
+  },
+  "browserImport": {
+    "valid": true,
+    "check": "existing v5 webpage actual import in headless Chrome",
+    "webMidi": "C:\\Users\\殷千\\Documents\\ChatGPT\\piane\\music-library\\songs\\moscow-nights-eop-1024-piano\\revisions\\r0001\\web.mid",
+    "webMidiSha256": "22eccbb708af40fc7a99c853bc7d61c1eee806d82ca1af5dfcaa582f96672aff",
+    "notes": 199,
+    "melody": 58,
+    "firstMelodyMidi": 69,
+    "trackOptions": [
+      "Melody · 58 音符",
+      "Backing 1 · 2 音符",
+      "Backing 2 · 139 音符"
+    ],
+    "selectedTrack": 0,
+    "browserErrors": [],
+    "actualListening": false,
+    "codeModified": false,
+    "published": false
+  },
+  "wholeLibrary": {
+    "songs": 2,
+    "revisions": 3,
+    "valid": true
+  },
+  "archiveToolTests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "sourceFileCount": 14,
+  "actualListening": {
+    "performed": false,
+    "reason": "依据公开谱图转录，未取得可读取的该版录音；浏览器导入检查没有播放或听辨音频。"
+  },
+  "uncertainSpans": [
+    {
+      "startTicks": 0,
+      "endTicks": 24000,
+      "reason": "用户只给曲名，尚未确认是否要采用 EOP 1024、谱面署名“生如夏花”的这一钢琴编配。已对照两份谱图转录；未取得可读取的该版 MIDI/音频，未实际试听。谱面无力度/踏板数据；旋律96/127、伴奏70/127为编辑播放值。"
+    },
+    {
+      "startTicks": 10560,
+      "endTicks": 11520,
+      "reason": "谱面第12小节（展开第12小节）有琶音记号，未规定各音起音时差。暂按从低到高每音30 ticks（39.0625 ms）展开，所有音在原标记时值终点结束；这是待试听确认的演奏处理。"
+    },
+    {
+      "startTicks": 19200,
+      "endTicks": 20160,
+      "reason": "谱面第12小节（展开第21小节）有琶音记号，未规定各音起音时差。暂按从低到高每音30 ticks（39.0625 ms）展开，所有音在原标记时值终点结束；这是待试听确认的演奏处理。"
+    },
+    {
+      "startTicks": 23040,
+      "endTicks": 24000,
+      "reason": "谱面第18小节（展开第25小节）有琶音记号，未规定各音起音时差。暂按从低到高每音30 ticks（39.0625 ms）展开，所有音在原标记时值终点结束；这是待试听确认的演奏处理。"
+    },
+    {
+      "startTicks": 14400,
+      "endTicks": 24000,
+      "reason": "谱面第15–16小节标第一结尾，第8小节有反复起点，第16小节有反复终点，第17小节未标“2.”。暂按1–16、8–14、17–18展开；请确认第一结尾范围及第二次跳转，未补写额外反复。"
+    }
+  ],
+  "oldRevisionsPreserved": true,
+  "uiOrGestureOrTimbreChanged": false,
+  "published": false
+}

@@ -1,11 +1,11 @@
 {
   "product": "指间月光 · 手势钢琴",
-  "site_version": 5,
-  "source_commit": "a22d8816fd7b017a05acefc00a6da9cbe8605dd6",
+  "site_version": 6,
+  "source_commit": "68a6184a31624317f79df402c849b11a2e149351",
   "exported_at": "2026-11-13T01:21:24.240162+08:00",
-  "live_url": "https://moon-fingers-piano.corkycake1.chatgpt.site",
+  "live_url": "https://yinqian642.github.io/moon-fingers-piano/",
   "original_source_files": 64,
-  "original_files_modified": false,
+  "original_files_modified": true,
   "local_start": "node serve.mjs",
   "local_url": "http://127.0.0.1:4192",
   "runtime_downloads_required": false,
@@ -29,5 +29,7 @@
     "credentials",
     "browser binaries",
     "OS fonts"
-  ]
+  ],
+  "repository": "https://github.com/YinQian642/moon-fingers-piano",
+  "migration_note": "Original v5 snapshot is retained in docs/v5-SNAPSHOT.json. Current version and publishing state follow this repository Git history and Actions. Source commit identifies the preserved pre-migration song integration."
 }
