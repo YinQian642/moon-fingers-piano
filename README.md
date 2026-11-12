@@ -4,6 +4,10 @@
 
 对一个开源手势钢琴网页第 5 版快照（`a22d8816fd7b017a05acefc00a6da9cbe8605dd6`）的完整、离线可运行复刻。页面结构、样式、逻辑、MediaPipe 手部模型与 WASM、28 个钢琴采样、内置《月光》MIDI 和 LilyPond 乐谱全部保持原样，**没有改写任何运行时文件**。
 
+**在线地址（GitHub Pages）：** https://yinqian642.github.io/moon-fingers-piano/
+
+**GitHub 仓库：** https://github.com/YinQian642/moon-fingers-piano
+
 ![音乐引导界面](screenshots/01-guided-ready.png)
 
 ## 快速开始
@@ -37,6 +41,15 @@ Windows 也可以双击 `启动复刻网页.cmd`，并保持命令行窗口开�
 - 允许 Web Worker 与 WebAssembly 正常加载。
 
 不要复用原项目的托管身份或 `.openai/hosting.json`；本复刻未包含该配置，发布时应使用自己的站点。
+
+当前在线版使用 GitHub Pages：`main` 分支保存完整源码，`gh-pages` 分支保存 `dist/` 的站点内容并附带 `.nojekyll`，Pages 从 `gh-pages` 根目录发布。修改 `dist/` 后重新生成并推送 `gh-pages` 即可更新线上页面：
+
+```bash
+git subtree split --prefix=dist -b gh-pages
+git push origin gh-pages
+```
+
+更新后通常一到两分钟生效。
 
 ## 三个演奏模式
 
