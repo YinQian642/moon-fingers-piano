@@ -1,0 +1,33 @@
+{
+  "product": "指间月光 · 手势钢琴",
+  "site_version": 5,
+  "source_commit": "a22d8816fd7b017a05acefc00a6da9cbe8605dd6",
+  "exported_at": "2026-11-13T01:21:24.240162+08:00",
+  "live_url": "https://moon-fingers-piano.corkycake1.chatgpt.site",
+  "original_source_files": 64,
+  "original_files_modified": false,
+  "local_start": "node serve.mjs",
+  "local_url": "http://127.0.0.1:4192",
+  "runtime_downloads_required": false,
+  "source_test_environment": {
+    "node": "24.22.0",
+    "npm": "11.19.1",
+    "chrome": "157.0.8103.51",
+    "os": "Windows"
+  },
+  "dependencies": {
+    "@tonejs/midi": "2.0.28",
+    "@playwright/test": "1.58.2"
+  },
+  "known_status": "v5 physical-camera recognition awaits user retest; automated tests are not an accuracy guarantee",
+  "excluded_non_source": [
+    ".git",
+    "node_modules",
+    ".local",
+    "test-results",
+    "logs",
+    "credentials",
+    "browser binaries",
+    "OS fonts"
+  ]
+}

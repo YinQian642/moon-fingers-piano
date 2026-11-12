@@ -1,0 +1,84 @@
+指间月光 · 第 5 版完整源码交接
+导出日期：2026-11-13（Asia/Shanghai）
+源码提交：a22d8816fd7b017a05acefc00a6da9cbe8605dd6
+当前网页：https://moon-fingers-piano.corkycake1.chatgpt.site
+
+【给接手智能体的任务】
+先原样运行这个快照，验证三个模式与全部本地资源，再根据使用者后续要求修改。
+dist 中的页面、逻辑、CSS、模型、WASM、音色和 MIDI 都是现有第 5 版的原文件。
+不要先替换框架、重写算法、改成合成音、更新第三方运行库或重新下载同名模型。
+源码与逐文件校验清单在本包内；SNAPSHOT.json 记录版本，verify-package.mjs 验证完整性。
+本包未包含 .git、node_modules、浏览器安装包、操作系统字体及临时调试文件。
+
+【最短启动步骤：Windows / macOS / Linux】
+1. 准备 Node.js。本快照实际验证使用 Node.js 24.22.0、npm 11.19.1。
+2. 解压 ZIP，进入含 package.json、serve.mjs、dist 的 moon-fingers-v5 目录。
+3. 运行：node verify-package.mjs
+4. 运行：node serve.mjs
+5. 在 Chrome 或 Edge 打开：http://127.0.0.1:4192
+   Windows 也可双击“启动网页.cmd”，并保持命令窗口打开。
+6. 点击“开始 / 开启声音”，再开启摄像头并授予权限。
+
+运行页面不需要 npm install，不需要构建，不需要 API Key、账户、远程数据库或 CDN。
+安装好 Node.js 后，页面在本机可离线运行；所有运行资源都在 dist 中。
+不要双击 index.html 使用 file://；摄像头要求 localhost / 127.0.0.1 或 HTTPS。
+端口 4192 被占用时，先结束旧的本项目服务。Ctrl+C 可关闭本次服务。
+
+【原样功能与交互约定】
+自由演奏：左手小指→无名指→中指→食指，为 Do Re Mi Fa；右手食指→中指→无名指→小指，
+为 Sol La Si 高 Do，固定 C4–C5，保留钢琴采样与适度尾音。双手/多指可以同时发音。
+音乐引导：演奏正确指法后音乐继续，原谱决定实际音高与八度，停手时会等待。
+梦想模式：任意指尖触碰拇指推进下一枚旋律音，节奏由使用者控制；同次合击推进一音，
+重复音高也须分别触发。伴奏开关默认关闭，可自由开启；不要求音符先落到判定线。
+屏幕琴键和 A S D F / J K L ; 同样可用。空格暂停/继续。支持 MIDI 导入与旋律音轨选择。
+背景为细小慢移星点，配色为深空蓝紫暖色，主界面保持简洁。
+
+【模型、音乐和版本完整性】
+dist/vendor/hand_landmarker.task：现有手部识别模型。
+dist/vendor/vision_bundle.mjs 与 dist/vendor/wasm：现有 MediaPipe 运行库和两套 WASM。
+dist/assets/piano：28 个 Salamander 钢琴 MP3 采样及授权文件。
+dist/assets/clair-de-lune.mid：完整内置《月光》，1,468 个原曲音符、306 个手势提示，322.5 秒。
+dist/assets/clair-de-lune.ly：对应 LilyPond 乐谱源文件。
+页面按原调和实际音高播放，不转为 C 大调。音轨提取策略与已知限制见原始 README.md。
+各第三方授权文件原样保留。fetch-assets.py 仅为原下载脚本，正常复现不需要运行它。
+
+【接手时需知道的真实状态】
+这是工作到此为止的第 5 版快照，不是手势识别准确率已验收的最终版本。
+第 4 版曾被使用者报告第一下和连续敲击均大量漏识别（约十次碰触只响应两次）。
+第 5 版恢复灵敏度范围 0.22–0.46（默认 0.34），放松深度否决，允许小幅分离后重新触发；
+已通过合成关键点与浏览器测试，但尚未收到使用者对第 5 版的真实摄像头复测结论。
+后续应优先实测手势，勿将自动测试通过解释为真实碰触识别率已达标。
+本包确保程序与资源一致；不同设备摄像头、光照、遮挡、浏览器及系统字体仍会影响
+识别表现、声音输出延迟和像素级外观。原验证浏览器是 Windows Chrome 157.0.8103.51。
+
+【开发与测试】
+仅在运行开发测试时需要依赖：
+  npm ci
+  npm test
+逻辑测试共 44 项。先在另一个终端保持 node serve.mjs 运行，再执行浏览器测试。
+原 tests/browser.mjs 和 tests/interaction-browser.mjs 保持原样，其中 Chrome 路径为 Windows。
+本包额外提供不改动原测试源文件的跨平台运行器：
+  node handoff/run-browser-tests.mjs
+它依次尝试 CHROME_PATH、常见 Chrome/Chromium 路径及 Playwright 已安装的 Chromium。
+若没有浏览器，先执行：npx playwright install chromium
+也可设置 CHROME_PATH 为已有 Chrome 的可执行文件绝对路径。
+跨平台运行器会临时生成测试副本，仅替换浏览器路径，执行后删除副本。
+
+【部署为朋友自己的网页】
+这是纯静态网站，发布 dist 的完整内容即可；服务器须正确提供 .mjs、.wasm、.task、.mp3、.mid。
+使用 HTTPS，保留相对目录结构，不要遗漏 vendor/wasm 或仅上传 index.html。
+.openai/hosting.json 是原站点的托管身份配置，为完整交接而原样包含，本地启动不会使用它。
+如使用 Sites 发布独立副本，应创建自己的站点并使用自己的项目 ID，不将原项目 ID 当成新站点。
+
+【代码地图】
+dist/app.js：UI、输入分派、摄像头采样和模式切换。
+dist/lib/gestures.js：触碰状态机、左右手轨迹匹配、梦想合击合并。
+dist/lib/hand-client.js / hand-worker.js：MediaPipe Worker 与摄像头帧处理。
+dist/lib/music.js：MIDI 解析整理、旋律事件与两个曲谱模式的 Transport。
+dist/lib/audio.js：钢琴采样、音符包络和同音重击处理。
+dist/lib/visuals.js：星空和由输入驱动的下落反馈。
+dist/index.html、style.css、cosmos.css：页面布局及主题。
+
+如需交给另一智能体，可直接说：
+“请先阅读 先读我-源码交接.txt 和 README.md，执行 node verify-package.mjs，原样启动此第 5 版
+手势钢琴网页；不要重写。先确认所有本地模型和音色加载，再基于真实测试修复手势识别。”

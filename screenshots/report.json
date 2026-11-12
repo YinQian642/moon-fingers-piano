@@ -1,0 +1,309 @@
+{
+  "startedAt": "2026-11-12T17:29:52.290Z",
+  "base": "http://127.0.0.1:4192",
+  "checks": [
+    {
+      "name": "built-in Clair de lune exposes 306 gesture cues",
+      "ok": true,
+      "detail": "306 cues"
+    },
+    {
+      "name": "built-in MIDI keeps all 1468 piano notes",
+      "ok": true,
+      "detail": "1468 notes"
+    },
+    {
+      "name": "page starts in guided mode, ready to play",
+      "ok": true,
+      "detail": "guided/ready"
+    },
+    {
+      "name": "first cue matches score (Sol / A♭4 expected)",
+      "ok": true,
+      "detail": "{\"slot\":4,\"midi\":68,\"time\":0.5}"
+    },
+    {
+      "name": "song header and progress UI populated",
+      "ok": true,
+      "detail": "{\"title\":\"月光 Clair de lune\",\"counter\":\"1 / 306\",\"details\":\"Db · 05:22\",\"duration\":\"05:22\"}"
+    },
+    {
+      "name": "imported MIDI parses and opens track picker",
+      "ok": true,
+      "detail": "{\"options\":2,\"name\":\"clair-de-lune\",\"notes\":1468}"
+    },
+    {
+      "name": "all 28 Salamander samples decode in browser",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "name": "28 piano samples requested from local assets",
+      "ok": true,
+      "detail": "28 mp3"
+    },
+    {
+      "name": "guided mode advances after the prompted finger",
+      "ok": true,
+      "detail": "index 1, hits 1"
+    },
+    {
+      "name": "guided hit triggers a real piano attack",
+      "ok": true,
+      "detail": "2 attacks"
+    },
+    {
+      "name": "free mode sounds all eight keyboard lanes",
+      "ok": true,
+      "detail": "[1,1,1,1,1,1,1,1]"
+    },
+    {
+      "name": "free mode keeps mode-local transport idle",
+      "ok": true,
+      "detail": "free"
+    },
+    {
+      "name": "free mode shows C4–C5 pitch labels",
+      "ok": true,
+      "detail": "{\"pitch\":\"C5 · 523.25 Hz\",\"solfege\":\"Do\",\"keyboard\":\"Do Re Mi Fa Sol La Si Do\"}"
+    },
+    {
+      "name": "dream mode advances one cue per tap",
+      "ok": true,
+      "detail": "1 -> 5"
+    },
+    {
+      "name": "dream accompaniment toggle switches on",
+      "ok": true,
+      "detail": "{\"pressed\":\"true\",\"snap\":true}"
+    },
+    {
+      "name": "reset returns score to the beginning",
+      "ok": true,
+      "detail": "0/ready"
+    },
+    {
+      "name": "progress slider seeks to a later cue",
+      "ok": true,
+      "detail": "index 100"
+    },
+    {
+      "name": "on-screen piano key accepts pointer input",
+      "ok": true,
+      "detail": "2 hits"
+    },
+    {
+      "name": "camera stream opens and MediaPipe worker becomes ready",
+      "ok": true,
+      "detail": "frames 17, 156 ms"
+    },
+    {
+      "name": "worker runs inference on live frames",
+      "ok": true,
+      "detail": "17 frames"
+    },
+    {
+      "name": "camera UI reports tracking state",
+      "ok": true,
+      "detail": "{\"handCount\":\"0 / 2\",\"status\":\"156 ms · 左 5 / 右 9\",\"placeholder\":true}"
+    },
+    {
+      "name": "mobile layout has no horizontal overflow",
+      "ok": true,
+      "detail": "{\"overflow\":0,\"width\":390,\"height\":1201}"
+    },
+    {
+      "name": "no uncaught page exceptions",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "no failed local asset requests",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no 4xx/5xx responses",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no external network dependencies",
+      "ok": true,
+      "detail": "0 external"
+    }
+  ],
+  "pages": {
+    "B35BDC26FE20DDA992D3D78F8B9D6E6D": "http://127.0.0.1:4192/",
+    "5104.3": "http://127.0.0.1:4192/cosmos.css",
+    "5104.2": "http://127.0.0.1:4192/style.css",
+    "5104.5": "http://127.0.0.1:4192/app.js",
+    "5104.4": "http://127.0.0.1:4192/vendor/midi.js",
+    "5104.11": "http://127.0.0.1:4192/lib/audio.js",
+    "5104.12": "http://127.0.0.1:4192/lib/hand-client.js",
+    "5104.10": "http://127.0.0.1:4192/lib/music.js",
+    "5104.13": "http://127.0.0.1:4192/lib/visuals.js",
+    "5104.14": "http://127.0.0.1:4192/lib/gestures.js",
+    "5104.15": "http://127.0.0.1:4192/assets/clair-de-lune.mid",
+    "5104.16": "http://127.0.0.1:4192/favicon.svg",
+    "5104.17": "http://127.0.0.1:4192/assets/piano/C1.mp3",
+    "5104.21": "http://127.0.0.1:4192/assets/piano/C2.mp3",
+    "5104.19": "http://127.0.0.1:4192/assets/piano/Fs1.mp3",
+    "5104.18": "http://127.0.0.1:4192/assets/piano/Ds1.mp3",
+    "5104.20": "http://127.0.0.1:4192/assets/piano/A1.mp3",
+    "5104.22": "http://127.0.0.1:4192/assets/piano/Ds2.mp3",
+    "5104.26": "http://127.0.0.1:4192/assets/piano/Ds3.mp3",
+    "5104.23": "http://127.0.0.1:4192/assets/piano/Fs2.mp3",
+    "5104.24": "http://127.0.0.1:4192/assets/piano/A2.mp3",
+    "5104.25": "http://127.0.0.1:4192/assets/piano/C3.mp3",
+    "5104.27": "http://127.0.0.1:4192/assets/piano/Fs3.mp3",
+    "5104.28": "http://127.0.0.1:4192/assets/piano/A3.mp3",
+    "5104.29": "http://127.0.0.1:4192/assets/piano/C4.mp3",
+    "5104.32": "http://127.0.0.1:4192/assets/piano/A4.mp3",
+    "5104.30": "http://127.0.0.1:4192/assets/piano/Ds4.mp3",
+    "5104.31": "http://127.0.0.1:4192/assets/piano/Fs4.mp3",
+    "5104.33": "http://127.0.0.1:4192/assets/piano/C5.mp3",
+    "5104.34": "http://127.0.0.1:4192/assets/piano/Ds5.mp3",
+    "5104.35": "http://127.0.0.1:4192/assets/piano/Fs5.mp3",
+    "5104.36": "http://127.0.0.1:4192/assets/piano/A5.mp3",
+    "5104.37": "http://127.0.0.1:4192/assets/piano/C6.mp3",
+    "5104.38": "http://127.0.0.1:4192/assets/piano/Ds6.mp3",
+    "5104.39": "http://127.0.0.1:4192/assets/piano/Fs6.mp3",
+    "5104.40": "http://127.0.0.1:4192/assets/piano/A6.mp3",
+    "5104.42": "http://127.0.0.1:4192/assets/piano/Ds7.mp3",
+    "5104.43": "http://127.0.0.1:4192/assets/piano/Fs7.mp3",
+    "5104.44": "http://127.0.0.1:4192/assets/piano/A7.mp3",
+    "5104.41": "http://127.0.0.1:4192/assets/piano/C7.mp3",
+    "5104.45": "http://127.0.0.1:4192/favicon.svg",
+    "1F0BA07E31C15EC89048EE4D7E6226C7": "http://127.0.0.1:4192/",
+    "5104.52": "http://127.0.0.1:4192/style.css",
+    "5104.53": "http://127.0.0.1:4192/cosmos.css",
+    "5104.55": "http://127.0.0.1:4192/app.js",
+    "5104.62": "http://127.0.0.1:4192/lib/hand-client.js",
+    "5104.60": "http://127.0.0.1:4192/lib/music.js",
+    "5104.61": "http://127.0.0.1:4192/lib/audio.js",
+    "5104.63": "http://127.0.0.1:4192/lib/visuals.js",
+    "5104.54": "http://127.0.0.1:4192/vendor/midi.js",
+    "5104.64": "http://127.0.0.1:4192/lib/gestures.js",
+    "5104.65": "http://127.0.0.1:4192/assets/clair-de-lune.mid",
+    "5104.66": "http://127.0.0.1:4192/favicon.svg",
+    "CFF8BC82A12449E2C1A7D59E0B1DB85E": "http://127.0.0.1:4192/",
+    "5104.69": "http://127.0.0.1:4192/cosmos.css",
+    "5104.68": "http://127.0.0.1:4192/style.css",
+    "5104.71": "http://127.0.0.1:4192/app.js",
+    "5104.70": "http://127.0.0.1:4192/vendor/midi.js",
+    "5104.76": "http://127.0.0.1:4192/lib/music.js",
+    "5104.77": "http://127.0.0.1:4192/lib/audio.js",
+    "5104.78": "http://127.0.0.1:4192/lib/hand-client.js",
+    "5104.79": "http://127.0.0.1:4192/lib/visuals.js",
+    "5104.80": "http://127.0.0.1:4192/lib/gestures.js",
+    "5104.81": "http://127.0.0.1:4192/assets/clair-de-lune.mid",
+    "5104.82": "http://127.0.0.1:4192/favicon.svg"
+  },
+  "screenshots": [
+    "01-guided-ready.png",
+    "02-library-import.png",
+    "03-guided-playing.png",
+    "04-free-play.png",
+    "05-dream-mode.png",
+    "06-camera-worker.png",
+    "10-help-dialog.png",
+    "07-desktop-full.png",
+    "08-mobile.png",
+    "09-mobile-full.png"
+  ],
+  "errors": [],
+  "network": {
+    "external": [],
+    "failed": [],
+    "badStatus": []
+  },
+  "initial": {
+    "mode": "guided",
+    "state": "ready",
+    "position": 0,
+    "index": 0,
+    "hits": 0,
+    "misses": 0,
+    "cameraReady": false,
+    "workerFrames": 0,
+    "inferenceMs": 0,
+    "cue": {
+      "slot": 4,
+      "midi": 68,
+      "time": 0.5
+    },
+    "notes": 1468,
+    "cues": 306,
+    "audioReady": false,
+    "dreamAccompaniment": false,
+    "voices": 0,
+    "contacts": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "sensitivity": 0.34,
+    "contactStates": [
+      {
+        "phase": "unarmed",
+        "ratio": null,
+        "depthBlocked": false
+      },
+      {
+        "phase": "unarmed",
+        "ratio": null,
+        "depthBlocked": false
+      },
+      {
+        "phase": "unarmed",
+        "ratio": null,
+        "depthBlocked": false
+      },
+      {
+        "phase": "unarmed",
+        "ratio": null,
+        "depthBlocked": false
+      },
+      {
+        "phase": "unarmed",
+        "ratio": null,
+        "depthBlocked": false
+      },
+      {
+        "phase": "unarmed",
+        "ratio": null,
+        "depthBlocked": false
+      },
+      {
+        "phase": "unarmed",
+        "ratio": null,
+        "depthBlocked": false
+      },
+      {
+        "phase": "unarmed",
+        "ratio": null,
+        "depthBlocked": false
+      }
+    ],
+    "audioAttacks": 0,
+    "inputCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "lastInputBatch": []
+  },
+  "finishedAt": "2026-11-12T17:30:20.281Z",
+  "failures": []
+}

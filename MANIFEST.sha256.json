@@ -1,0 +1,415 @@
+{
+  "source_commit": "a22d8816fd7b017a05acefc00a6da9cbe8605dd6",
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 42,
+      "sha256": "96135710d94b55f2eb02899554249049b5fd0a82f0e2da40a1332840f9607a0b",
+      "origin": "original"
+    },
+    {
+      "path": ".openai/hosting.json",
+      "bytes": 106,
+      "sha256": "a8818552b09f4086f8ced0de14998dfd32d9d6306ffea21bc2b9a491fdf74e9d",
+      "origin": "original"
+    },
+    {
+      "path": "dist/app.js",
+      "bytes": 17789,
+      "sha256": "85b7cb3c3dd9fd3ff97d48d059f07592c92c74d972d6752cceceeeaa132f263a",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/clair-de-lune.ly",
+      "bytes": 17978,
+      "sha256": "c1c58f806a8939fc5a157707ea479403abb9655a4820b25bb6b98e39fd781e7a",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/clair-de-lune.mid",
+      "bytes": 12476,
+      "sha256": "4eee9a1546ffde1ff74cb9824ba0e57cbc821185a15185bfea9faed97820bf8c",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/A1.mp3",
+      "bytes": 115061,
+      "sha256": "17fa1e363f9fad67c3357be54a6defc4fca5a5c2aada21de84b30254f9cb2f5b",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/A2.mp3",
+      "bytes": 81678,
+      "sha256": "20601d890f44a3c22499c7b61f52e571795df1fe5a01fac553dded7b6379e1d4",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/A3.mp3",
+      "bytes": 74526,
+      "sha256": "8e108fe228e34e32f6b4e61efff732eec53058a9e6f05a8d8e719598b132c4f9",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/A4.mp3",
+      "bytes": 61148,
+      "sha256": "a62df24a2c84cea8d18c1fa8aca7c18c877ba2b76a00a591256fa74d3ce54ac3",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/A5.mp3",
+      "bytes": 45747,
+      "sha256": "9e5cee1fe9cf68b7193623d46a27c8956e572c1ff234ca0e11599b556050dec6",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/A6.mp3",
+      "bytes": 30013,
+      "sha256": "b6064a657592c63c03561d2ce1092607c14e1d8091445d50065d0ec819ff6fbc",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/A7.mp3",
+      "bytes": 18730,
+      "sha256": "751c0a0acd00bad6e52749063dac56a0def9870242b053c68ab45cbe8d083fc1",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/C1.mp3",
+      "bytes": 110199,
+      "sha256": "caba05f0be4d9f6030adcc033208b49ac54e47d58edc57b743085b095b4ea395",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/C2.mp3",
+      "bytes": 110357,
+      "sha256": "7029a9e84f748433bc33d067ee13d37d0b866768f09ae6c7dac8e2e98e1e53ca",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/C3.mp3",
+      "bytes": 78036,
+      "sha256": "bb70dd921d81b3dda561c19b5c029292ae5a6fba1947e364bf274218ce19a9d1",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/C4.mp3",
+      "bytes": 78718,
+      "sha256": "689eaa4c2fd7f29a2cc0e386eec462156d523a87d701269e5e2458e66056f4f6",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/C5.mp3",
+      "bytes": 68920,
+      "sha256": "2f5b0f7422063010fb379e684bfdf2daa3911dcd2251413d79fa2a53029fdc30",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/C6.mp3",
+      "bytes": 28065,
+      "sha256": "0d3232edd13ba69fd5caf4a295060ae0fd533b8a1433ae0a038644d70715c907",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/C7.mp3",
+      "bytes": 18963,
+      "sha256": "694b512fac99ba7f7290c045d9c18e94724a7ebcc319b937baabc62125814283",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Ds1.mp3",
+      "bytes": 120625,
+      "sha256": "1c02b816b85d2fa938815fdf04d7d327ff20068f1aadc3c97052144c735afa0c",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Ds2.mp3",
+      "bytes": 110796,
+      "sha256": "a106cdec93aa4e767e36809fc9cdaa6b92453fb9f18d5fc28ac4eb0f9f239ecd",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Ds3.mp3",
+      "bytes": 78717,
+      "sha256": "4fe73ea3f2c59a1dbfb35cff1d9d8a9e38cb12ef39a91a13083729544cdafed5",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Ds4.mp3",
+      "bytes": 73519,
+      "sha256": "663e8bb3e2d0fa23a30526dcd7ab0e42609c193c07025647ef46badcf81ec211",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Ds5.mp3",
+      "bytes": 58179,
+      "sha256": "bf71096e653ab7ceca3914b9fd44d8c27fe83c162564c5db34bd06b94eb14b8c",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Ds6.mp3",
+      "bytes": 31395,
+      "sha256": "eb643014d9f926f1a5f9f51fc4a1ed8c07c6da36ce164d5b221d7b878a53f142",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Ds7.mp3",
+      "bytes": 22136,
+      "sha256": "d51f4c51bed719f51e75ad22d5b9ac4b4d1a4749d02ef31ea03696de46fa5e77",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Fs1.mp3",
+      "bytes": 115010,
+      "sha256": "5cbb51d2a0a55a9ef3656671ca72e336856813949055bb6c189cf990655335cf",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Fs2.mp3",
+      "bytes": 102320,
+      "sha256": "dd34c708274eeba35da1fd99fc31ef904e390ff02f6864aefe8a13261f8a8327",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Fs3.mp3",
+      "bytes": 77933,
+      "sha256": "960fefd90f56608b7edf958dadfeca893cff5744ab9034d61e419401fe45ce9c",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Fs4.mp3",
+      "bytes": 68219,
+      "sha256": "613652f5c96e35736ce6a46bc4ddb6ba1076d1fb16a35a4c22c14e67efdde57c",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Fs5.mp3",
+      "bytes": 51597,
+      "sha256": "ed2fdf543274ea72ddd4eb634a16356531a5f4040b2a60d34fb12a5c72cbf22f",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Fs6.mp3",
+      "bytes": 26478,
+      "sha256": "c584d2b4e96a37b12c920ed3212d149abedf25342389bfdc557b2fac847ab11c",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/Fs7.mp3",
+      "bytes": 22709,
+      "sha256": "e9ce71e0f7dc39c1d0033d656cf57e3aa8b303127147f194cc92b04e2b648a9f",
+      "origin": "original"
+    },
+    {
+      "path": "dist/assets/piano/LICENSE.txt",
+      "bytes": 1883,
+      "sha256": "04ddba91bcafcb4c53dee7b004479f79af47bb92574f06bbe741b00c3ca64e0e",
+      "origin": "original"
+    },
+    {
+      "path": "dist/cosmos.css",
+      "bytes": 9664,
+      "sha256": "21ec1177179d43c6eba5d1d5d079220dfb123a71bb0492240979d3f3a2afffc9",
+      "origin": "original"
+    },
+    {
+      "path": "dist/favicon.svg",
+      "bytes": 236,
+      "sha256": "c093fa4f1ce3cedafabb3db717672a2ed08a962580f1852d33ff4782be8e683a",
+      "origin": "original"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 8543,
+      "sha256": "e86165aa166a506a8498baf219a4eb60f03d4e8fe8760976bf6f95a9c07c4b87",
+      "origin": "original"
+    },
+    {
+      "path": "dist/lib/audio.js",
+      "bytes": 4134,
+      "sha256": "7a1a7c57a7f4b371e7aadfd6055f221a02551bba8f779d9cae8ecc1c98eeab56",
+      "origin": "original"
+    },
+    {
+      "path": "dist/lib/gestures.js",
+      "bytes": 6951,
+      "sha256": "1a462f5d19da28b06250eb4ec9fb965a56d5229704479a97fc7dfcd4aba0c811",
+      "origin": "original"
+    },
+    {
+      "path": "dist/lib/hand-client.js",
+      "bytes": 2022,
+      "sha256": "4d0ea720376367d06674e5dd80cdddcd927a012e4171fe8481c5935ccf6f8ce3",
+      "origin": "original"
+    },
+    {
+      "path": "dist/lib/hand-worker.js",
+      "bytes": 1638,
+      "sha256": "78688f25fb03f47b45ee4418866681d56edaed5a792fa054e091e834212e9668",
+      "origin": "original"
+    },
+    {
+      "path": "dist/lib/music.js",
+      "bytes": 8697,
+      "sha256": "a64630c12f22731d9086a535d7e5edf53d5da705e0ae884d2ecb63f02544bc41",
+      "origin": "original"
+    },
+    {
+      "path": "dist/lib/visuals.js",
+      "bytes": 3212,
+      "sha256": "d3f7e058547cae3077a1c112de7b100b0bfb08aa1b6b427437e76ecdeefb4aac",
+      "origin": "original"
+    },
+    {
+      "path": "dist/style.css",
+      "bytes": 16646,
+      "sha256": "41b48a50348e9dc6aae7c35742f580c0a70fdfb2095f13291feb6002f21765ea",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/hand_landmarker.task",
+      "bytes": 7819105,
+      "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/MEDIAPIPE-LICENSE.txt",
+      "bytes": 12331,
+      "sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/MIDI-LICENSE.txt",
+      "bytes": 1107,
+      "sha256": "6debbf1ddd278dcf5d8e7b6c42c7a827cb944943401fc37ee017e172bbccbaea",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/midi.js",
+      "bytes": 32288,
+      "sha256": "9165a2b3de9d378eca970b80618c3747c60ed8188b12b0f059ccf44fc6a07cc0",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/vision_bundle.mjs",
+      "bytes": 137735,
+      "sha256": "40f4123dfcd75cfa58add046919cc6f52fde66f009ff582997c09ba54c6ba27c",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/wasm/vision_wasm_internal.js",
+      "bytes": 204284,
+      "sha256": "4a97e2520ba506c680ecd6ba6acfb146888afa0e2746d57f205352bc6ebb82eb",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/wasm/vision_wasm_internal.wasm",
+      "bytes": 9574032,
+      "sha256": "f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/wasm/vision_wasm_nosimd_internal.js",
+      "bytes": 204137,
+      "sha256": "927def7b465c51b86e4b3060f93646aca4e27121f4b8fc0483786e407ea9cf1f",
+      "origin": "original"
+    },
+    {
+      "path": "dist/vendor/wasm/vision_wasm_nosimd_internal.wasm",
+      "bytes": 9448638,
+      "sha256": "3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4",
+      "origin": "original"
+    },
+    {
+      "path": "fetch-assets.py",
+      "bytes": 1127,
+      "sha256": "6bc1b3561321e96453ace2e5ad4266111d5bcaf34fdd7eb0d17c103d5b9a5483",
+      "origin": "original"
+    },
+    {
+      "path": "handoff/run-browser-tests.mjs",
+      "bytes": 1633,
+      "sha256": "30a115f3e10113123b64d601ebd5aeef0c38b7d3acedf4d33db924fe65f0e782",
+      "origin": "handoff"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 3221,
+      "sha256": "5b48bceee20900759095ee92ae9e0737421c37e8fc28020d7920918fb6b7d289",
+      "origin": "original"
+    },
+    {
+      "path": "package.json",
+      "bytes": 219,
+      "sha256": "fb297a75cd77d1f329e7a2dd9e505187569671b43caeedf71f0b65ca02b76f82",
+      "origin": "original"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9755,
+      "sha256": "d889603a652536c536e2d02b0faa130d052e15e7f5779b8b7401fee45b60a0ed",
+      "origin": "original"
+    },
+    {
+      "path": "serve.mjs",
+      "bytes": 972,
+      "sha256": "9496012cc34d4b93b17e650be0473a48938895c3cbc2ca081a8716a99e3c5109",
+      "origin": "original"
+    },
+    {
+      "path": "SNAPSHOT.json",
+      "bytes": 973,
+      "sha256": "976a14a4cfc07efaa65aea0bf35f11a2af5082c285bfe95f3dfa925d8c0fec82",
+      "origin": "handoff"
+    },
+    {
+      "path": "tests/browser.mjs",
+      "bytes": 6728,
+      "sha256": "63fa711ca1cf4082ac180becd9950f59f3837d42c5d616c7351d5e8fdb2e6cf4",
+      "origin": "original"
+    },
+    {
+      "path": "tests/core.test.mjs",
+      "bytes": 11931,
+      "sha256": "46aa5386bb8e0cad10fd731ebc9ff80a97d09116d71aa794853fe39373a077df",
+      "origin": "original"
+    },
+    {
+      "path": "tests/interaction-browser.mjs",
+      "bytes": 8247,
+      "sha256": "ba476413c6b3b0e862dbbc3add5b472a680a311a01d5d95d5ccf266a40f4e3af",
+      "origin": "original"
+    },
+    {
+      "path": "tests/regressions.test.mjs",
+      "bytes": 6142,
+      "sha256": "03ea1a2b53627cab1e0e5e87c47ffc49f2f8117cc3e10e34f4e2b7e03ea31d5b",
+      "origin": "original"
+    },
+    {
+      "path": "tests/sensitivity.test.mjs",
+      "bytes": 3161,
+      "sha256": "5e073364775694f161c8f39a25571a7889b198e06f5192874598a1a6eb5d946f",
+      "origin": "original"
+    },
+    {
+      "path": "verify-package.mjs",
+      "bytes": 940,
+      "sha256": "205755f0745f2b8e41de74498797f6182bbe057f5cfe8545d82c3dde5d9e8fba",
+      "origin": "handoff"
+    },
+    {
+      "path": "先读我-源码交接.txt",
+      "bytes": 6157,
+      "sha256": "3f4bda53007a813393353aafb8dfba44091efb22e9c0b43c2218329e90635844",
+      "origin": "handoff"
+    },
+    {
+      "path": "启动网页.cmd",
+      "bytes": 160,
+      "sha256": "4435276cc11899836f1d644ce14b5ad909fe409997a6b88ccb7805dedd4f745c",
+      "origin": "original"
+    }
+  ],
+  "note": "This manifest excludes its own bytes; the ZIP has a separate SHA-256 sidecar."
+}
