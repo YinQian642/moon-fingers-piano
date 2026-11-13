@@ -64,6 +64,10 @@ npm run test:pipa-duo
 
 自动测试不能证明真人手势识别准确率或音乐已完成试听。原 26 项复刻记录及截图见 [VERIFICATION.md](VERIFICATION.md)，属于历史记录。
 
+识别启动现在并行加载模型、运行库和 WASM，显示加载进度。资源通过 SHA-256 校验后保存在浏览器缓存，后续开启可复用；浏览器禁止缓存时仍可使用。持续有下载进度不会因超过 60 秒而被取消，连续 30 秒无数据时最多重试两次。识别线程或图形初始化失败时自动切换到页面内的兼容路径。首次加载仍受访问 GitHub Pages 的网速影响。
+
+`npm run test:hand-loading` 验证真实模型初始化、缓存复用与损坏修复、网络重试、取消和兼容回退；`npm run test:hand-loading:slow` 验证持续超过 60 秒的实际慢速下载。浏览器标识与缺失能力的模拟不等于真机测试。
+
 ## 文件与历史
 
 `dist/` 为网页；`music-library/` 为档案、来源及规范；`scripts/` 为生成工具；`tests/` 为测试；`.github/` 为云端验证和部署；`.devcontainer/` 为 Codespaces 环境；`docs/` 为交接与历史说明。

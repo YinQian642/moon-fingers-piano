@@ -8,7 +8,7 @@ await context.addInitScript(()=>{
   const NativeWorker=window.Worker;window.Worker=class extends NativeWorker{postMessage(data,transfers){if(data.type==='frame')data.testPose=window.__gesturePose;super.postMessage(data,transfers);}};
   navigator.mediaDevices.getUserMedia=async()=>{const c=document.createElement('canvas');c.width=640;c.height=480;const ctx=c.getContext('2d');setInterval(()=>{ctx.fillStyle='#333';ctx.fillRect(0,0,640,480);ctx.fillRect(Date.now()%640,1,1,1);},16);return c.captureStream(60);};
 });
-await context.route('**/lib/hand-worker.js',route=>route.fulfill({contentType:'text/javascript',body:`
+await context.route('**/lib/hand-worker.js*',route=>route.fulfill({contentType:'text/javascript',body:`
 self.onmessage=({data})=>{
   if(data.type==='init'){self.postMessage({type:'ready',delegate:'test'});return;}
   if(data.type!=='frame')return;

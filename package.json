@@ -12,7 +12,9 @@
     "test:library": "node tests/library-browser.mjs",
     "prepare:site": "node scripts/prepare-site.mjs",
     "test:pipa": "node tests/pipa-browser.mjs",
-    "test:pipa-duo": "node tests/pipa-duo-browser.mjs"
+    "test:pipa-duo": "node tests/pipa-duo-browser.mjs",
+    "test:hand-loading": "node tests/hand-loading-browser.mjs",
+    "test:hand-loading:slow": "node tests/hand-loading-browser.mjs --slow"
   },
   "devDependencies": {
     "@tonejs/midi": "2.0.28",

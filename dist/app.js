@@ -2,7 +2,7 @@ import {KEYS,buildSong,pitchName,Transport} from './lib/music.js';
 import {archivedSong} from './lib/library.js';
 import {PipaExperience} from './lib/pipa.js';
 import {Piano} from './lib/audio.js';
-import {HandWorker} from './lib/hand-client.js';
+import {HandWorker} from './lib/hand-client.js?v=2';
 import {Sky} from './lib/visuals.js';
 import {PinchDetector,HandAssociator,DreamStrokeGate,cameraError} from './lib/gestures.js';
 const $=id=>document.getElementById(id),piano=new Piano(),pinch=new PinchDetector();
@@ -112,7 +112,7 @@ async function startCamera(){
     if(token!==cameraToken){pending.getTracks().forEach(t=>t.stop());return;}stream=pending;
     for(const track of stream.getVideoTracks())track.onended=()=>{stopCamera();safeText('camera-message','摄像头已断开');};
     video.srcObject=stream;await video.play();$('camera-placeholder').hidden=true;
-    if(!detector)detector=new HandWorker(text=>{if(token===cameraToken)safeText('camera-message',text);});
+    if(!detector)detector=new HandWorker();detector.onStatus=text=>{if(token===cameraToken)safeText('camera-message',text);};
     await detector.init();if(token!==cameraToken)return;
     pinch.reset();dreamStroke.reset();associator.reset();lastFrame=-1;handErrors=0;$('hand-badges').hidden=false;$('camera-dot').classList.add('on');safeText('hand-count','0 / 2');safeText('camera-message','');$('camera-button').querySelector('span').textContent='关闭摄像头';
     if(video.requestVideoFrameCallback){const nextFrame=now=>{if(token!==cameraToken||!stream)return;detectHands(now);videoFrameRequest=video.requestVideoFrameCallback(nextFrame);};videoFrameRequest=video.requestVideoFrameCallback(nextFrame);}
