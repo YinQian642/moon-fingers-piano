@@ -10,8 +10,8 @@
     },
     {
       "path": "dist/app.js",
-      "bytes": 21824,
-      "sha256": "66b533b3d72cda587834070f3642f9d3f9fc3e949615d0006e1571ea27c3bfea"
+      "bytes": 21853,
+      "sha256": "90f1c718f987ed1e33b8d76f1f2d5fd4bba45f95bced9b470fdbcb75e673df6b"
     },
     {
       "path": "dist/assets/clair-de-lune.ly",
@@ -230,8 +230,8 @@
     },
     {
       "path": "dist/index.html",
-      "bytes": 10573,
-      "sha256": "02e22c8c16f858370def2a41beaa2077be63185172628abd058d06b78f8da846"
+      "bytes": 10643,
+      "sha256": "8febbaa9989fb9103d41066e83634a1f338948947775c6c235cfac3d25db183b"
     },
     {
       "path": "dist/lib/audio.js",
@@ -260,23 +260,33 @@
     },
     {
       "path": "dist/lib/music.js",
-      "bytes": 8591,
-      "sha256": "4f2b233eb053bacc16c0e1615365570e47efa3371b7168771d9ae2de28b2ce1f"
+      "bytes": 8765,
+      "sha256": "6c418f283ca333aa24ed1d97202b8630c62c7c6a341f3bf5b0449ce540a050fe"
     },
     {
       "path": "dist/lib/pipa-audio.js",
-      "bytes": 1957,
-      "sha256": "57dc03d751ed9d23b77afeec066a18d00fad520bdcc9a51118ce3da336095fa8"
+      "bytes": 3607,
+      "sha256": "109b17050f380a4a64b8165b0a68c2cdc940e62db9030a7da53c0555fbfd2880"
     },
     {
       "path": "dist/lib/pipa-gestures.js",
-      "bytes": 7759,
-      "sha256": "145e2404430b047bf26c86e85642f2cf9cd41fd17ade4ba98b2cbc2b57de02ce"
+      "bytes": 8011,
+      "sha256": "41e90d6ea1a00d51b6e2daca431d5501b184a9b2e60d4563f98e9bbf075e21c6"
+    },
+    {
+      "path": "dist/lib/pipa-input.js",
+      "bytes": 1459,
+      "sha256": "7ea6e7331e0dd2a3306c8730324c57610e1aeaedaffd9de652d9c79f07b9eae3"
+    },
+    {
+      "path": "dist/lib/pipa-layout.js",
+      "bytes": 1818,
+      "sha256": "6700f096d84b7391418506abe2ff7b443611a44290972deaa9e0118aa50fb0be"
     },
     {
       "path": "dist/lib/pipa.js",
-      "bytes": 16317,
-      "sha256": "c6184e0c3c8d45d65382471a0f7c1887dd215622e029a6abf411f0262c9dcf09"
+      "bytes": 19660,
+      "sha256": "c5e98028c8bac66426f714cccba6704b2a833b64b5a36198ad6f8a354a0f4948"
     },
     {
       "path": "dist/lib/visuals.js",
@@ -285,8 +295,8 @@
     },
     {
       "path": "dist/pipa.css",
-      "bytes": 5611,
-      "sha256": "5c458a4f5094f10dfc8e4b8d65fada776f7efe9b5a55a8914db69daf759e89dc"
+      "bytes": 6067,
+      "sha256": "d5d098f66d3de720bc94bb57de9862bc3996f9fec77a22e7428306920f6340cf"
     },
     {
       "path": "dist/style.css",

@@ -9,4 +9,4 @@
 - 发布前运行 `npm run prepare:site`、`npm test`、`npm run verify`；涉及网页交互时运行相应浏览器测试。推送 main 后 Actions 会重复生成与验证，无需本机常驻。自动化模型测试不代表真人手势识别率或音乐听感已获验证。
 - `docs/v5-*`、原有截图及 `VERIFICATION.md` 是历史复刻记录；当前代码以 `main` 为准。具体发布方法见 README。
 - 不把凭据、node_modules、浏览器用户目录、临时文件、完整备份 ZIP 提交到仓库。仅发布 `dist/` 到网页。
-- 钢琴与琵琶曲库独立：钢琴 `music-library/catalog.json`；琵琶 `music-library/pipa/catalog.json`，使用 `scripts/pipa-library.mjs` 入库。两种乐器均保留自由演奏、音乐引导、梦想模式。默认进入钢琴；琵琶梦想模式同一次连续扫弦只推进一音。不得因切换乐器或钢琴选曲而覆盖另一乐器的曲目。
+- 钢琴与琵琶曲库独立：钢琴 `music-library/catalog.json`；琵琶 `music-library/pipa/catalog.json`，使用 `scripts/pipa-library.mjs` 入库。两种乐器均保留自由演奏、音乐引导、梦想模式。默认进入钢琴；琵琶梦想模式每个拨弦点的一次连续扫弦只推进一音，两个点独立计数。不得因切换乐器或钢琴选曲而覆盖另一乐器的曲目。

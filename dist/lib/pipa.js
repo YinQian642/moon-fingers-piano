@@ -2,19 +2,25 @@ import {Transport} from './music.js';
 import {archivedSong} from './library.js';
 import {PipaAudio} from './pipa-audio.js';
 import {STRINGS,PipaPluckDetector,PipaHandStabilizer,demoHand} from './pipa-gestures.js';
+import {PipaStringLayout} from './pipa-layout.js';
+import {PipaInputBank,PipaSweepClock,velocityScale} from './pipa-input.js';
 
 export class PipaExperience {
   constructor({video}){
-    this.video=video;this.audio=new PipaAudio();this.detector=new PipaPluckDetector();this.mouse=new PipaPluckDetector();this.stabilizer=new PipaHandStabilizer();
-    this.active=false;this.mode='guided';this.epoch=0;this.flashes=Array(4).fill(-Infinity);this.counts=Array(4).fill(0);this.detectedCounts=Array(4).fill(0);this.manual=0;this.lastStroke=null;
+    this.video=video;this.audio=new PipaAudio();this.inputs=new PipaInputBank();this.mouse=new PipaPluckDetector();this.stabilizer=new PipaHandStabilizer();
+    this.layout=new PipaStringLayout();this.sweep=new PipaSweepClock();this.handMode='single';this.lastStrokes=new Map();this.pointerCounts={};this.pointers=[];
+    this.active=false;this.mode='guided';this.epoch=0;this.flashes=Array(4).fill(-Infinity);this.counts=Array(4).fill(0);this.detectedCounts=Array(4).fill(0);this.manual=0;
     this.root=document.createElement('section');this.root.id='pipa-experience';this.root.hidden=true;
-    this.root.innerHTML=`<div class="pipa-layout"><section class="pipa-instrument"><div class="pipa-heading"><div><span class="eyebrow">PIPA · EXPLORATION</span><h2>指间四弦 <small>琵琶试验</small></h2></div><div class="pipa-modes" aria-label="琵琶演奏方式"><button data-pipa-mode="free" aria-pressed="false">自由演奏</button><button data-pipa-mode="guided" aria-pressed="true">音乐引导</button><button data-pipa-mode="dream" aria-pressed="false">梦想模式</button></div></div><div class="pipa-stage"><canvas id="pipa-canvas" aria-label="四根虚拟琴弦，可按住鼠标或触屏划弦"></canvas><div class="pipa-stage-heading"><span id="pipa-gesture-hint">左手撑弦 · 右手食指拨弦</span><span id="pipa-tracking">鼠标划弦也可试奏</span><button id="pipa-lock" class="subtle-button" aria-pressed="false">固定琴弦</button></div><div class="pipa-live-note" aria-live="polite"><span id="pipa-note">A · E · D · A</span><small id="pipa-note-detail">四根空弦</small></div></div><div class="pipa-controls"><button id="pipa-reset" class="icon-button" aria-label="琵琶从头开始">↺</button><button id="pipa-play" class="primary-button">开启声音</button><span id="pipa-progress">单拨 · 连拨 · 扫弦</span><button id="pipa-backing" class="accompaniment-toggle" aria-pressed="false" hidden>伴奏 <span aria-hidden="true"></span></button><label class="pipa-volume">音量<input id="pipa-volume" type="range" min="0" max="100" value="70" aria-label="琵琶音量"></label></div><div class="pipa-strings" aria-label="四根弦的试奏按钮">${STRINGS.map((s,i)=>`<button data-string="${i}" aria-label="拨${s.name} ${s.pitch}"><span>${s.name} <small>${s.finger}</small></span><strong>${s.pitch}</strong><kbd>${i+1}</kbd></button>`).join('')}</div></section><aside class="pipa-sidebar"><div id="pipa-camera-slot"></div><section class="pipa-song-panel"><span class="eyebrow">琵琶曲库</span><h3 id="pipa-song-title">茉莉花</h3><p id="pipa-song-hint">任意一弦推进一音，扫弦计一次</p><button id="pipa-library" class="subtle-button">选择乐曲 ↗</button></section></aside></div><p class="pipa-footnote">左手自然展开 · 右手食指横向穿弦 · 1–4 试奏</p>`;
+    this.root.innerHTML=`<div class="pipa-layout"><section class="pipa-instrument"><div class="pipa-heading"><div><span class="eyebrow">PIPA · EXPLORATION</span><h2>指间四弦 <small>琵琶试验</small></h2></div><div class="pipa-modes" aria-label="琵琶演奏方式"><button data-pipa-mode="free" aria-pressed="false">自由演奏</button><button data-pipa-mode="guided" aria-pressed="true">音乐引导</button><button data-pipa-mode="dream" aria-pressed="false">梦想模式</button></div></div><div class="pipa-setup"><label>演奏方式<select id="pipa-hands"><option value="single">单手演奏</option><option value="dual">双手演奏</option></select></label><label>琴弦定位<select id="pipa-layout"><option value="once">一次固定</option><option value="twice">二次固定</option></select></label><button id="pipa-lock" class="subtle-button" aria-pressed="false">固定琴弦</button><button id="pipa-cancel-layout" class="subtle-button" hidden>重新定位</button><p id="pipa-layout-hint" role="status"></p></div><div class="pipa-stage"><canvas id="pipa-canvas" aria-label="四根虚拟琴弦，可按住鼠标或触屏划弦"></canvas><div class="pipa-stage-heading"><span id="pipa-gesture-hint">左手撑弦 · 右手食指拨弦</span><span id="pipa-tracking">鼠标划弦也可试奏</span></div><div class="pipa-live-note" aria-live="polite"><span id="pipa-note">A · E · D · A</span><small id="pipa-note-detail">四根空弦</small></div></div><div class="pipa-controls"><button id="pipa-reset" class="icon-button" aria-label="琵琶从头开始">↺</button><button id="pipa-play" class="primary-button">开启声音</button><span id="pipa-progress">单拨 · 连拨 · 扫弦</span><button id="pipa-backing" class="accompaniment-toggle" aria-pressed="false" hidden>伴奏 <span aria-hidden="true"></span></button><label class="pipa-volume">音量<input id="pipa-volume" type="range" min="0" max="100" value="70" aria-label="琵琶音量"></label></div><div class="pipa-strings" aria-label="四根弦的试奏按钮">${STRINGS.map((s,i)=>`<button data-string="${i}" aria-label="拨${s.name} ${s.pitch}"><span>${s.name} <small>${s.finger}</small></span><strong>${s.pitch}</strong><kbd>${i+1}</kbd></button>`).join('')}</div></section><aside class="pipa-sidebar"><div id="pipa-camera-slot"></div><section class="pipa-song-panel"><span class="eyebrow">琵琶曲库</span><h3 id="pipa-song-title">茉莉花</h3><p id="pipa-song-hint">任意一弦推进一音，扫弦计一次</p><button id="pipa-library" class="subtle-button">选择乐曲 ↗</button></section></aside></div><p id="pipa-footnote" class="pipa-footnote">左手自然展开 · 右手食指横向穿弦 · 1–4 试奏</p>`;
+
     document.querySelector('main').append(this.root);this.canvas=this.el('pipa-canvas');
     this.transport=new Transport(this.audio,()=>this.render());this.transport.mode=this.mode;
     this.el('pipa-library').onclick=()=>this.openLibrary();
-    this.el('pipa-lock').onclick=()=>{if(this.stabilizer.locked)this.stabilizer.lock(null);else if(this.left)this.stabilizer.lock(this.left);else{this.text('pipa-tracking','先让左手入镜');return;}this.detector.reset();this.lastStroke=null;this.render();};
-    this.createLibrary();
-    this.loadLibrary();
+    this.el('pipa-lock').onclick=()=>this.captureLayout();
+    this.el('pipa-hands').onchange=e=>{this.handMode=e.target.value;this.pause();this.render();};
+    this.el('pipa-layout').onchange=e=>{this.layout.setMode(e.target.value);this.pause();this.render();};
+    this.el('pipa-cancel-layout').onclick=()=>{this.layout.clear();this.pause();this.render();};
+    this.createLibrary();this.loadLibrary();
     this.el('pipa-play').onclick=()=>this.start();
     this.el('pipa-reset').onclick=()=>{this.epoch++;this.transport.reset();this.resetInput();this.clearNote();this.render();};
     this.el('pipa-backing').onclick=()=>{this.transport.setDreamAccompaniment(!this.transport.dreamAccompaniment);this.render();};
@@ -36,43 +42,56 @@ export class PipaExperience {
   }
   el(id){return this.root.querySelector('#'+id);}
   text(id,value){const el=this.el(id);if(el.textContent!==value)el.textContent=value;}
-  resetInput(){this.detector.reset();this.mouse.reset();this.lastStroke=null;this.left=null;this.right=null;this.pointer=null;}
-  setActive(value){this.stabilizer.reset();this.epoch++;this.active=value;this.root.hidden=!value;this.transport.pause();this.audio.stopAll();this.resetInput();this.render();}
+  resetInput(){this.inputs.reset();this.mouse.reset();this.sweep.reset();this.lastStrokes.clear();this.pointers=[];this.pointer=null;}
+  setActive(value){this.layout.clear();this.liveLeft=null;this.stabilizer.reset();this.epoch++;this.active=value;this.root.hidden=!value;this.transport.pause();this.audio.stopAll();this.resetInput();this.render();}
   setMode(mode){this.epoch++;this.transport.pause();this.audio.stopAll();this.mode=mode;this.transport.mode=mode;this.transport.reset();this.resetInput();this.clearNote();this.render();}
   loadSong(song,display={}){this.epoch++;this.song={...song,cues:song.cues.map(n=>({...n,slot:3-Math.floor(n.slot/2)}))};this.songTitle=display.title||song.title;this.transport.load(this.song);this.resetInput();this.clearNote();this.render();}
   async ensureAudio(){try{await this.audio.init(p=>this.text('pipa-play',`音色 ${Math.round(p*100)}%`));return true;}catch{this.text('pipa-tracking','声音未能开启，请重试');return false;}finally{this.render();}}
   async start(){const epoch=this.epoch;if(!await this.ensureAudio()||epoch!==this.epoch||!this.active)return;if(this.mode!=='free'){if(['waiting','playing'].includes(this.transport.state))this.transport.pause();else this.transport.start();}this.render();}
-  async manualPluck(index){const epoch=this.epoch;if(!await this.ensureAudio()||epoch!==this.epoch||!this.active)return;this.playHits([{string:index,stroke:++this.manual,velocity:.8}],'manual');}
+  async manualPluck(index){const epoch=this.epoch;if(!await this.ensureAudio()||epoch!==this.epoch||!this.active)return;this.playHits([{string:index,stroke:++this.manual}],'manual');}
+  captureLayout(){
+    if(this.layout.fixed){this.layout.clear();this.pause();return;}
+    if(!this.liveLeft||performance.now()-(this.handAt||0)>250){this.text('pipa-layout-hint','先让左手入镜');return;}
+    if(!this.layout.capture(this.liveLeft,this.aspect||4/3)){this.text('pipa-layout-hint','稍展开左手食指和中指，再固定');return;}
+    this.pause();
+  }
   playHits(hits,source){
     if(!this.active||document.querySelector('dialog[open]'))return;
-    for(const hit of hits){this.flashes[hit.string]=performance.now();this.detectedCounts[hit.string]++;}
+    for(const hit of hits){this.flashes[hit.string]=performance.now();this.detectedCounts[hit.string]++;const id=hit.source||source;this.pointerCounts[id]=(this.pointerCounts[id]||0)+1;}
     if(!this.audio.ready)return;
     for(const hit of hits){
-      const i=hit.string,stroke=`${source}:${hit.stroke}`;
+      const i=hit.string,id=hit.source||source,stroke=hit.stroke,scale=Number.isFinite(hit.speed)?velocityScale(hit.speed):1;
+      let delay=0;
       if(this.mode!=='free'){
-        if(stroke===this.lastStroke)continue;
-        const result=this.transport.hit(i);if(!result.accepted){if(result.reason==='pitch')this.text('pipa-tracking',`请拨${STRINGS[this.transport.cue.slot].name}`);continue;}
-        this.lastStroke=stroke;
+        if(stroke===this.lastStrokes.get(id))continue;
+        delay=this.mode==='dream'?Math.min(.05,Math.max(0,this.sweep.melodyAt+.022-this.audio.now())):0;
+        const result=this.transport.hit(i,{velocityScale:scale,delay,voiceKey:id+':melody'});
+        if(!result.accepted){if(result.reason==='pitch')this.text('pipa-tracking',`请拨${STRINGS[this.transport.cue.slot].name}`);continue;}
+        this.sweep.melodyAt=this.audio.now()+delay;this.lastStrokes.set(id,stroke);
         this.text('pipa-note',result.cue.pitch);this.text('pipa-note-detail',`${STRINGS[i].name} · ${this.transport.index} / ${this.song.cues.length}`);
-      }else{this.audio.playFree(STRINGS[i].midi,hit.velocity);this.text('pipa-note',STRINGS[i].pitch);this.text('pipa-note-detail',`${STRINGS[i].name} · ${hit.direction<0?'回拨':'拨弦'}`);}
-      this.counts[i]++;this.flashes[i]=performance.now();
+      }else{
+        delay=this.sweep.delay(id,stroke,this.audio.now());
+        this.audio.playFree(STRINGS[i].midi,.8*scale,delay,id+':'+i);this.text('pipa-note',STRINGS[i].pitch);this.text('pipa-note-detail',`${STRINGS[i].name} · ${hit.direction<0?'回拨':'拨弦'}`);
+      }
+      this.counts[i]++;this.flashes[i]=performance.now()+delay*1000;
     }
     this.render();
   }
   receive(assigned,now,aspect){
     if(!this.active)return;
+    if(this.layout.aspect&&Math.abs(aspect-this.layout.aspect)>.03){this.layout.clear();this.pause();}
     const pose=this.stabilizer.update(assigned,now,aspect);
-    this.left=pose.left;this.right=pose.right;this.handAt=performance.now();
-    this.playHits(this.detector.update(this.left,this.right,now,aspect),'camera');
-    this.text('pipa-tracking',!this.left?'左手自然展开':!this.right?'右手食指入镜':this.stabilizer.locked?'琴弦已固定':pose.held?'琴弦稳定中':'四弦已就绪');
+    this.liveLeft=pose.left;this.handAt=performance.now();this.aspect=aspect;
+    const frame=this.handMode==='dual'&&!this.layout.fixed?null:this.layout.frame(this.liveLeft,aspect);
+    const result=this.inputs.update(frame,pose.hands,this.handMode,now,aspect);this.pointers=result.pointers;
+    this.playHits(result.hits,'camera');this.tracking=!frame?'waiting':'ready';
+    this.text('pipa-tracking',this.layout.calibrating?'定位中':this.handMode==='dual'&&!this.layout.fixed?'请先固定琴弦':!frame?'左手自然展开':!this.pointers.some(p=>p.point)?'拨弦手入镜':this.layout.fixed?'琴弦已固定':pose.held?'琴弦稳定中':'四弦已就绪');
   }
-
   movePointer(event){
     const rect=this.canvas.getBoundingClientRect(),box=this.geometry(rect.width,rect.height);
     const point={x:1-(event.clientX-rect.left-box.x)/box.w,y:(event.clientY-rect.top-box.y)/box.h};
-    // Mouse demo is disabled over a tracked hand so it cannot alter camera calibration.
     if(this.video.srcObject)return;
-    this.playHits(this.mouse.update(demoHand(),point,performance.now(),4/3),'mouse');
+    this.playHits(this.mouse.updateFrame(this.layout.frame(demoHand(),4/3),point,performance.now(),4/3),'mouse');
   }
   geometry(w,h){const ratio=this.video.videoWidth?this.video.videoWidth/this.video.videoHeight:4/3;const width=Math.min(w,h*ratio),height=width/ratio;return {x:(w-width)/2,y:(h-height)/2,w:width,h:height};}
   draw(now){
@@ -82,37 +101,37 @@ export class PipaExperience {
     const c=canvas.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);const box=this.geometry(w,h);
     const project=p=>({x:box.x+(1-p.x)*box.w,y:box.y+p.y*box.h});
     if(this.video.srcObject&&this.video.readyState>=2){c.save();c.globalAlpha=.34;c.translate(box.x+box.w,box.y);c.scale(-1,1);c.drawImage(this.video,0,0,box.w,box.h);c.restore();}
-    const live=now-(this.handAt||0)<250,points=this.video.srcObject?(live?this.left:null):demoHand();
-    if(points){
-      const a=project(points[4]);
-      STRINGS.forEach((s,i)=>{
-        const b=project(points[s.tip]),age=now-this.flashes[i],glow=Math.max(0,1-age/500);
-        const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const wave=reduced||glow<=0?0:Math.sin(age*.06)*glow*7;
-        c.strokeStyle=`rgba(${glow?'240,204,174':'187,164,211'},${.6+glow*.4})`;c.lineWidth=1.3+glow*1.2;
-        c.shadowColor='#ddbba6';c.shadowBlur=glow*16;c.beginPath();c.moveTo(a.x,a.y);c.quadraticCurveTo((a.x+b.x)/2+wave,(a.y+b.y)/2-wave,b.x,b.y);c.stroke();c.shadowBlur=0;
-        const p=lerpPoint(a,b,.14),q=lerpPoint(a,b,1);c.lineWidth=7;c.strokeStyle='rgba(198,173,218,.07)';c.beginPath();c.moveTo(p.x,p.y);c.lineTo(q.x,q.y);c.stroke();
-        c.fillStyle='#e5d4dc';c.beginPath();c.arc(b.x,b.y,4,0,Math.PI*2);c.fill();c.font='12px sans-serif';c.textAlign='center';c.fillText(`${s.name} · ${this.mode==='guided'&&this.transport.cue?.slot===i?this.transport.cue.pitch:s.pitch}`,b.x,b.y-15);
-        this.root.querySelector(`[data-string="${i}"]`).classList.toggle('sounding',glow>.4);
-      });
-      c.fillStyle='#dfbaa2';c.beginPath();c.arc(a.x,a.y,6,0,Math.PI*2);c.fill();
-      if(!this.video.srcObject){c.font='11px sans-serif';c.fillStyle='#aaa1b9';c.textAlign='center';c.fillText('按住鼠标或触屏划过琴弦',w/2,h-24);}
-    }
-    if(live&&this.right){const p=project(this.right);c.strokeStyle='#f6d5b1';c.lineWidth=2;c.beginPath();c.arc(p.x,p.y,8,0,Math.PI*2);c.stroke();c.fillStyle='#fff1dc';c.beginPath();c.arc(p.x,p.y,2,0,Math.PI*2);c.fill();}
+    const live=now-(this.handAt||0)<250,points=this.video.srcObject?(live?this.liveLeft:null):demoHand(),lines=this.layout.lines(points);
+    lines.forEach((line,i)=>{
+      const s=STRINGS[i],a=project(line.a),b=project(line.b),age=now-this.flashes[i],glow=age>=0?Math.max(0,1-age/500):0;
+      const wave=matchMedia('(prefers-reduced-motion: reduce)').matches||glow<=0?0:Math.sin(age*.06)*glow*7;
+      c.strokeStyle=`rgba(${glow?'240,204,174':'187,164,211'},${.6+glow*.4})`;c.lineWidth=1.3+glow*1.2;
+      c.shadowColor='#ddbba6';c.shadowBlur=glow*16;c.beginPath();c.moveTo(a.x,a.y);c.quadraticCurveTo((a.x+b.x)/2+wave,(a.y+b.y)/2-wave,b.x,b.y);c.stroke();c.shadowBlur=0;
+      const p=lerpPoint(a,b,.14),q=lerpPoint(a,b,1);c.lineWidth=7;c.strokeStyle='rgba(198,173,218,.07)';c.beginPath();c.moveTo(p.x,p.y);c.lineTo(q.x,q.y);c.stroke();
+      c.fillStyle='#e5d4dc';c.beginPath();c.arc(b.x,b.y,4,0,Math.PI*2);c.fill();c.font='12px sans-serif';c.textAlign='center';c.fillText(`${s.name} · ${this.mode==='guided'&&this.transport.cue?.slot===i?this.transport.cue.pitch:s.pitch}`,b.x,b.y-15);
+      c.fillStyle='#dfbaa2';c.beginPath();c.arc(a.x,a.y,5,0,Math.PI*2);c.fill();
+      this.root.querySelector(`[data-string="${i}"]`).classList.toggle('sounding',glow>.4);
+    });
+    if(!this.video.srcObject){c.font='11px sans-serif';c.fillStyle='#aaa1b9';c.textAlign='center';c.fillText('按住鼠标或触屏划过琴弦',w/2,h-24);}
+    if(live)this.pointers.forEach((pointer,i)=>{if(!pointer.point)return;const p=project(pointer.point);c.strokeStyle=i?'#c9b8ee':'#f6d5b1';c.fillStyle=c.strokeStyle;c.lineWidth=2;c.beginPath();c.arc(p.x,p.y,8,0,Math.PI*2);c.stroke();c.beginPath();c.arc(p.x,p.y,2,0,Math.PI*2);c.fill();c.font='10px sans-serif';c.textAlign='center';c.fillText(pointer.label,p.x,p.y-13);});
   }
   render(){
     if(!this.transport)return;
-    this.el('pipa-lock').setAttribute('aria-pressed',String(!!this.stabilizer.locked));this.text('pipa-lock',this.stabilizer.locked?'解除固定':'固定琴弦');
+    this.el('pipa-lock').setAttribute('aria-pressed',String(!!this.layout.fixed));
+    this.text('pipa-lock',this.layout.fixed?'解除固定':this.layout.mode==='twice'?(this.layout.first?'固定三、四弦':'固定一、二弦'):'固定琴弦');
+    this.el('pipa-cancel-layout').hidden=!this.layout.first||!!this.layout.fixed;
+    this.text('pipa-layout-hint',this.layout.calibrating?(this.layout.first?'一、二弦已保存 · 移动左手，再固定三、四弦':'左手中指→一弦 · 食指→二弦，先固定第一组'):this.handMode==='dual'&&!this.layout.fixed?'双手演奏请先固定琴弦':'');
+    const hint=this.handMode==='dual'?'左、右手食指拨弦':'右手食指、中指拨弦';this.text('pipa-gesture-hint',hint);this.text('pipa-footnote',hint+' · 横向穿弦 · 1–4 试奏');
+    const cameraHint=this.root.querySelector('#camera-placeholder small');if(cameraHint)cameraHint.textContent=hint;
     const musical=this.mode!=='free',dream=this.mode==='dream',t=this.transport;
     this.root.querySelectorAll('[data-pipa-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pipaMode===this.mode)));
     this.el('pipa-backing').hidden=!dream;this.el('pipa-backing').setAttribute('aria-pressed',String(t.dreamAccompaniment));
     this.text('pipa-play',!this.audio.ready?'开启声音':!musical?'声音已开启':['waiting','playing'].includes(t.state)?'暂停':t.state==='paused'?'继续':t.state==='ended'?'重来':'开始');
     this.text('pipa-progress',musical&&this.song?`${t.index} / ${this.song.cues.length}`:'单拨 · 连拨 · 扫弦');
-    this.text('pipa-song-title',this.songTitle||'茉莉花');
-    this.el('pipa-play').disabled=musical&&!this.song;
+    this.text('pipa-song-title',this.songTitle||'茉莉花');this.el('pipa-play').disabled=musical&&!this.song;
     if(musical&&t.cue)this.text('pipa-song-hint',`下一音 ${t.cue.pitch} · ${dream?'任意一弦':STRINGS[t.cue.slot].name}`);
     else this.text('pipa-song-hint',musical?(this.song?'已完成':'载入乐谱 · 可在曲库重试'):'四根空弦 · 自由拨奏');
-    this.root.querySelectorAll('[data-string]').forEach((b,i)=>{const target=this.mode==='guided'&&t.cue?.slot===i;b.classList.toggle('expected',target);b.querySelector('strong').textContent=target?t.cue.pitch:STRINGS[i].pitch;});
+    this.root.querySelectorAll('[data-string]').forEach((b,i)=>{const target=this.mode==='guided'&&t.cue?.slot===i;b.classList.toggle('expected',target);b.querySelector('strong').textContent=target?t.cue.pitch:STRINGS[i].pitch;b.querySelector('small').textContent=this.layout.mode==='twice'?['中指①','食指①','中指②','食指②'][i]:STRINGS[i].finger;});
   }
   clearNote(){this.text('pipa-note','A · E · D · A');this.text('pipa-note-detail','四根空弦');this.flashes.fill(-Infinity);}
   createLibrary(){
@@ -146,8 +165,9 @@ export class PipaExperience {
       this.loadSong(song,entry);this.library.querySelector('#pipa-library-status').textContent='';return true;
     }catch{if(token===this.loadToken){this.library.querySelector('#pipa-library-status').textContent='乐谱未能载入，请重新选择';this.library.querySelector('#pipa-library-retry').hidden=false;}return false;}
   }
-  resetHands(){this.stabilizer.reset();this.resetInput();this.render();}
-  pause(clearHands=false){if(clearHands)this.stabilizer.reset();this.epoch++;this.transport.pause();this.audio.stopAll();this.resetInput();this.render();}
-  snapshot(){return {songId:this.song?.songId,title:this.songTitle,cue:this.transport.cue?{midi:this.transport.cue.midi,string:this.transport.cue.slot}:null,active:this.active,mode:this.mode,state:this.transport.state,index:this.transport.index,cues:this.song?.cues.length,audioReady:this.audio.ready,attacks:this.audio.attacks,counts:[...this.counts],detectedCounts:[...this.detectedCounts],tracking:this.detector.status,stringsLocked:!!this.stabilizer.locked,stroke:this.detector.sequence,accompaniment:this.transport.dreamAccompaniment,voices:this.audio.voices.size};}
+
+  resetHands(){this.layout.clear();this.liveLeft=null;this.stabilizer.reset();this.resetInput();this.render();}
+  pause(clearHands=false){if(clearHands){this.layout.clear();this.liveLeft=null;this.stabilizer.reset();}this.epoch++;this.transport.pause();this.audio.stopAll();this.resetInput();this.render();}
+  snapshot(){return {songId:this.song?.songId,title:this.songTitle,cue:this.transport.cue?{midi:this.transport.cue.midi,string:this.transport.cue.slot}:null,active:this.active,mode:this.mode,state:this.transport.state,index:this.transport.index,cues:this.song?.cues.length,audioReady:this.audio.ready,attacks:this.audio.attacks,counts:[...this.counts],detectedCounts:[...this.detectedCounts],tracking:this.tracking||'waiting',stringsLocked:!!this.layout.fixed,handMode:this.handMode,layoutMode:this.layout.mode,layoutPhase:this.layout.phase,strings:this.layout.lines(this.liveLeft),pointerCounts:{...this.pointerCounts},audioHistory:this.audio.history||[],accompaniment:this.transport.dreamAccompaniment,voices:this.audio.voices.size};}
 }
 const lerpPoint=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t});

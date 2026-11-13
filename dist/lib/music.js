@@ -73,18 +73,18 @@ export class Transport {
     if(this.position>=boundary-1e-5){this.position=boundary;this.schedule();this.state=this.cue?'waiting':'ended';this.onChange();}
     else this.schedule();
   }
-  hit(slot){
-    if(this.mode==='dream')return this.dreamHit(slot);
+  hit(slot,options={}){
+    if(this.mode==='dream')return this.dreamHit(slot,options);
     this.tick();
     if(this.state!=='waiting'||!this.cue)return {accepted:false,reason:'timing'};
     const cue=this.cue;
     // Both Do fingers mean the same pitch class; the score owns the octave.
     const correct=this.mode==='dream'||slot===cue.slot||([0,7].includes(slot)&&[0,7].includes(cue.slot));
     if(!correct){this.misses++;this.onChange();return {accepted:false,reason:'pitch'};}
-    this.audio.note(cue.midi,cue.duration/this.speed,cue.velocity);
+    this.audio.note(cue.midi,cue.duration/this.speed,cue.velocity*(options.velocityScale??1),options.delay??0,{voiceKey:options.voiceKey});
     this.hits++;this.index++;this.run();return {accepted:true,cue};
   }
-  dreamHit(slot){
+  dreamHit(slot,options={}){
     if(this.state==='ready')this.start();
     if(this.state!=='waiting'||!this.cue)return {accepted:false,reason:'timing'};
     const cue=this.cue,now=this.audio.now();
@@ -94,7 +94,7 @@ export class Transport {
     this.dreamPlan=[];
     if(this.lastTap!==null&&now-this.lastTap>.045){const span=cue.time-this.lastCueTime;if(span>0)this.dreamRate=Math.min(3,Math.max(.15,(now-this.lastTap)/span));}
     const rate=this.dreamRate,next=this.song.cues[this.index+1]?.time??this.song.duration,from=this.index===0?0:cue.time;
-    this.lastMelody=this.audio.note(cue.midi,Math.max(.1,cue.duration*rate),cue.velocity);
+    this.lastMelody=this.audio.note(cue.midi,Math.max(.1,cue.duration*rate),cue.velocity*(options.velocityScale??1),options.delay??0,{voiceKey:options.voiceKey});
     if(this.dreamAccompaniment)for(const note of this.song.accompaniment){if(note.time<from-1e-6)continue;if(note.time>=next-1e-6)break;const delay=Math.max(0,(note.time-cue.time)*rate);if(delay<.008)this.playDreamAccompaniment(note,rate);else this.dreamPlan.push({note,rate,at:now+delay});}
     this.lastTap=now;this.lastCueTime=cue.time;this.position=cue.time;this.hits++;this.index++;this.onChange();return {accepted:true,cue,slot};
   }

@@ -45,15 +45,16 @@ export class PipaHandStabilizer {
       if(swapped+.04<normal)[left,right]=[right,left];
     }
     if(left&&right)this.previous={left:{...left[0]},right:{...right[0]},at:now};
-    if(this.locked)return {left:this.locked,right:right?.[8],held:true};
+    const hands={Left:left,Right:right};
+    if(this.locked)return {left:this.locked,right:right?.[8],hands,held:true};
     const frame=handFrame(left,aspect);
-    if(!frame){if(!left||!prev||now-prev.at>400)this.anchor=null;return {left:null,right:right?.[8],held:false};}
-    const target=right&&frame.local(right[8]),ids=[4,8,12,16,20];let held=false;
+    if(!frame){if(!left||!prev||now-prev.at>400)this.anchor=null;return {left:null,right:right?.[8],hands,held:false};}
+    const targets=right?[frame.local(right[8]),frame.local(right[12])]:[],ids=[4,8,12,16,20];let held=false;
     if(!this.anchor)this.anchor=new Map(ids.map(i=>[i,frame.local(left[i])]));
     const points=left.map(p=>({...p}));
     for(const i of ids){
       const old=this.anchor.get(i),observed=frame.local(left[i]),delta=norm(sub(observed,old));
-      const occluded=target&&(norm(sub(target,old))<.32||norm(sub(target,observed))<.22);
+      const occluded=targets.some(target=>norm(sub(target,old))<.32||norm(sub(target,observed))<.22);
       let accepted=old;
       if(occluded){held=true;this.candidates.delete(i);}
       else if(delta>.45){
@@ -64,15 +65,15 @@ export class PipaHandStabilizer {
       }else{accepted=lerp(old,observed,.45);this.candidates.delete(i);}
       this.anchor.set(i,accepted);points[i]={...left[i],...frame.imagePoint(accepted)};
     }
-    return {left:points,right:right?.[8],held};
+    return {left:points,right:right?.[8],hands,held};
   }
 }
 export class PipaPluckDetector {
   constructor(){this.sequence=0;this.reset();}
   reset(){this.previous=null;this.states=Array(4).fill(null);this.direction=null;this.motionPoint=null;this.motionAt=-Infinity;this.struck=new Set();this.status='waiting';}
-  update(left,right,now,aspect=1){
-    const frame=handFrame(left,aspect);
-    if(!frame||!good(right)){this.reset();this.status=left?'spread':'waiting';return [];}
+  update(left,right,now,aspect=1){return this.updateFrame(handFrame(left,aspect),right,now,aspect);}
+  updateFrame(frame,right,now,aspect=1){
+    if(!frame||!good(right)){this.reset();this.status=frame?'spread':'waiting';return [];}
     const point=frame.local(right),raw={x:right.x*aspect,y:right.y},previous=this.previous;
     const seed=()=>{this.previous={point,raw,strings:frame.strings,at:now};if(!this.motionPoint)this.motionPoint={...point};};
     this.status='ready';
@@ -90,7 +91,7 @@ export class PipaPluckDetector {
       if(!frame.valid[i]){this.states[i]=null;return;}
       const gap=signed(point,line),u=along(point,line),projection=lerp(line.a,line.b,Math.max(.14,Math.min(1,u)));
       const spacing=Math.min(...frame.strings.filter((_,j)=>j!==i&&frame.valid[j]).map(s=>Math.abs(signed(projection,s))));
-      const radius=Math.max(.004,Math.min(.014,spacing*.22)),release=Math.max(.014,radius*1.9);
+      const radius=Math.max(.004,Math.min(.014,spacing*.22)),release=Math.max(.012,radius);
       const state=this.states[i];
       const arm=()=>({point:{...point},raw:{...raw},side:Math.sign(gap)});
       if(state){
@@ -100,10 +101,10 @@ export class PipaPluckDetector {
         // Remember an actual crossing until the finger clears the tiny dead band.
         // Merely approaching the string or touching and retracting is silent.
         if(Math.sign(gap)===state.side)state.pending=null;
-        else if(crossing)state.pending={...crossing,at:now};
+        else if(crossing)state.pending={...crossing,at:now,speed:Math.abs(signed(point,line)-signed(previous.point,line))*1000/Math.max(8,now-previous.at)};
         const confirmed=state.pending&&Math.sign(gap)===-state.side&&Math.abs(gap)>=Math.min(.004,radius);
         if(confirmed&&travel>.012&&rawTravel>.012){
-          hits.push({string:i,t:state.pending.t,order:state.pending.at+state.pending.t*.001,velocity:Math.max(.5,Math.min(.95,travel*2)),direction:Math.sign(gap)||-state.side});
+          hits.push({string:i,t:state.pending.t,order:state.pending.at+state.pending.t*.001,speed:state.pending.speed,velocity:.8,direction:Math.sign(gap)||-state.side});
           this.states[i]=Math.abs(gap)>=release?arm():null;
         }else if(Math.abs(gap)>=release&&(Math.sign(gap)!==state.side||Math.abs(gap)>Math.abs(signed(state.point,line))))this.states[i]=arm();
       }else if(Math.abs(gap)>=release)this.states[i]=arm();

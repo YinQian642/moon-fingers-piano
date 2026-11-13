@@ -25,7 +25,7 @@ $('instrument-switch').onclick=()=>{
   $('instrument-switch').setAttribute('aria-label',isPipa?'切换到钢琴模式':'切换到琵琶试验模式');
   $('sensitivity').closest('label').hidden=isPipa;
   $('import-button').innerHTML=isPipa?'琵琶曲库':'<span>＋</span> 导入乐曲';
-  $('camera-placeholder').querySelector('small').textContent=isPipa?'左手撑弦 · 右手食指拨弦':'拇指轻触指尖';
+  if(isPipa)pipa.render();else $('camera-placeholder').querySelector('small').textContent='拇指轻触指尖';
 };
 const keys=KEYS.map((key,i)=>{const button=document.createElement('button');button.className='piano-key';button.dataset.slot=i;button.setAttribute('aria-label',`${key.hand}${key.finger}，${key.name}，${pitchName(key.midi)}`);button.innerHTML=`<span class="finger-label">${key.finger}</span><span class="solfege">${key.en}</span><span class="key-bottom"><span>${key.en} · ${pitchName(key.midi)}</span><kbd>${key.key}</kbd></span>`;button.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();button.focus({preventScroll:true});hit(i,'screen');});button.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(!e.repeat)hit(i,'screen');}});$('keys').append(button);return button;});
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').hidden=true,4500);}
@@ -141,7 +141,7 @@ function receiveHands(result,now){
   }
   if(instrument==='pipa'){
     pipa.receive(assigned.map(t=>({...t,hand:$('swap-hands').checked?(t.hand==='Left'?'Right':'Left'):t.hand})),now,w/h);
-    if(now-lastHandUi>350){safeText('hand-count',`${seen.size} / 2`);safeText('left-hand',seen.has('Left')?'左手 · 撑弦':'—');safeText('right-hand',seen.has('Right')?'右手 · 拨弦':'—');safeText('recognition-status',`${Math.round(detector.inferenceMs)} ms · ${pipa.detectedCounts.reduce((a,b)=>a+b,0)} 次拨弦`);lastHandUi=now;}return;
+    if(now-lastHandUi>350){safeText('hand-count',`${seen.size} / 2`);safeText('left-hand',seen.has('Left')?(pipa.handMode==='dual'?'左手 · 拨弦':'左手 · 定弦'):'—');safeText('right-hand',seen.has('Right')?'右手 · 拨弦':'—');safeText('recognition-status',`${Math.round(detector.inferenceMs)} ms · ${pipa.detectedCounts.reduce((a,b)=>a+b,0)} 次拨弦`);lastHandUi=now;}return;
   }
   lastInputBatch=frameHits;
   if(mode==='free')frameReleases.forEach(slot=>piano.release(KEYS[slot].midi));
