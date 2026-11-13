@@ -5,7 +5,8 @@ export class HandWorker {
     this.worker=new Worker(new URL('./hand-worker.js',import.meta.url));
     this.loading=new Promise((resolve,reject)=>{
       this.rejectInit=reject;
-      this.timer=setTimeout(()=>{this.close();reject(Error('识别启动超时，请重试。'));},70000);
+      // Model and WASM are separate large downloads on a cold GitHub Pages visit.
+      this.timer=setTimeout(()=>this.close(Error('识别启动超时，请重试。')),180000);
       this.worker.onmessage=({data})=>{
         if(data.type==='status')this.onStatus(data.text);
         if(data.type==='ready'){clearTimeout(this.timer);this.ready=true;resolve();}
@@ -25,5 +26,5 @@ export class HandWorker {
       return await new Promise((resolve,reject)=>{this.resolveFrame=resolve;this.rejectFrame=reject;this.worker.postMessage({type:'frame',bitmap,timestamp,session},[bitmap]);});
     }catch(e){this.busy=false;throw e;}
   }
-  close(){clearTimeout(this.timer);const reject=this.rejectInit;this.rejectInit=null;reject?.(Error('识别已取消'));this.worker?.terminate();this.worker=null;this.ready=false;this.busy=false;this.loading=null;this.resolveFrame?.(null);this.resolveFrame=null;}
+  close(reason=Error('识别已取消')){clearTimeout(this.timer);const reject=this.rejectInit;this.rejectInit=null;reject?.(reason);this.worker?.terminate();this.worker=null;this.ready=false;this.busy=false;this.loading=null;this.resolveFrame?.(null);this.resolveFrame=null;}
 }

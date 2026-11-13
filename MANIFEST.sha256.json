@@ -245,8 +245,8 @@
     },
     {
       "path": "dist/lib/hand-client.js",
-      "bytes": 2022,
-      "sha256": "4d0ea720376367d06674e5dd80cdddcd927a012e4171fe8481c5935ccf6f8ce3"
+      "bytes": 2107,
+      "sha256": "d4e13e2ba4e889dd1639151e32c2e8dac3cd44f57842e35b506dac4ad4602d80"
     },
     {
       "path": "dist/lib/hand-worker.js",
