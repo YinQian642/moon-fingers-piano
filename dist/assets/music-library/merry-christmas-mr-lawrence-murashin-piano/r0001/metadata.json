@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "merry-christmas-mr-lawrence-murashin-piano",
+  "revision": "r0001",
+  "title": "Merry Christmas Mr. Lawrence（钢琴版）",
+  "composer": "Ryuichi Sakamoto（坂本龙一）",
+  "createdAt": "2026-11-13T05:04:45.923Z",
+  "status": "needs-review",
+  "sourceFiles": [
+    {
+      "name": "score.json",
+      "sha256": "7e248c9ff9ab1223f1bbb352225bf88c1f989c7fe4ddc1c08b3e5d1b3de301a7",
+      "bytes": 558999
+    },
+    {
+      "name": "Merry.Christmas.MrLawrence.p.mid",
+      "sha256": "1f1ec05a4a565ac23064590cefd5787b4482209dcfbb84f6769e786f9745f038",
+      "bytes": 19751
+    },
+    {
+      "name": "source-page.html",
+      "sha256": "a44fcf104c3f2cb913605065e19bbd708fc6ac8211e9512de217faf182bb2d0f",
+      "bytes": 41785
+    },
+    {
+      "name": "source-audit.json",
+      "sha256": "b4170e1c7c6c65a870d00c2042f3622c99a34cfedc532acafec45899b19987d0",
+      "bytes": 5728
+    },
+    {
+      "name": "source-notes.txt",
+      "sha256": "b0a86365102863cd06fb92659622f8352252d799021ce2cd7a9ad8de450e0e33",
+      "bytes": 2142
+    },
+    {
+      "name": "import-long-versions.mjs",
+      "sha256": "a199e38133b50eadbe66d67d1862e52bc1be2ee239bc1b34da983bae0196179d",
+      "bytes": 10745
+    }
+  ],
+  "noteCount": 2272,
+  "melodyCount": 640,
+  "accompanimentCount": 1632,
+  "durationSeconds": 270.9060475958333,
+  "keyChanges": [
+    {
+      "ticks": 0,
+      "fifths": -5,
+      "mode": "major",
+      "key": "Db"
+    }
+  ],
+  "webAdaptation": {
+    "melodyTrack": 0,
+    "shortenedMelodyNoteIds": [],
+    "reason": "Only web.mid clips overlapping melody durations so the v5 importer does not discard lower legato notes. score.json, full.mid and performance.json retain original durations."
+  },
+  "files": {
+    "score.json": {
+      "sha256": "7e248c9ff9ab1223f1bbb352225bf88c1f989c7fe4ddc1c08b3e5d1b3de301a7",
+      "bytes": 558999
+    },
+    "performance.json": {
+      "sha256": "a45d71e8b680b99f094515ecc709903781b1d298a2ca7a6ed025139da449b19a",
+      "bytes": 1090794
+    },
+    "full.mid": {
+      "sha256": "6dcddecedd093a3379544a351dd36fc52359969bfbba8737fd22208f42202627",
+      "bytes": 25339
+    },
+    "web.mid": {
+      "sha256": "5357b61ec62af9064d989b4370126f6fbac567f730aa574f78d41e00355e09a1",
+      "bytes": 25722
+    },
+    "sources/score.json": {
+      "sha256": "7e248c9ff9ab1223f1bbb352225bf88c1f989c7fe4ddc1c08b3e5d1b3de301a7",
+      "bytes": 558999
+    },
+    "sources/Merry.Christmas.MrLawrence.p.mid": {
+      "sha256": "1f1ec05a4a565ac23064590cefd5787b4482209dcfbb84f6769e786f9745f038",
+      "bytes": 19751
+    },
+    "sources/source-page.html": {
+      "sha256": "a44fcf104c3f2cb913605065e19bbd708fc6ac8211e9512de217faf182bb2d0f",
+      "bytes": 41785
+    },
+    "sources/source-audit.json": {
+      "sha256": "b4170e1c7c6c65a870d00c2042f3622c99a34cfedc532acafec45899b19987d0",
+      "bytes": 5728
+    },
+    "sources/source-notes.txt": {
+      "sha256": "b0a86365102863cd06fb92659622f8352252d799021ce2cd7a9ad8de450e0e33",
+      "bytes": 2142
+    },
+    "sources/import-long-versions.mjs": {
+      "sha256": "a199e38133b50eadbe66d67d1862e52bc1be2ee239bc1b34da983bae0196179d",
+      "bytes": 10745
+    }
+  }
+}

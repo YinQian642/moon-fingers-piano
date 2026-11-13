@@ -1,0 +1,218 @@
+{
+  "stage": "pre-publication validation",
+  "clientDate": "2026-11-13",
+  "songs": [
+    {
+      "id": "moscow-nights-21405ff9-piano",
+      "revision": "r0001",
+      "score": "songs/moscow-nights-21405ff9-piano/revisions/r0001/score.json",
+      "webMidi": "songs/moscow-nights-21405ff9-piano/revisions/r0001/web.mid",
+      "status": "needs-review",
+      "noteCount": 1928,
+      "melodyCount": 216,
+      "accompanimentCount": 1712,
+      "durationSeconds": 184.40770767499998,
+      "header": {
+        "ppq": 240,
+        "tempos": [
+          {
+            "ticks": 0,
+            "bpm": 64.99999458333379
+          }
+        ],
+        "timeSignatures": [
+          {
+            "ticks": 0,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "keySignatures": [
+          {
+            "ticks": 0,
+            "fifths": -3,
+            "mode": "minor"
+          }
+        ]
+      },
+      "uncertainSpans": [
+        {
+          "startTicks": 0,
+          "endTicks": 47946,
+          "reason": "整曲的来源编配者未署名，未独立对照出版谱或录音；C小调为缺失调号的编辑推断。钢琴化多声部平衡尚未试听，源鼓轨仅在原材料保留。"
+        },
+        {
+          "startTicks": 45696,
+          "endTicks": 47946,
+          "reason": "主旋律终止后的原始伴奏尾奏（约175.75–184.41秒）保留；声部角色和结尾听感待试听。"
+        }
+      ],
+      "webShortenedNotes": 0
+    },
+    {
+      "id": "merry-christmas-mr-lawrence-murashin-piano",
+      "revision": "r0001",
+      "score": "songs/merry-christmas-mr-lawrence-murashin-piano/revisions/r0001/score.json",
+      "webMidi": "songs/merry-christmas-mr-lawrence-murashin-piano/revisions/r0001/web.mid",
+      "status": "needs-review",
+      "noteCount": 2272,
+      "melodyCount": 640,
+      "accompanimentCount": 1632,
+      "durationSeconds": 270.9060475958333,
+      "header": {
+        "ppq": 480,
+        "tempos": [
+          {
+            "ticks": 0,
+            "bpm": 102.0000510000255
+          },
+          {
+            "ticks": 44640,
+            "bpm": 89.9999550000225
+          },
+          {
+            "ticks": 45360,
+            "bpm": 40.00002666668444
+          },
+          {
+            "ticks": 46080,
+            "bpm": 88.00015253359773
+          },
+          {
+            "ticks": 76800,
+            "bpm": 91.99984666692222
+          },
+          {
+            "ticks": 90960,
+            "bpm": 60
+          },
+          {
+            "ticks": 92160,
+            "bpm": 88.00015253359773
+          },
+          {
+            "ticks": 107520,
+            "bpm": 91.99984666692222
+          },
+          {
+            "ticks": 120960,
+            "bpm": 83.99996640001343
+          },
+          {
+            "ticks": 121920,
+            "bpm": 76.00016213367923
+          },
+          {
+            "ticks": 122880,
+            "bpm": 96
+          },
+          {
+            "ticks": 181440,
+            "bpm": 91.99984666692222
+          },
+          {
+            "ticks": 182160,
+            "bpm": 83.99996640001343
+          },
+          {
+            "ticks": 183120,
+            "bpm": 79.99978666723555
+          },
+          {
+            "ticks": 183840,
+            "bpm": 72.00002880001152
+          },
+          {
+            "ticks": 184080,
+            "bpm": 67.99976426748387
+          },
+          {
+            "ticks": 184320,
+            "bpm": 79.99978666723555
+          }
+        ],
+        "timeSignatures": [
+          {
+            "ticks": 0,
+            "numerator": 12,
+            "denominator": 8
+          },
+          {
+            "ticks": 46080,
+            "numerator": 4,
+            "denominator": 4
+          }
+        ],
+        "keySignatures": [
+          {
+            "ticks": 0,
+            "fifths": -5,
+            "mode": "major"
+          }
+        ]
+      },
+      "uncertainSpans": [
+        {
+          "startTicks": 0,
+          "endTicks": 199583,
+          "reason": "网络钢琴MIDI版本，编曲者未核实；未对照出版谱或实际试听。保留来源的高音八度、Db major调号及所有演奏数据，是否匹配用户期望版本仍待确认。"
+        },
+        {
+          "startTicks": 46080,
+          "endTicks": 76800,
+          "reason": "中低音主题与内声部交错；暂采用上谱表最高声部并排除两处持续旋律下的Bb3，需人工声部复核。"
+        },
+        {
+          "startTicks": 76800,
+          "endTicks": 122880,
+          "reason": "和弦、琶音与高音再现段的主旋律归属待试听；详细展开和弦事件见source-audit.json。"
+        },
+        {
+          "startTicks": 184320,
+          "endTicks": 199583,
+          "reason": "尾声的低音震音和右手重复和弦完整保留，旋律逐次起音的安排及收尾听感待试听。"
+        }
+      ],
+      "webShortenedNotes": 0
+    }
+  ],
+  "library": {
+    "songs": 4,
+    "revisions": 5,
+    "valid": true
+  },
+  "jsonSchema": "both passed Draft 2020-12",
+  "unitTests": {
+    "passed": 62,
+    "failed": 0
+  },
+  "runtimeIntegrity": "61 files passed",
+  "browser": {
+    "valid": true,
+    "newSongs": [
+      {
+        "id": "moscow-nights-21405ff9-piano",
+        "notes": 1928,
+        "cues": 216,
+        "revision": "r0001",
+        "distinctDreamTaps": 16,
+        "accompaniment": true
+      },
+      {
+        "id": "merry-christmas-mr-lawrence-murashin-piano",
+        "notes": 2272,
+        "cues": 640,
+        "revision": "r0001",
+        "distinctDreamTaps": 16,
+        "accompaniment": true
+      }
+    ],
+    "oldShortVersionPreserved": true,
+    "browserErrors": [],
+    "actualListening": false
+  },
+  "existingLibraryBrowser": "passed: three modes, short version, mobile, failed/stale fetch",
+  "actualListening": false,
+  "oldRevisionsPreserved": true,
+  "gestureUiTimbreOrPlaybackCodeChanged": false
+}

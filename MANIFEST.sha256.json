@@ -25,8 +25,28 @@
     },
     {
       "path": "dist/assets/music-library/catalog.json",
-      "bytes": 346,
-      "sha256": "9c60116a4e4b26fbbc6f281c2c771e1eba07d1013972fb0fc3e9c2cad476ff8e"
+      "bytes": 1044,
+      "sha256": "05934f50d46a57896d21783ed0ac339259f13d674cd59f9e00fbb6f519a90ef8"
+    },
+    {
+      "path": "dist/assets/music-library/merry-christmas-mr-lawrence-murashin-piano/r0001/metadata.json",
+      "bytes": 3177,
+      "sha256": "344485376d994ef5f0fb92963322cfb197afbb15205986296ce0744882c8e258"
+    },
+    {
+      "path": "dist/assets/music-library/merry-christmas-mr-lawrence-murashin-piano/r0001/performance.json",
+      "bytes": 1090794,
+      "sha256": "a45d71e8b680b99f094515ecc709903781b1d298a2ca7a6ed025139da449b19a"
+    },
+    {
+      "path": "dist/assets/music-library/moscow-nights-21405ff9-piano/r0001/metadata.json",
+      "bytes": 3157,
+      "sha256": "644f94ffdaae9c599217bf080e8977541272cd8fb8db87b75e3b9a93ce897e3d"
+    },
+    {
+      "path": "dist/assets/music-library/moscow-nights-21405ff9-piano/r0001/performance.json",
+      "bytes": 882152,
+      "sha256": "2d908004eb46f497f7f7a75c4fae1f3065f7d223dba989aaa86d49e91c9956e2"
     },
     {
       "path": "dist/assets/music-library/moscow-nights-eop-1024-piano/r0001/metadata.json",

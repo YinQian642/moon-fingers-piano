@@ -1,0 +1,23 @@
+Merry Christmas Mr. Lawrence（钢琴版）
+
+https://murashin.sakura.ne.jp/cgi-bin/adtunetr4mid.cgi?smf=../upload/Merry.Christmas.MrLawrence.p.mid
+
+https://murashin.sakura.ne.jp/upload/Merry.Christmas.MrLawrence.p.mid
+
+来自murashin.sakura.ne.jp公开MIDI上传目录的Merry.Christmas.MrLawrence.p.mid，目录署上传者E、登记2023-10-16，编曲/制谱者未核实。采用原始SMF，不采用该站调律转换文件。两条钢琴声部共2272音，源时长270.906047596秒，保留原始八度、起音、时值、力度、1551个控制器事件、17个速度标记及12/8→4/4变化；没有重排段落或补写音符。源文件调号为5降号/major，原样保留Db大调元数据，不将其擅改为C大调。
+
+已检查原始两轨的开头高音主题F6/Eb6/F6/Bb6、tick46080中低音主题、76800和弦段、92160高音再现、122880重复和弦段及184320起尾声。右手同刻和弦只取最高声部；tick48000和55680的Bb3在持续Eb4下作为内声部；共同释放的短促展开和弦按最高音归旋律，全部内声部保留。全曲精确音符和控制事件经程序比对；尚未逐小节对照出版谱或实际试听，不能认证为坂本龙一某场演奏原版。网页暂不执行MIDI踏板/弯音，档案仍保留。授权unknown。
+
+0–199583 ticks: 网络钢琴MIDI版本，编曲者未核实；未对照出版谱或实际试听。保留来源的高音八度、Db major调号及所有演奏数据，是否匹配用户期望版本仍待确认。
+
+46080–76800 ticks: 中低音主题与内声部交错；暂采用上谱表最高声部并排除两处持续旋律下的Bb3，需人工声部复核。
+
+76800–122880 ticks: 和弦、琶音与高音再现段的主旋律归属待试听；详细展开和弦事件见source-audit.json。
+
+184320–199583 ticks: 尾声的低音震音和右手重复和弦完整保留，旋律逐次起音的安排及收尾听感待试听。
+
+程序对比通过；实际试听未进行。
+
+原始MIDI、来源网页、source-audit.json与score.json一并归档。
+
+生成脚本：music-library/inbox/import-long-versions.mjs。历史修订不得覆盖。

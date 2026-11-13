@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "moscow-nights-21405ff9-piano",
+  "revision": "r0001",
+  "title": "莫斯科郊外的晚上（合奏钢琴化长版）",
+  "composer": "Vasily Solovyov-Sedoy（瓦西里·索洛维约夫-谢多伊）",
+  "createdAt": "2026-11-13T05:04:45.640Z",
+  "status": "needs-review",
+  "sourceFiles": [
+    {
+      "name": "score.json",
+      "sha256": "39ddd400410d4cda393aaaef19335807e38f0eb5e4633bd0861a772b65fe4072",
+      "bytes": 327181
+    },
+    {
+      "name": "21405ff9.mid",
+      "sha256": "7e41b26a737950c41a4b13fffc6f365e153ff2a3f9f863cc79094ea6652ad09a",
+      "bytes": 23214
+    },
+    {
+      "name": "source-page.html",
+      "sha256": "ee4706a825d59790efb695c57fa2506586db3b84da3d9f95f30edf0c42b12c38",
+      "bytes": 7106
+    },
+    {
+      "name": "source-audit.json",
+      "sha256": "176a9698a9946d31db966379bb5d6eb59a6bc5b24248ddcfd789e0abe4dfa5c5",
+      "bytes": 2161
+    },
+    {
+      "name": "source-notes.txt",
+      "sha256": "7a16d27727bf897de4e66d683dbf5d36673533da71b30a20e5c6e14e61d441e2",
+      "bytes": 1796
+    },
+    {
+      "name": "import-long-versions.mjs",
+      "sha256": "a199e38133b50eadbe66d67d1862e52bc1be2ee239bc1b34da983bae0196179d",
+      "bytes": 10745
+    }
+  ],
+  "noteCount": 1928,
+  "melodyCount": 216,
+  "accompanimentCount": 1712,
+  "durationSeconds": 184.40770767499998,
+  "keyChanges": [
+    {
+      "ticks": 0,
+      "fifths": -3,
+      "mode": "minor",
+      "key": "C"
+    }
+  ],
+  "webAdaptation": {
+    "melodyTrack": 0,
+    "shortenedMelodyNoteIds": [],
+    "reason": "Only web.mid clips overlapping melody durations so the v5 importer does not discard lower legato notes. score.json, full.mid and performance.json retain original durations."
+  },
+  "files": {
+    "score.json": {
+      "sha256": "39ddd400410d4cda393aaaef19335807e38f0eb5e4633bd0861a772b65fe4072",
+      "bytes": 327181
+    },
+    "performance.json": {
+      "sha256": "2d908004eb46f497f7f7a75c4fae1f3065f7d223dba989aaa86d49e91c9956e2",
+      "bytes": 882152
+    },
+    "full.mid": {
+      "sha256": "7c4c8b000ceb30089a8cdfc8feb13de3e780726423067160269d5dfcb8939171",
+      "bytes": 16186
+    },
+    "web.mid": {
+      "sha256": "78391de616ad1a959f1c470cf367632d1176192df0d338f5c6f24a92f80c5426",
+      "bytes": 16102
+    },
+    "sources/score.json": {
+      "sha256": "39ddd400410d4cda393aaaef19335807e38f0eb5e4633bd0861a772b65fe4072",
+      "bytes": 327181
+    },
+    "sources/21405ff9.mid": {
+      "sha256": "7e41b26a737950c41a4b13fffc6f365e153ff2a3f9f863cc79094ea6652ad09a",
+      "bytes": 23214
+    },
+    "sources/source-page.html": {
+      "sha256": "ee4706a825d59790efb695c57fa2506586db3b84da3d9f95f30edf0c42b12c38",
+      "bytes": 7106
+    },
+    "sources/source-audit.json": {
+      "sha256": "176a9698a9946d31db966379bb5d6eb59a6bc5b24248ddcfd789e0abe4dfa5c5",
+      "bytes": 2161
+    },
+    "sources/source-notes.txt": {
+      "sha256": "7a16d27727bf897de4e66d683dbf5d36673533da71b30a20e5c6e14e61d441e2",
+      "bytes": 1796
+    },
+    "sources/import-long-versions.mjs": {
+      "sha256": "a199e38133b50eadbe66d67d1862e52bc1be2ee239bc1b34da983bae0196179d",
+      "bytes": 10745
+    }
+  }
+}

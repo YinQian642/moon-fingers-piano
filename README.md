@@ -17,8 +17,12 @@
 | --- | --- | --- | --- |
 | 德彪西《月光》 | 保留第 5 版 MIDI 播放；档案另存 r0001、r0002 | 1,468 / 306 | 322.5 秒 |
 | 《莫斯科郊外的晚上》EOP 1024 钢琴版 | 显式旋律档案 r0001，A 小调 | 199 / 58 | 31.25 秒 |
+| 《莫斯科郊外的晚上》合奏钢琴化长版 | 独立档案 r0001，C 小调为缺失调号的编辑判断 | 1,928 / 216 | 184.41 秒 |
+| Merry Christmas Mr. Lawrence 钢琴版 | 独立档案 r0001，保留源 Db 大调元数据、17 个速度标记及拍号变化 | 2,272 / 640 | 270.91 秒 |
 
 《莫斯科郊外的晚上》按用户存入的版本接入，并非完整商业录音转写。档案标记 `needs-review`，琶音时序与反复展开仍待试听。《月光》档案也保留声部复核标记。
+
+长版《莫斯科郊外的晚上》采用 MIDI Music Collection 的 `21405ff9.mid`，完整保留全部有音高声部并改用钢琴演奏，鼓轨仅留在原始材料中；没有重复短版或改变速度凑时长。《Merry Christmas Mr. Lawrence》采用 murashin 上传目录的两谱表钢琴 MIDI，保留原始音符与控制器。两首均标 `needs-review`：网络编配尚未独立对照出版谱或实际试听。来源、声部取舍及待确认位置见各修订的 `sources/source-audit.json`。原短版继续保留。
 
 自由演奏使用 C4–C5 钢琴音；音乐引导按照原曲音高和指法提示推进；梦想模式由每次独立触碰推进一枚旋律音，伴奏默认关闭、可自行开启。重复同音逐次触发。按键从左至右对应左手小指至食指、右手食指至小指；也支持鼠标和 `A S D F / J K L ;`。
 
@@ -60,4 +64,4 @@ npm run test:library
 
 ## 来源
 
-《月光》来自 Mutopia Project #1778，Keith OHara 制谱，原谱和 MIDI 标为 Public Domain。新曲为用户归档的 EOP 1024 钢琴谱，来源、质量、授权状态保存在修订的 `score.json` 与 `metadata.json`。钢琴采样为 Salamander Grand Piano / Alexander Holm（CC BY 3.0）；MediaPipe、MIDI 库授权随 `assets/`、`vendor/` 保留。技术细节见 [当前技术说明](docs/当前技术说明.md)。
+《月光》来自 Mutopia Project #1778，Keith OHara 制谱，原谱和 MIDI 标为 Public Domain。其它曲目采用 EOP 1024 钢琴谱、MIDI Music Collection 及 murashin 公开 MIDI 材料，具体来源、质量、授权状态保存在各修订的 `score.json` 与 `metadata.json`；未核实的授权均记为 `unknown`。钢琴采样为 Salamander Grand Piano / Alexander Holm（CC BY 3.0）；MediaPipe、MIDI 库授权随 `assets/`、`vendor/` 保留。技术细节见 [当前技术说明](docs/当前技术说明.md)。

@@ -9,6 +9,24 @@
       "status": "needs-review",
       "duration": 31.25,
       "performance": "moscow-nights-eop-1024-piano/r0001/performance.json"
+    },
+    {
+      "id": "moscow-nights-21405ff9-piano",
+      "revision": "r0001",
+      "title": "莫斯科郊外的晚上（合奏钢琴化长版）",
+      "composer": "Vasily Solovyov-Sedoy",
+      "status": "needs-review",
+      "duration": 184.40770767499998,
+      "performance": "moscow-nights-21405ff9-piano/r0001/performance.json"
+    },
+    {
+      "id": "merry-christmas-mr-lawrence-murashin-piano",
+      "revision": "r0001",
+      "title": "Merry Christmas Mr. Lawrence（钢琴版）",
+      "composer": "Ryuichi Sakamoto",
+      "status": "needs-review",
+      "duration": 270.9060475958333,
+      "performance": "merry-christmas-mr-lawrence-murashin-piano/r0001/performance.json"
     }
   ]
 }

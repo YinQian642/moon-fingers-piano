@@ -1,0 +1,100 @@
+{
+  "sourcePage": "https://www.midi-karaoke.info/21405ff9.ru.html",
+  "downloadUrl": "https://www.midi-karaoke.info/21405ff9.mid",
+  "sourceFile": "21405ff9.mid",
+  "sourceSha256": "7e41b26a737950c41a4b13fffc6f365e153ff2a3f9f863cc79094ea6652ad09a",
+  "sourceBytes": 23214,
+  "sourceNoteCount": 2821,
+  "sourceTracks": [
+    {
+      "index": 0,
+      "name": "",
+      "channel": 14,
+      "program": 88,
+      "notes": 216
+    },
+    {
+      "index": 1,
+      "name": "",
+      "channel": 1,
+      "program": 40,
+      "notes": 221
+    },
+    {
+      "index": 2,
+      "name": "",
+      "channel": 9,
+      "program": 21,
+      "notes": 893
+    },
+    {
+      "index": 3,
+      "name": "",
+      "channel": 2,
+      "program": 1,
+      "notes": 729
+    },
+    {
+      "index": 4,
+      "name": "",
+      "channel": 6,
+      "program": 0,
+      "notes": 762
+    }
+  ],
+  "retainedNotes": 1928,
+  "excluded": [
+    {
+      "trackId": "track-2",
+      "channel": 9,
+      "notes": 893,
+      "reason": "原始GM鼓轨，非有音高钢琴声部；完整原文件保留，未将鼓号误作钢琴音高。"
+    }
+  ],
+  "melodyEvents": 216,
+  "accompanimentNotes": 1712,
+  "repeatedConsecutiveMelodyPairs": 7,
+  "originalTimingAndPitchesPreserved": true,
+  "durationSeconds": 184.40770767499998,
+  "ppq": 240,
+  "header": {
+    "ppq": 240,
+    "tempos": [
+      {
+        "ticks": 0,
+        "bpm": 64.99999458333379
+      }
+    ],
+    "timeSignatures": [
+      {
+        "ticks": 0,
+        "numerator": 4,
+        "denominator": 4
+      }
+    ],
+    "keySignatures": [
+      {
+        "ticks": 0,
+        "fifths": -3,
+        "mode": "minor"
+      }
+    ]
+  },
+  "rawSourceTempo": [
+    {
+      "ticks": 0,
+      "microsecondsPerBeat": 923077
+    }
+  ],
+  "reviewedArpeggios": [],
+  "programChecks": {
+    "sourcePitchedNoteEquality": true,
+    "fullMidiRoundtrip": true,
+    "webMelodyEquality": true,
+    "webShortenedMelodyIds": [],
+    "controllersPreserved": true
+  },
+  "actualListening": false,
+  "license": "unknown",
+  "sourceSearchNote": "39.43秒的Seonaidh Morton合唱MIDI和127.03秒的Kombrig合奏候选未采用；未将短版复制凑长。"
+}

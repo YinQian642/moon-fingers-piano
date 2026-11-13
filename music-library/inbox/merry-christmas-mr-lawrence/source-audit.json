@@ -1,0 +1,262 @@
+{
+  "sourcePage": "https://murashin.sakura.ne.jp/cgi-bin/adtunetr4mid.cgi?smf=../upload/Merry.Christmas.MrLawrence.p.mid",
+  "downloadUrl": "https://murashin.sakura.ne.jp/upload/Merry.Christmas.MrLawrence.p.mid",
+  "sourceFile": "Merry.Christmas.MrLawrence.p.mid",
+  "sourceSha256": "1f1ec05a4a565ac23064590cefd5787b4482209dcfbb84f6769e786f9745f038",
+  "sourceBytes": 19751,
+  "sourceNoteCount": 2272,
+  "sourceTracks": [
+    {
+      "index": 0,
+      "name": "",
+      "channel": 0,
+      "program": 0,
+      "notes": 1179
+    },
+    {
+      "index": 1,
+      "name": "",
+      "channel": 0,
+      "program": 0,
+      "notes": 1093
+    }
+  ],
+  "retainedNotes": 2272,
+  "excluded": [],
+  "melodyEvents": 640,
+  "accompanimentNotes": 1632,
+  "repeatedConsecutiveMelodyPairs": 107,
+  "originalTimingAndPitchesPreserved": true,
+  "durationSeconds": 270.9060475958333,
+  "ppq": 480,
+  "header": {
+    "ppq": 480,
+    "tempos": [
+      {
+        "ticks": 0,
+        "bpm": 102.0000510000255
+      },
+      {
+        "ticks": 44640,
+        "bpm": 89.9999550000225
+      },
+      {
+        "ticks": 45360,
+        "bpm": 40.00002666668444
+      },
+      {
+        "ticks": 46080,
+        "bpm": 88.00015253359773
+      },
+      {
+        "ticks": 76800,
+        "bpm": 91.99984666692222
+      },
+      {
+        "ticks": 90960,
+        "bpm": 60
+      },
+      {
+        "ticks": 92160,
+        "bpm": 88.00015253359773
+      },
+      {
+        "ticks": 107520,
+        "bpm": 91.99984666692222
+      },
+      {
+        "ticks": 120960,
+        "bpm": 83.99996640001343
+      },
+      {
+        "ticks": 121920,
+        "bpm": 76.00016213367923
+      },
+      {
+        "ticks": 122880,
+        "bpm": 96
+      },
+      {
+        "ticks": 181440,
+        "bpm": 91.99984666692222
+      },
+      {
+        "ticks": 182160,
+        "bpm": 83.99996640001343
+      },
+      {
+        "ticks": 183120,
+        "bpm": 79.99978666723555
+      },
+      {
+        "ticks": 183840,
+        "bpm": 72.00002880001152
+      },
+      {
+        "ticks": 184080,
+        "bpm": 67.99976426748387
+      },
+      {
+        "ticks": 184320,
+        "bpm": 79.99978666723555
+      }
+    ],
+    "timeSignatures": [
+      {
+        "ticks": 0,
+        "numerator": 12,
+        "denominator": 8
+      },
+      {
+        "ticks": 46080,
+        "numerator": 4,
+        "denominator": 4
+      }
+    ],
+    "keySignatures": [
+      {
+        "ticks": 0,
+        "fifths": -5,
+        "mode": "major"
+      }
+    ]
+  },
+  "rawSourceTempo": [
+    {
+      "ticks": 0,
+      "microsecondsPerBeat": 588235
+    },
+    {
+      "ticks": 44640,
+      "microsecondsPerBeat": 666667
+    },
+    {
+      "ticks": 45360,
+      "microsecondsPerBeat": 1499999
+    },
+    {
+      "ticks": 46080,
+      "microsecondsPerBeat": 681817
+    },
+    {
+      "ticks": 76800,
+      "microsecondsPerBeat": 652175
+    },
+    {
+      "ticks": 90960,
+      "microsecondsPerBeat": 1000000
+    },
+    {
+      "ticks": 92160,
+      "microsecondsPerBeat": 681817
+    },
+    {
+      "ticks": 107520,
+      "microsecondsPerBeat": 652175
+    },
+    {
+      "ticks": 120960,
+      "microsecondsPerBeat": 714286
+    },
+    {
+      "ticks": 121920,
+      "microsecondsPerBeat": 789472
+    },
+    {
+      "ticks": 122880,
+      "microsecondsPerBeat": 625000
+    },
+    {
+      "ticks": 181440,
+      "microsecondsPerBeat": 652175
+    },
+    {
+      "ticks": 182160,
+      "microsecondsPerBeat": 714286
+    },
+    {
+      "ticks": 183120,
+      "microsecondsPerBeat": 750002
+    },
+    {
+      "ticks": 183840,
+      "microsecondsPerBeat": 833333
+    },
+    {
+      "ticks": 184080,
+      "microsecondsPerBeat": 882356
+    },
+    {
+      "ticks": 184320,
+      "microsecondsPerBeat": 750002
+    }
+  ],
+  "reviewedArpeggios": [
+    {
+      "startTicks": 52320,
+      "endTicks": 52799,
+      "noteIds": [
+        "0:220",
+        "0:221",
+        "0:222"
+      ],
+      "melodyNoteId": "0:222",
+      "reason": "紧邻起音、共同释放的展开和弦；上方音作旋律，其余原样保留为伴奏。"
+    },
+    {
+      "startTicks": 67680,
+      "endTicks": 68159,
+      "noteIds": [
+        "0:280",
+        "0:281",
+        "0:282"
+      ],
+      "melodyNoteId": "0:282",
+      "reason": "紧邻起音、共同释放的展开和弦；上方音作旋律，其余原样保留为伴奏。"
+    },
+    {
+      "startTicks": 78480,
+      "endTicks": 78947,
+      "noteIds": [
+        "0:337",
+        "0:338",
+        "0:339",
+        "0:340"
+      ],
+      "melodyNoteId": "0:340",
+      "reason": "紧邻起音、共同释放的展开和弦；上方音作旋律，其余原样保留为伴奏。"
+    },
+    {
+      "startTicks": 98400,
+      "endTicks": 98879,
+      "noteIds": [
+        "0:453",
+        "0:454",
+        "0:455"
+      ],
+      "melodyNoteId": "0:455",
+      "reason": "紧邻起音、共同释放的展开和弦；上方音作旋律，其余原样保留为伴奏。"
+    },
+    {
+      "startTicks": 113760,
+      "endTicks": 114239,
+      "noteIds": [
+        "0:534",
+        "0:535",
+        "0:536"
+      ],
+      "melodyNoteId": "0:536",
+      "reason": "紧邻起音、共同释放的展开和弦；上方音作旋律，其余原样保留为伴奏。"
+    }
+  ],
+  "programChecks": {
+    "sourcePitchedNoteEquality": true,
+    "fullMidiRoundtrip": true,
+    "webMelodyEquality": true,
+    "webShortenedMelodyIds": [],
+    "controllersPreserved": true
+  },
+  "actualListening": false,
+  "license": "unknown",
+  "sourceSearchNote": "比较了单轨285.625秒与227.969秒候选，采用两谱表、含速度变化的270.906秒版本。目录来源https://murashin.sakura.ne.jp/cgi-bin/upload.cgi?dir=&page=Main&sort=filename；上传者E，2023-10-16，19751 bytes。"
+}
