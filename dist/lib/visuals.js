@@ -8,7 +8,7 @@ export class Sky {
   draw(now,mode,song,t){
     const bg=this.context(this.background),seconds=reduce.matches?0:now/1000;
     for(const s of this.stars){const x=(s.x*bg.w+seconds*s.s)%bg.w,y=(s.y*bg.h-seconds*s.s*.3+bg.h)%bg.h;bg.c.fillStyle=`rgba(${s.r>.65?'222,194,180':'190,199,237'},${s.a})`;bg.c.beginPath();bg.c.arc(x,y,s.r,0,Math.PI*2);bg.c.fill();}
-    const {c,w,h}=this.context(this.roll),margin=22,lane=(w-margin*2)/8,line=h-45;
+    const {c,w,h}=this.context(this.roll);if(!w||!h)return;const margin=22,lane=(w-margin*2)/8,line=h-45;
     for(let i=0;i<=8;i++){c.strokeStyle='rgba(173,167,214,.055)';c.beginPath();c.moveTo(margin+i*lane,48);c.lineTo(margin+i*lane,line);c.stroke();}
     const halo=c.createRadialGradient(w*.55,h*.4,0,w*.55,h*.4,w*.4);halo.addColorStop(0,'rgba(129,95,155,.09)');halo.addColorStop(1,'rgba(129,95,155,0)');c.fillStyle=halo;c.fillRect(0,0,w,h);
     if(t.index!==this.previousIndex){this.fromIndex=this.displayIndex;this.previousIndex=t.index;this.changedAt=now;}

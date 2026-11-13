@@ -1,10 +1,12 @@
 import {KEYS,buildSong,pitchName,Transport} from './lib/music.js';
 import {archivedSong} from './lib/library.js';
+import {PipaExperience} from './lib/pipa.js';
 import {Piano} from './lib/audio.js';
 import {HandWorker} from './lib/hand-client.js';
 import {Sky} from './lib/visuals.js';
 import {PinchDetector,HandAssociator,DreamStrokeGate,cameraError} from './lib/gestures.js';
 const $=id=>document.getElementById(id),piano=new Piano(),pinch=new PinchDetector();
+let instrument='piano';
 let mode='guided',song=null,builtinMidi=null,importedMidi=null,importTitle='',booting=false,loadToken=0,flash=Array(8).fill(0),lastFreeNote=null;
 const transport=new Transport(piano,renderState);
 const associator=new HandAssociator(),dreamStroke=new DreamStrokeGate();
@@ -12,14 +14,28 @@ const inputCounts=Array(8).fill(0);let lastInputBatch=[];
 let stream=null,detector=null,startingCamera=false,cameraToken=0,lastFrame=-1,lastDetect=0,lastHandUi=0,handErrors=0,videoFrameRequest=null;
 const video=$('webcam'),handCanvas=$('hand-overlay'),handCtx=handCanvas.getContext('2d'),roll=$('roll'),rollCtx=roll.getContext('2d');
 const sky=new Sky($('starfield'),roll);
+const pipa=new PipaExperience({video});
+const pianoSidebar=document.querySelector('.sidebar'),cameraPanel=document.querySelector('.camera-panel');
+$('instrument-switch').onclick=()=>{
+  transport.pause();piano.stopAll();pinch.reset();dreamStroke.reset();
+  instrument=instrument==='piano'?'pipa':'piano';const isPipa=instrument==='pipa';document.body.dataset.instrument=instrument;
+  pipa.setActive(isPipa);if(isPipa)$('pipa-camera-slot').append(cameraPanel);else pianoSidebar.prepend(cameraPanel);
+  if(stream)video.play().catch(()=>{});
+  $('instrument-switch').innerHTML=(isPipa?'琵琶':'钢琴')+' <span aria-hidden="true">⇄</span>';
+  $('instrument-switch').setAttribute('aria-label',isPipa?'切换到钢琴模式':'切换到琵琶试验模式');
+  $('sensitivity').closest('label').hidden=isPipa;
+  $('import-button').innerHTML=isPipa?'琵琶曲库':'<span>＋</span> 导入乐曲';
+  $('camera-placeholder').querySelector('small').textContent=isPipa?'左手撑弦 · 右手食指拨弦':'拇指轻触指尖';
+};
 const keys=KEYS.map((key,i)=>{const button=document.createElement('button');button.className='piano-key';button.dataset.slot=i;button.setAttribute('aria-label',`${key.hand}${key.finger}，${key.name}，${pitchName(key.midi)}`);button.innerHTML=`<span class="finger-label">${key.finger}</span><span class="solfege">${key.en}</span><span class="key-bottom"><span>${key.en} · ${pitchName(key.midi)}</span><kbd>${key.key}</kbd></span>`;button.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();button.focus({preventScroll:true});hit(i,'screen');});button.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(!e.repeat)hit(i,'screen');}});$('keys').append(button);return button;});
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').hidden=true,4500);}
 const clock=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 function safeText(id,text){const el=$(id);if(el&&el.textContent!==text)el.textContent=text;}
 async function ensureAudio(){if(piano.ready){await piano.init();return;}if(booting)return piano.loading;booting=true;$('play-button').disabled=true;try{await piano.init(p=>safeText('play-text',`音色 ${Math.round(p*100)}%`));}finally{booting=false;$('play-button').disabled=false;renderState();}}
-async function start(){try{await ensureAudio();if(mode==='free'){safeText('feedback','');renderState();return;}if(!song){toast('乐谱尚未加载，请稍候。');return;}if(['playing','waiting'].includes(transport.state))transport.pause();else transport.start();}catch(e){toast(e.message||'声音未能开启，请重试。');}}
+async function start(){try{await ensureAudio();if(instrument!=='piano')return;if(mode==='free'){safeText('feedback','');renderState();return;}if(!song){toast('乐谱尚未加载，请稍候。');return;}if(['playing','waiting'].includes(transport.state))transport.pause();else transport.start();}catch(e){toast(e.message||'声音未能开启，请重试。');}}
 async function hit(slot,source='camera'){
-  if(!piano.ready){if(source==='camera'||booting)return;const inputMode=mode,inputSong=song;try{await ensureAudio();}catch(e){toast(e.message);return;}if(inputMode!==mode||inputSong!==song)return;}
+  if(instrument!=='piano')return;
+  if(!piano.ready){if(source==='camera'||booting)return;const inputMode=mode,inputSong=song;try{await ensureAudio();}catch(e){toast(e.message);return;}if(instrument!=='piano'||inputMode!==mode||inputSong!==song)return;}
   inputCounts[slot]++;flash[slot]=performance.now();keys[slot].classList.add('flash');setTimeout(()=>keys[slot].classList.remove('flash'),140);
   if(mode==='free'){piano.playFree(KEYS[slot].midi);lastFreeNote=slot;safeText('next-solfege',KEYS[slot].en);safeText('next-finger',`${KEYS[slot].hand} · ${KEYS[slot].finger}`);safeText('next-pitch',`${pitchName(KEYS[slot].midi)} · ${Math.round(440*2**((KEYS[slot].midi-69)/12)*100)/100} Hz`);safeText('feedback','');sky.hit(null,slot);return;}
   const result=transport.hit(slot);
@@ -80,10 +96,10 @@ document.querySelectorAll('button[data-mode]').forEach(b=>b.addEventListener('cl
 $('play-button').onclick=start;$('reset-button').onclick=()=>{transport.reset();dreamStroke.reset();piano.stopAll();renderState();sky.reset();safeText('feedback','');};
 $('accompaniment-toggle').onclick=()=>{transport.setDreamAccompaniment(!transport.dreamAccompaniment);$('accompaniment-toggle').setAttribute('aria-pressed',String(transport.dreamAccompaniment));};
 $('speed').onchange=e=>transport.setSpeed(Number(e.target.value));$('volume').oninput=e=>piano.setVolume(Number(e.target.value)/100);$('progress').onchange=e=>{transport.seek(Number(e.target.value));sky.reset(transport.index);};
-document.addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||document.querySelector('dialog[open]')||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;if(e.code==='Space'){e.preventDefault();start();return;}const i=['KeyA','KeyS','KeyD','KeyF','KeyJ','KeyK','KeyL','Semicolon'].indexOf(e.code);if(i>=0){e.preventDefault();hit(i,'keyboard');}});
+document.addEventListener('keydown',e=>{if(instrument!=='piano'||e.repeat||e.ctrlKey||e.metaKey||e.altKey||document.querySelector('dialog[open]')||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;if(e.code==='Space'){e.preventDefault();start();return;}const i=['KeyA','KeyS','KeyD','KeyF','KeyJ','KeyK','KeyL','Semicolon'].indexOf(e.code);if(i>=0){e.preventDefault();hit(i,'keyboard');}});
 for(const [button,dialog] of [['help-button','help-dialog'],['library-button','library-dialog'],['credits-button','credits-dialog']])$(button).onclick=()=>$(dialog).showModal();
 document.querySelectorAll('.close-dialog').forEach(b=>b.onclick=()=>b.closest('dialog').close());document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}}));
-$('builtin-song').onclick=()=>{loadBuiltin();$('library-dialog').close();};$('import-button').onclick=$('library-import').onclick=()=>$('midi-file').click();
+$('builtin-song').onclick=()=>{loadBuiltin();$('library-dialog').close();};$('import-button').onclick=()=>instrument==='pipa'?pipa.openLibrary():$('midi-file').click();$('library-import').onclick=()=>$('midi-file').click();
 $('midi-file').onchange=async e=>{const file=e.target.files[0];if(!file)return;const token=++loadToken;try{if(file.size>5*1024*1024)throw Error('请选择小于 5 MB 的 MIDI 文件。');const bytes=await file.arrayBuffer();if(new TextDecoder().decode(new Uint8Array(bytes,0,4))!=='MThd')throw Error('这不是标准 MIDI 文件，请选择 .mid 或 .midi 乐谱。');const parsed=new window.Midi(bytes);if(token!==loadToken)return;const title=file.name.replace(/\.midi?$/i,'');const track=parsed.tracks.findIndex(t=>t.notes.length&&t.channel!==9);const candidate=buildSong(parsed,{title,trackIndex:track});importedMidi=parsed;importTitle=title;loadSong(parsed,{title,trackIndex:candidate.trackIndex});$('imported-section').hidden=false;safeText('imported-name',title);$('melody-track').replaceChildren(...candidate.tracks.map(t=>{const o=document.createElement('option');o.value=t.index;o.textContent=`${t.name} · ${t.count} 音符`;return o;}));$('melody-track').value=candidate.trackIndex;$('library-dialog').showModal();toast('MIDI 已载入，可选择旋律音轨。');}catch(err){toast(`导入失败：${err.message}`);}finally{e.target.value='';}};
 $('melody-track').onchange=e=>{if(importedMidi){++loadToken;loadSong(importedMidi,{title:importTitle,trackIndex:Number(e.target.value)});}};
 
@@ -103,8 +119,8 @@ async function startCamera(){
   }catch(e){if(token===cameraToken){stopCamera();safeText('camera-message',cameraError(e));}}
   finally{if(token===cameraToken)startingCamera=false;}
 }
-function stopCamera(){cameraToken++;if(videoFrameRequest!==null){video.cancelVideoFrameCallback?.(videoFrameRequest);videoFrameRequest=null;}startingCamera=false;if(stream){stream.getTracks().forEach(t=>{t.onended=null;t.stop();});stream=null;}if(detector&&!detector.ready){detector.close();detector=null;}video.srcObject=null;pinch.reset();dreamStroke.reset();associator.reset();handCtx.clearRect(0,0,handCanvas.width,handCanvas.height);$('camera-placeholder').hidden=false;$('hand-badges').hidden=true;$('camera-dot').classList.remove('on');safeText('hand-count','未开启');safeText('camera-message','');$('camera-button').querySelector('span').textContent='开启摄像头';transport.pause();}
-$('camera-button').onclick=startCamera;$('sensitivity').oninput=e=>{pinch.threshold=Number(e.target.value)/100;pinch.reset();};$('swap-hands').onchange=()=>{pinch.reset();dreamStroke.reset();associator.reset();};
+function stopCamera(){cameraToken++;if(videoFrameRequest!==null){video.cancelVideoFrameCallback?.(videoFrameRequest);videoFrameRequest=null;}startingCamera=false;if(stream){stream.getTracks().forEach(t=>{t.onended=null;t.stop();});stream=null;}if(detector&&!detector.ready){detector.close();detector=null;}video.srcObject=null;pipa.pause();pinch.reset();dreamStroke.reset();associator.reset();handCtx.clearRect(0,0,handCanvas.width,handCanvas.height);$('camera-placeholder').hidden=false;$('hand-badges').hidden=true;$('camera-dot').classList.remove('on');safeText('hand-count','未开启');safeText('camera-message','');$('camera-button').querySelector('span').textContent='开启摄像头';transport.pause();}
+$('camera-button').onclick=startCamera;$('sensitivity').oninput=e=>{pinch.threshold=Number(e.target.value)/100;pinch.reset();};$('swap-hands').onchange=()=>{pinch.reset();dreamStroke.reset();associator.reset();pipa.resetInput();};
 const CONNECTIONS=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[0,17],[17,18],[18,19],[19,20]];
 function detectHands(now){
   if(!stream||!detector?.ready||detector.busy||startingCamera||video.readyState<2||lastFrame===video.currentTime)return;
@@ -118,10 +134,14 @@ function receiveHands(result,now){
   if(assigned.some(t=>t.identityChanged)){pinch.reset();dreamStroke.reset();}
   for(const tracked of assigned){
     const points=tracked.points;let hand=tracked.hand;if($('swap-hands').checked)hand=hand==='Left'?'Right':'Left';seen.add(hand);
-    const detected=pinch.update(points,hand,now,tracked.world,w/h);frameHits.push(...detected.hits);frameReleases.push(...detected.releases);
+    if(instrument==='piano'){const detected=pinch.update(points,hand,now,tracked.world,w/h);frameHits.push(...detected.hits);frameReleases.push(...detected.releases);}
     handCtx.strokeStyle=hand==='Left'?'#c6b5e6':'#dfb69e';handCtx.lineWidth=1.5;handCtx.fillStyle=handCtx.strokeStyle;
     for(const [a,b] of CONNECTIONS){handCtx.beginPath();handCtx.moveTo(points[a].x*w,points[a].y*h);handCtx.lineTo(points[b].x*w,points[b].y*h);handCtx.stroke();}
     points.forEach((p,j)=>{handCtx.beginPath();handCtx.arc(p.x*w,p.y*h,[4,8,12,16,20].includes(j)?4:1.6,0,Math.PI*2);handCtx.fill();});
+  }
+  if(instrument==='pipa'){
+    pipa.receive(assigned.map(t=>({...t,hand:$('swap-hands').checked?(t.hand==='Left'?'Right':'Left'):t.hand})),now,w/h);
+    if(now-lastHandUi>350){safeText('hand-count',`${seen.size} / 2`);safeText('left-hand',seen.has('Left')?'左手 · 撑弦':'—');safeText('right-hand',seen.has('Right')?'右手 · 拨弦':'—');safeText('recognition-status',`${Math.round(detector.inferenceMs)} ms · ${pipa.counts.reduce((a,b)=>a+b,0)} 次拨弦`);lastHandUi=now;}return;
   }
   lastInputBatch=frameHits;
   if(mode==='free')frameReleases.forEach(slot=>piano.release(KEYS[slot].midi));
@@ -131,10 +151,10 @@ function receiveHands(result,now){
   if(now-lastHandUi>350){safeText('hand-count',`${seen.size} / 2`);safeText('left-hand',seen.has('Left')?'左手':'—');safeText('right-hand',seen.has('Right')?'右手':'—');safeText('recognition-status',`${Math.round(detector.inferenceMs)} ms · 左 ${inputCounts.slice(0,4).reduce((a,b)=>a+b,0)} / 右 ${inputCounts.slice(4).reduce((a,b)=>a+b,0)}`);lastHandUi=now;}
 }
 let lastUi=0,lastPaint=0;
-function frame(now){const released=pinch.expire(now);if(mode==='free')released.forEach(slot=>piano.release(KEYS[slot].midi));transport.tick();if(!video.requestVideoFrameCallback)detectHands(now);if(now-lastPaint>16){sky.draw(now,mode,song,transport);lastPaint=now;}if(now-lastUi>150){safeText('position-label',clock(transport.position));lastUi=now;}requestAnimationFrame(frame);}
-document.addEventListener('visibilitychange',()=>{if(document.hidden){transport.pause();piano.stopAll();pinch.reset();}});window.addEventListener('pagehide',()=>{stopCamera();piano.stopAll();detector?.close();});
+function frame(now){const released=pinch.expire(now);if(mode==='free')released.forEach(slot=>piano.release(KEYS[slot].midi));transport.tick();pipa.draw(now);if(!video.requestVideoFrameCallback)detectHands(now);if(now-lastPaint>16){sky.draw(now,mode,song,transport);lastPaint=now;}if(now-lastUi>150){safeText('position-label',clock(transport.position));lastUi=now;}requestAnimationFrame(frame);}
+document.addEventListener('visibilitychange',()=>{if(document.hidden){transport.pause();piano.stopAll();pinch.reset();pipa.pause();}});window.addEventListener('pagehide',()=>{stopCamera();piano.stopAll();detector?.close();});
 // Introspection is read-only, useful for verifying timing without camera hardware.
-window.moonlight=Object.freeze({snapshot:()=>({songId:song?.songId||(song?.builtin?"debussy-clair-de-lune-piano":null),title:song?.title,revision:song?.revision,mode,state:transport.state,position:transport.position,index:transport.index,hits:transport.hits,misses:transport.misses,cameraReady:!!detector?.ready,workerFrames:detector?.frames||0,inferenceMs:detector?.inferenceMs||0,cue:transport.cue?{slot:transport.cue.slot,midi:transport.cue.midi,time:transport.cue.time}:null,notes:song?.notes.length,cues:song?.cues.length,audioReady:piano.ready,dreamAccompaniment:transport.dreamAccompaniment,voices:piano.voices.size,contacts:pinch.states.map(s=>s.closed),sensitivity:pinch.threshold,contactStates:pinch.states.map(s=>({phase:s.phase,ratio:s.ratio,depthBlocked:s.depthBlocked})),audioAttacks:piano.attacks,inputCounts:[...inputCounts],lastInputBatch:[...lastInputBatch]})});
+window.moonlight=Object.freeze({snapshot:()=>({instrument,pipa:pipa.snapshot(),songId:song?.songId||(song?.builtin?"debussy-clair-de-lune-piano":null),title:song?.title,revision:song?.revision,mode,state:transport.state,position:transport.position,index:transport.index,hits:transport.hits,misses:transport.misses,cameraReady:!!detector?.ready,workerFrames:detector?.frames||0,inferenceMs:detector?.inferenceMs||0,cue:transport.cue?{slot:transport.cue.slot,midi:transport.cue.midi,time:transport.cue.time}:null,notes:song?.notes.length,cues:song?.cues.length,audioReady:piano.ready,dreamAccompaniment:transport.dreamAccompaniment,voices:piano.voices.size,contacts:pinch.states.map(s=>s.closed),sensitivity:pinch.threshold,contactStates:pinch.states.map(s=>({phase:s.phase,ratio:s.ratio,depthBlocked:s.depthBlocked})),audioAttacks:piano.attacks,inputCounts:[...inputCounts],lastInputBatch:[...lastInputBatch]})});
 document.body.dataset.mode=mode;loadLibrary();await loadBuiltin();requestAnimationFrame(frame);
 
 

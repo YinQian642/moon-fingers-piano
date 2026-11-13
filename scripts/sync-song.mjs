@@ -5,10 +5,11 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {archivedSong} from '../dist/lib/library.js';
 
-const [archivePath, songId] = process.argv.slice(2);
+const [archivePath, songId, instrument = 'piano'] = process.argv.slice(2);
 if (!archivePath || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(songId || '')) {
   throw Error('Usage: node scripts/sync-song.mjs <music-library directory> <song-id>');
 }
+if (!['piano', 'pipa'].includes(instrument)) throw Error('Instrument must be piano or pipa');
 const root = resolve(archivePath);
 function withinArchive(path) {
   const full = resolve(root, path), rel = relative(root, full);
@@ -35,7 +36,7 @@ if (performance.notes.length !== metadata.noteCount || performance.cues.length !
     performance.accompaniment.length !== metadata.accompanimentCount || performance.duration !== entry.duration) {
   throw Error('Archive counts mismatch');
 }
-const output = fileURLToPath(new URL('../dist/assets/music-library/', import.meta.url));
+const output = fileURLToPath(new URL(instrument === 'pipa' ? '../dist/assets/pipa-library/' : '../dist/assets/music-library/', import.meta.url));
 const catalogPath = resolve(output, 'catalog.json');
 let published = {schemaVersion: 1, entries: []};
 try { published = JSON.parse(await readFile(catalogPath, 'utf8')); }

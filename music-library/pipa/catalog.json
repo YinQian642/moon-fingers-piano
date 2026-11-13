@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "jasmine-pipa",
+      "title": "茉莉花 · 琵琶试奏",
+      "composer": "江苏民歌",
+      "currentRevision": "r0001",
+      "status": "needs-review",
+      "metadata": "songs/jasmine-pipa/revisions/r0001/metadata.json",
+      "score": "songs/jasmine-pipa/revisions/r0001/score.json",
+      "performance": "songs/jasmine-pipa/revisions/r0001/performance.json",
+      "webMidi": "songs/jasmine-pipa/revisions/r0001/web.mid",
+      "fullMidi": "songs/jasmine-pipa/revisions/r0001/full.mid",
+      "revisions": [
+        "r0001"
+      ]
+    }
+  ]
+}

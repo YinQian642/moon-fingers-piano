@@ -1,0 +1,794 @@
+{
+  "schemaVersion": 1,
+  "id": "jasmine-pipa",
+  "title": "茉莉花 · 琵琶试奏",
+  "composer": "江苏民歌",
+  "provenance": {
+    "kind": "score",
+    "url": "https://jwc.arthn.com/__local/7/B3/83/3107CEF266DCC87041DDD41E5CA_A3C890B5_1DAFB6.pdf",
+    "description": "湖南艺术职业学院公开考核材料 PDF 第 30 页《茉莉花》单旋律简谱，1=E、4/4。视觉核对音高与时值，展开尾部第一/第二房子；装饰波音未拆为额外触发。无歌词、无音频复制。本项目自编稀疏低音，用于琵琶识别试奏；不是专业琵琶独奏谱或实录扒谱。",
+    "license": "unknown"
+  },
+  "quality": {
+    "status": "needs-review",
+    "notes": "旋律按公开简谱输入，速度 92 BPM 为试奏设定；低音为本项目新配，默认在梦想模式关闭。尚未经真人逐句试听与琵琶演奏法复核。",
+    "uncertainSpans": [
+      {
+        "startTicks": 0,
+        "endTicks": 30720,
+        "reason": "需要真人听谱校对及琵琶演奏适配；简化装饰音和力度。"
+      }
+    ]
+  },
+  "header": {
+    "ppq": 480,
+    "tempos": [
+      {
+        "ticks": 0,
+        "bpm": 92
+      }
+    ],
+    "timeSignatures": [
+      {
+        "ticks": 0,
+        "numerator": 4,
+        "denominator": 4
+      }
+    ],
+    "keySignatures": [
+      {
+        "ticks": 0,
+        "fifths": 4,
+        "mode": "major"
+      }
+    ]
+  },
+  "tracks": [
+    {
+      "id": "melody",
+      "name": "Jasmine melody",
+      "channel": 0,
+      "program": 24,
+      "notes": [
+        {
+          "id": "m1",
+          "midi": 68,
+          "ticks": 0,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m2",
+          "midi": 68,
+          "ticks": 480,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m3",
+          "midi": 71,
+          "ticks": 720,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m4",
+          "midi": 73,
+          "ticks": 960,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m5",
+          "midi": 76,
+          "ticks": 1200,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m6",
+          "midi": 76,
+          "ticks": 1440,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m7",
+          "midi": 73,
+          "ticks": 1680,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m8",
+          "midi": 71,
+          "ticks": 1920,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m9",
+          "midi": 71,
+          "ticks": 2400,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m10",
+          "midi": 73,
+          "ticks": 2640,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m11",
+          "midi": 71,
+          "ticks": 2880,
+          "durationTicks": 960,
+          "velocity": 0.76
+        },
+        {
+          "id": "m12",
+          "midi": 68,
+          "ticks": 3840,
+          "durationTicks": 360,
+          "velocity": 0.76
+        },
+        {
+          "id": "m13",
+          "midi": 66,
+          "ticks": 4200,
+          "durationTicks": 120,
+          "velocity": 0.76
+        },
+        {
+          "id": "m14",
+          "midi": 68,
+          "ticks": 4320,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m15",
+          "midi": 71,
+          "ticks": 4560,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m16",
+          "midi": 73,
+          "ticks": 4800,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m17",
+          "midi": 76,
+          "ticks": 5040,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m18",
+          "midi": 76,
+          "ticks": 5280,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m19",
+          "midi": 73,
+          "ticks": 5520,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m20",
+          "midi": 71,
+          "ticks": 5760,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m21",
+          "midi": 71,
+          "ticks": 6240,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m22",
+          "midi": 73,
+          "ticks": 6480,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m23",
+          "midi": 71,
+          "ticks": 6720,
+          "durationTicks": 960,
+          "velocity": 0.76
+        },
+        {
+          "id": "m24",
+          "midi": 71,
+          "ticks": 7680,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m25",
+          "midi": 71,
+          "ticks": 8160,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m26",
+          "midi": 71,
+          "ticks": 8640,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m27",
+          "midi": 68,
+          "ticks": 9120,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m28",
+          "midi": 71,
+          "ticks": 9360,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m29",
+          "midi": 73,
+          "ticks": 9600,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m30",
+          "midi": 73,
+          "ticks": 10080,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m31",
+          "midi": 71,
+          "ticks": 10560,
+          "durationTicks": 960,
+          "velocity": 0.76
+        },
+        {
+          "id": "m32",
+          "midi": 68,
+          "ticks": 11520,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m33",
+          "midi": 66,
+          "ticks": 12000,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m34",
+          "midi": 68,
+          "ticks": 12240,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m35",
+          "midi": 71,
+          "ticks": 12480,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m36",
+          "midi": 68,
+          "ticks": 12960,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m37",
+          "midi": 66,
+          "ticks": 13200,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m38",
+          "midi": 64,
+          "ticks": 13440,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m39",
+          "midi": 64,
+          "ticks": 13920,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m40",
+          "midi": 66,
+          "ticks": 14160,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m41",
+          "midi": 64,
+          "ticks": 14400,
+          "durationTicks": 960,
+          "velocity": 0.76
+        },
+        {
+          "id": "m42",
+          "midi": 68,
+          "ticks": 15360,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m43",
+          "midi": 66,
+          "ticks": 15600,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m44",
+          "midi": 64,
+          "ticks": 15840,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m45",
+          "midi": 68,
+          "ticks": 16080,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m46",
+          "midi": 66,
+          "ticks": 16320,
+          "durationTicks": 720,
+          "velocity": 0.76
+        },
+        {
+          "id": "m47",
+          "midi": 68,
+          "ticks": 17040,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m48",
+          "midi": 71,
+          "ticks": 17280,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m49",
+          "midi": 73,
+          "ticks": 17760,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m50",
+          "midi": 76,
+          "ticks": 18000,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m51",
+          "midi": 71,
+          "ticks": 18240,
+          "durationTicks": 960,
+          "velocity": 0.76
+        },
+        {
+          "id": "m52",
+          "midi": 66,
+          "ticks": 19200,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m53",
+          "midi": 68,
+          "ticks": 19680,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m54",
+          "midi": 71,
+          "ticks": 19920,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m55",
+          "midi": 66,
+          "ticks": 20160,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m56",
+          "midi": 68,
+          "ticks": 20400,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m57",
+          "midi": 64,
+          "ticks": 20640,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m58",
+          "midi": 61,
+          "ticks": 20880,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m59",
+          "midi": 59,
+          "ticks": 21120,
+          "durationTicks": 960,
+          "velocity": 0.76
+        },
+        {
+          "id": "m60",
+          "midi": 61,
+          "ticks": 22080,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m61",
+          "midi": 64,
+          "ticks": 22560,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m62",
+          "midi": 66,
+          "ticks": 23040,
+          "durationTicks": 720,
+          "velocity": 0.76
+        },
+        {
+          "id": "m63",
+          "midi": 68,
+          "ticks": 23760,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m64",
+          "midi": 64,
+          "ticks": 24000,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m65",
+          "midi": 66,
+          "ticks": 24240,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m66",
+          "midi": 64,
+          "ticks": 24480,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m67",
+          "midi": 61,
+          "ticks": 24720,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m68",
+          "midi": 59,
+          "ticks": 24960,
+          "durationTicks": 960,
+          "velocity": 0.76
+        },
+        {
+          "id": "m69",
+          "midi": 61,
+          "ticks": 25920,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m70",
+          "midi": 64,
+          "ticks": 26400,
+          "durationTicks": 480,
+          "velocity": 0.76
+        },
+        {
+          "id": "m71",
+          "midi": 66,
+          "ticks": 26880,
+          "durationTicks": 720,
+          "velocity": 0.76
+        },
+        {
+          "id": "m72",
+          "midi": 68,
+          "ticks": 27600,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m73",
+          "midi": 64,
+          "ticks": 27840,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m74",
+          "midi": 66,
+          "ticks": 28080,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m75",
+          "midi": 64,
+          "ticks": 28320,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m76",
+          "midi": 61,
+          "ticks": 28560,
+          "durationTicks": 240,
+          "velocity": 0.76
+        },
+        {
+          "id": "m77",
+          "midi": 59,
+          "ticks": 28800,
+          "durationTicks": 1440,
+          "velocity": 0.76
+        }
+      ]
+    },
+    {
+      "id": "backing",
+      "name": "Optional sparse bass",
+      "channel": 1,
+      "program": 24,
+      "notes": [
+        {
+          "id": "b1",
+          "midi": 52,
+          "ticks": 0,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b2",
+          "midi": 47,
+          "ticks": 1920,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b3",
+          "midi": 52,
+          "ticks": 3840,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b4",
+          "midi": 47,
+          "ticks": 5760,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b5",
+          "midi": 52,
+          "ticks": 7680,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b6",
+          "midi": 49,
+          "ticks": 9600,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b7",
+          "midi": 54,
+          "ticks": 11520,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b8",
+          "midi": 52,
+          "ticks": 13440,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b9",
+          "midi": 54,
+          "ticks": 15360,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b10",
+          "midi": 47,
+          "ticks": 17280,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b11",
+          "midi": 47,
+          "ticks": 19200,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b12",
+          "midi": 52,
+          "ticks": 21120,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b13",
+          "midi": 47,
+          "ticks": 23040,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b14",
+          "midi": 52,
+          "ticks": 24960,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b15",
+          "midi": 47,
+          "ticks": 26880,
+          "durationTicks": 720,
+          "velocity": 0.32
+        },
+        {
+          "id": "b16",
+          "midi": 52,
+          "ticks": 28800,
+          "durationTicks": 720,
+          "velocity": 0.32
+        }
+      ]
+    }
+  ],
+  "melodyNoteIds": [
+    "m1",
+    "m2",
+    "m3",
+    "m4",
+    "m5",
+    "m6",
+    "m7",
+    "m8",
+    "m9",
+    "m10",
+    "m11",
+    "m12",
+    "m13",
+    "m14",
+    "m15",
+    "m16",
+    "m17",
+    "m18",
+    "m19",
+    "m20",
+    "m21",
+    "m22",
+    "m23",
+    "m24",
+    "m25",
+    "m26",
+    "m27",
+    "m28",
+    "m29",
+    "m30",
+    "m31",
+    "m32",
+    "m33",
+    "m34",
+    "m35",
+    "m36",
+    "m37",
+    "m38",
+    "m39",
+    "m40",
+    "m41",
+    "m42",
+    "m43",
+    "m44",
+    "m45",
+    "m46",
+    "m47",
+    "m48",
+    "m49",
+    "m50",
+    "m51",
+    "m52",
+    "m53",
+    "m54",
+    "m55",
+    "m56",
+    "m57",
+    "m58",
+    "m59",
+    "m60",
+    "m61",
+    "m62",
+    "m63",
+    "m64",
+    "m65",
+    "m66",
+    "m67",
+    "m68",
+    "m69",
+    "m70",
+    "m71",
+    "m72",
+    "m73",
+    "m74",
+    "m75",
+    "m76",
+    "m77"
+  ]
+}

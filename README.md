@@ -26,6 +26,10 @@
 
 自由演奏使用 C4–C5 钢琴音；音乐引导按照原曲音高和指法提示推进；梦想模式由每次独立触碰推进一枚旋律音，伴奏默认关闭、可自行开启。重复同音逐次触发。按键从左至右对应左手小指至食指、右手食指至小指；也支持鼠标和 `A S D F / J K L ;`。
 
+页面默认进入钢琴；左上角「钢琴 ⇄ 琵琶」切换乐器。琵琶同样提供自由演奏、音乐引导、梦想模式，复用同一个音乐 Transport。左手拇指连接四个指尖形成四弦，右手食指划过弦中段拨奏。自由模式一至四弦为 A3、E3、D3、A2；引导模式按亮起的弦演奏原谱音高；梦想模式任意一弦推进一个旋律事件，同向扫弦只计一次，伴奏默认关闭。支持鼠标/触屏划弦和 `1–4`。
+
+琵琶曲库与钢琴独立，当前仅收录《茉莉花》试奏编配：E 调，77 个旋律事件、16 个可选低音。权威档案与入库说明在 [music-library/pipa/](music-library/pipa/README.txt)，运行数据在 `dist/assets/pipa-library/`。钢琴选曲不会替换琵琶曲目。琵琶音色是本项目编写的拨弦合成音色，尚非实录采样；当前识别采用同一摄像头图像中的跨弦轨迹，未实现按品、轮指或可信的跨手三维接触测量。真人双手遮挡与快速拨奏需继续实测。
+
 ## 完全通过 GitHub 继续工作
 
 `main` 是源码与音乐档案的权威分支。`.github/workflows/pages.yml` 在推送 `main` 时校验档案、生成网站曲库、执行测试并把 `dist/` 部署到 GitHub Pages；PR 运行验证但不发布。无需本机长期运行服务。
@@ -50,6 +54,7 @@ npm run verify
 npm start
 # 另一个终端，使用已安装的 Chrome：
 npm run test:library
+npm run test:pipa
 ```
 
 `prepare:site` 校验档案、同步新歌、更新运行时 SHA-256 清单。单曲同步：`node scripts/sync-song.mjs music-library <song-id>`。新曲浏览器测试支持 `TEST_URL`、`CHROME_PATH` 环境变量；旧无依赖浏览器测试保留为 `npm run test:browser`。

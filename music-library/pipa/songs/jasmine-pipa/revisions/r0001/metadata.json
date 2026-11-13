@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "jasmine-pipa",
+  "revision": "r0001",
+  "title": "茉莉花 · 琵琶试奏",
+  "composer": "江苏民歌",
+  "createdAt": "2026-11-13T10:54:07.063Z",
+  "status": "needs-review",
+  "sourceFiles": [
+    {
+      "name": "jasmine.score.json",
+      "sha256": "8ccffb1416568e594b6dae631d25fa33897efdb25b45d90c7345f688e129fecd",
+      "bytes": 16551
+    }
+  ],
+  "noteCount": 93,
+  "melodyCount": 77,
+  "accompanimentCount": 16,
+  "durationSeconds": 41.08695652173913,
+  "keyChanges": [
+    {
+      "ticks": 0,
+      "fifths": 4,
+      "mode": "major",
+      "key": "E"
+    }
+  ],
+  "webAdaptation": {
+    "melodyTrack": 0,
+    "shortenedMelodyNoteIds": [],
+    "reason": "Only web.mid clips overlapping melody durations so the v5 importer does not discard lower legato notes. score.json, full.mid and performance.json retain original durations."
+  },
+  "files": {
+    "score.json": {
+      "sha256": "8ccffb1416568e594b6dae631d25fa33897efdb25b45d90c7345f688e129fecd",
+      "bytes": 16551
+    },
+    "performance.json": {
+      "sha256": "928bea3339dd13c891a88b4d472663c9bb9f261b7e47cb0a5048658b3daf9574",
+      "bytes": 46207
+    },
+    "full.mid": {
+      "sha256": "857c6027fad9ece7c74d10f96bed62b190e91579a8c7c3df422886427493eddc",
+      "bytes": 970
+    },
+    "web.mid": {
+      "sha256": "433f4edac8f27e9d0b5dff0d5a508d4f23491d58b497ee7408db4bfd0d090014",
+      "bytes": 951
+    },
+    "sources/jasmine.score.json": {
+      "sha256": "8ccffb1416568e594b6dae631d25fa33897efdb25b45d90c7345f688e129fecd",
+      "bytes": 16551
+    }
+  }
+}

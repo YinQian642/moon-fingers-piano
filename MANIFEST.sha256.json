@@ -10,8 +10,8 @@
     },
     {
       "path": "dist/app.js",
-      "bytes": 19931,
-      "sha256": "b0b91bf75065c556fe0fdf97e9d3a72495d7a00378b8b197830aaccd7b2a5000"
+      "bytes": 21812,
+      "sha256": "65bf3fbdf0dfb15b134bd7f940f2ef6ac1258fe5a08e6e443f00836790d7ce82"
     },
     {
       "path": "dist/assets/clair-de-lune.ly",
@@ -204,6 +204,21 @@
       "sha256": "04ddba91bcafcb4c53dee7b004479f79af47bb92574f06bbe741b00c3ca64e0e"
     },
     {
+      "path": "dist/assets/pipa-library/catalog.json",
+      "bytes": 302,
+      "sha256": "ec50618c19795d0c9d3fb6d35172e3d3d59c46685c2af092ac0b8e6f344d8537"
+    },
+    {
+      "path": "dist/assets/pipa-library/jasmine-pipa/r0001/metadata.json",
+      "bytes": 1571,
+      "sha256": "7f6d18f4e3797fa5e94e9acdcdf5dd2ed459012b5206c494d642b17690c49097"
+    },
+    {
+      "path": "dist/assets/pipa-library/jasmine-pipa/r0001/performance.json",
+      "bytes": 46207,
+      "sha256": "928bea3339dd13c891a88b4d472663c9bb9f261b7e47cb0a5048658b3daf9574"
+    },
+    {
       "path": "dist/cosmos.css",
       "bytes": 9900,
       "sha256": "17f3900c02d430ad5cb1f45b7335c4df834fd20b4bc42d7287589bc3509240ea"
@@ -215,8 +230,8 @@
     },
     {
       "path": "dist/index.html",
-      "bytes": 8905,
-      "sha256": "00b479c97df5bd4b4c6b8254cc3c859e85b0ba019e69f5ce11cb53629006a48a"
+      "bytes": 10300,
+      "sha256": "31b4db7726ecda5ca21abb5bc78be20e36f935d50f7e7af959601da5f768a3bd"
     },
     {
       "path": "dist/lib/audio.js",
@@ -249,9 +264,29 @@
       "sha256": "4f2b233eb053bacc16c0e1615365570e47efa3371b7168771d9ae2de28b2ce1f"
     },
     {
+      "path": "dist/lib/pipa-audio.js",
+      "bytes": 1963,
+      "sha256": "885c0cb4f0d941a970a366f46511679d55b30d6ba2b2e96e287e583d04ad904e"
+    },
+    {
+      "path": "dist/lib/pipa-gestures.js",
+      "bytes": 4471,
+      "sha256": "437abae7365b7b047e2260faf5a3a4c298a821f4132339fe597e29cf70e0a1eb"
+    },
+    {
+      "path": "dist/lib/pipa.js",
+      "bytes": 15485,
+      "sha256": "78a7a796ad13329666df78e29d3fdd4897692a2a251af2125019b2d26e5c9967"
+    },
+    {
       "path": "dist/lib/visuals.js",
-      "bytes": 3212,
-      "sha256": "d3f7e058547cae3077a1c112de7b100b0bfb08aa1b6b427437e76ecdeefb4aac"
+      "bytes": 3235,
+      "sha256": "44ff0021ebfa91b0d92c7fd0aedb0031cbeb2fd868117f78619e60b484926272"
+    },
+    {
+      "path": "dist/pipa.css",
+      "bytes": 5224,
+      "sha256": "6ff9c8d9f14c6fd89669792056f6faa5e3fa4496e9d22be11113f8f78d5b79a9"
     },
     {
       "path": "dist/style.css",
