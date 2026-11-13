@@ -97,14 +97,18 @@ export class PipaPluckDetector {
         // Accumulate motion from the armed position. No minimum speed per video frame.
         const travel=norm(sub(point,state.point)),rawTravel=norm(sub(raw,state.raw))/frame.scale;
         const crossing=previous&&intersection(previous.point,point,line);
-        const touch=Math.abs(gap)<=radius&&u>=.14&&u<=1.04;
-        if((crossing||touch)&&travel>.012&&rawTravel>.012){
-          hits.push({string:i,t:crossing?.t??1,velocity:Math.max(.5,Math.min(.95,travel*2)),direction:Math.sign(gap)||-state.side});
+        // Remember an actual crossing until the finger clears the tiny dead band.
+        // Merely approaching the string or touching and retracting is silent.
+        if(Math.sign(gap)===state.side)state.pending=null;
+        else if(crossing)state.pending={...crossing,at:now};
+        const confirmed=state.pending&&Math.sign(gap)===-state.side&&Math.abs(gap)>=Math.min(.004,radius);
+        if(confirmed&&travel>.012&&rawTravel>.012){
+          hits.push({string:i,t:state.pending.t,order:state.pending.at+state.pending.t*.001,velocity:Math.max(.5,Math.min(.95,travel*2)),direction:Math.sign(gap)||-state.side});
           this.states[i]=Math.abs(gap)>=release?arm():null;
         }else if(Math.abs(gap)>=release&&(Math.sign(gap)!==state.side||Math.abs(gap)>Math.abs(signed(state.point,line))))this.states[i]=arm();
       }else if(Math.abs(gap)>=release)this.states[i]=arm();
     });
-    hits.sort((a,b)=>a.t-b.t);
+    hits.sort((a,b)=>a.order-b.order);
     // Re-armed strikes of the same string are independent even at very low speeds.
     if(hits.some(h=>this.struck.has(h.string))){this.sequence++;this.struck.clear();}
     for(const h of hits){h.stroke=this.sequence;this.struck.add(h.string);}

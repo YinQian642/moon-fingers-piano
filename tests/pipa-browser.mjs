@@ -67,12 +67,14 @@ try{
   const posePoint=async(point,left=demoHand())=>{await page.evaluate(p=>window.__pipaPose=p,{left,point});await page.waitForTimeout(65);};
   for(let i=0;i<4;i++){
     await posePoint(near(i,.06));const before=(await snap()).pipa.counts[i];
-    for(let j=0;j<5;j++){await posePoint(near(i,.008));await posePoint(near(i,.06));}
+    for(const gap of [.008,0,.008,.06])await posePoint(near(i,gap));
+    assert.equal((await snap()).pipa.counts[i],before,'approach without crossing is silent');
+    for(let j=0;j<5;j++)await posePoint(near(i,j%2?.06:-.06));
     assert.equal((await snap()).pipa.counts[i],before+5,'five small plucks on string '+i);
   }
   await posePoint(near(1,.06));const beforeOcclusion=(await snap()).pipa.counts[1];
   for(let j=0;j<4;j++){
-    const tip=near(1,.008),bad=demoHand();bad[4]={...tip};await posePoint(tip,bad);await posePoint(near(1,.06));
+    const tip=near(1,j%2?.06:-.06),bad=demoHand();bad[4]={...tip};await posePoint(tip,bad);
   }
   assert.equal((await snap()).pipa.counts[1],beforeOcclusion+4);
   await page.locator('#pipa-lock').click();assert.equal((await snap()).pipa.stringsLocked,true);
@@ -88,5 +90,5 @@ try{
   await page.locator('#instrument-switch').click();assert.equal((await snap()).pipa.index,savedIndex);assert.equal((await snap()).pipa.songId,'jasmine-pipa');
   await page.locator('#import-button').click();assert(await page.locator('#pipa-library-dialog').isVisible());await page.locator('#pipa-library-dialog .close-dialog').click();
   await page.reload();await page.waitForFunction(()=>window.moonlight?.snapshot().notes===1468);assert.equal((await snap()).instrument,'piano');
-  assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,checks:['piano default and round trip','four plucked pitches','mouse sweep','one sweep per melody step','repeated inputs and pause','independent libraries','77 dream steps including repeats','guided correct and wrong strings','camera worker 10 reversals','camera sweep grouping','small repeated plucks on all four strings','thumb occlusion stabilization','fixed strings lifecycle','mobile overflow','piano audio preserved']}));
+  assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,checks:['piano default and round trip','four plucked pitches','mouse sweep','one sweep per melody step','repeated inputs and pause','independent libraries','77 dream steps including repeats','guided correct and wrong strings','camera worker 10 reversals','camera sweep grouping','small repeated crossings on all four strings','thumb occlusion stabilization','fixed strings lifecycle','mobile overflow','piano audio preserved']}));
 }finally{await browser.close();}

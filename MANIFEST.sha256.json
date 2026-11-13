@@ -230,8 +230,8 @@
     },
     {
       "path": "dist/index.html",
-      "bytes": 10504,
-      "sha256": "932e87f13e9ff57b7bf5b91ef0fb219b59752c188ee043eb786b18a2c5d66687"
+      "bytes": 10573,
+      "sha256": "02e22c8c16f858370def2a41beaa2077be63185172628abd058d06b78f8da846"
     },
     {
       "path": "dist/lib/audio.js",
@@ -270,13 +270,13 @@
     },
     {
       "path": "dist/lib/pipa-gestures.js",
-      "bytes": 7385,
-      "sha256": "8d4373c65b957b07b5f4ac9120dfe291bc1e7591216ea0f07295e0b559e21c6c"
+      "bytes": 7759,
+      "sha256": "145e2404430b047bf26c86e85642f2cf9cd41fd17ade4ba98b2cbc2b57de02ce"
     },
     {
       "path": "dist/lib/pipa.js",
-      "bytes": 16320,
-      "sha256": "6b1ae3ea742b46c312e9cda5254c415a22935a139d130df6b9ffc0272c5130ad"
+      "bytes": 16317,
+      "sha256": "c6184e0c3c8d45d65382471a0f7c1887dd215622e029a6abf411f0262c9dcf09"
     },
     {
       "path": "dist/lib/visuals.js",

@@ -8,13 +8,13 @@ function finger(i,gap,u=.7,points=hand){
   return f.imagePoint({x:a.x+dx*u-dy/len*gap,y:a.y+dy*u+dx/len*gap});
 }
 for(let string=0;string<4;string++){
-  test(`string ${string+1}: 20 small touch/retract plucks each emit once`,()=>{
+  test(`string ${string+1}: 20 small crossings each emit once`,()=>{
+    const d=new PipaPluckDetector();d.update(hand,finger(string,.03),0,aspect);
+    for(let i=1;i<=20;i++)assert.deepEqual(d.update(hand,finger(string,i%2?-.03:.03),i*25,aspect).map(h=>h.string),[string]);
+  });
+  test(`string ${string+1}: approach, rest on the line, and retract are silent`,()=>{
     const d=new PipaPluckDetector();let t=0;d.update(hand,finger(string,.06),t,aspect);
-    for(let i=0;i<20;i++){
-      const hits=d.update(hand,finger(string,.008),t+=25,aspect);
-      assert.deepEqual(hits.map(h=>h.string),[string]);
-      assert.deepEqual(d.update(hand,finger(string,.06),t+=25,aspect),[]);
-    }
+    for(let i=0;i<12;i++)for(const gap of [.008,0,0,.008,.06])assert.deepEqual(d.update(hand,finger(string,gap),t+=16,aspect),[]);
   });
   test(`string ${string+1}: slow sub-threshold steps accumulate into one pluck`,()=>{
     const d=new PipaPluckDetector(),hits=[];
@@ -38,9 +38,9 @@ test('one folded finger does not disable other strings',()=>{
   const d=new PipaPluckDetector();d.update(partial,{x:.05,y:.5},0,aspect);
   assert.deepEqual(d.update(partial,{x:.95,y:.5},32,aspect).map(h=>h.string),[0,2,3]);
 });
-test('after one touch, holding and jitter cannot stream extra melody events',()=>{
+test('after one crossing, holding and jitter cannot stream extra melody events',()=>{
   const d=new PipaPluckDetector();d.update(hand,finger(2,.06),0,aspect);
-  assert.equal(d.update(hand,finger(2,.008),20,aspect).length,1);
+  assert.equal(d.update(hand,finger(2,-.008),20,aspect).length,1);
   for(let i=0;i<100;i++)assert.deepEqual(d.update(hand,finger(2,i%2?.004:-.004),40+i*16,aspect),[]);
 });
 const right=tip=>Array.from({length:21},(_,i)=>i===8?tip:{x:.12,y:.65,z:0});
