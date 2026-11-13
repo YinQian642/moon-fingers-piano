@@ -1,17 +1,18 @@
 import {Transport} from './music.js';
 import {archivedSong} from './library.js';
 import {PipaAudio} from './pipa-audio.js';
-import {STRINGS,PipaPluckDetector,demoHand} from './pipa-gestures.js';
+import {STRINGS,PipaPluckDetector,PipaHandStabilizer,demoHand} from './pipa-gestures.js';
 
 export class PipaExperience {
   constructor({video}){
-    this.video=video;this.audio=new PipaAudio();this.detector=new PipaPluckDetector();this.mouse=new PipaPluckDetector();
-    this.active=false;this.mode='guided';this.epoch=0;this.flashes=Array(4).fill(-Infinity);this.counts=Array(4).fill(0);this.manual=0;this.lastStroke=null;
+    this.video=video;this.audio=new PipaAudio();this.detector=new PipaPluckDetector();this.mouse=new PipaPluckDetector();this.stabilizer=new PipaHandStabilizer();
+    this.active=false;this.mode='guided';this.epoch=0;this.flashes=Array(4).fill(-Infinity);this.counts=Array(4).fill(0);this.detectedCounts=Array(4).fill(0);this.manual=0;this.lastStroke=null;
     this.root=document.createElement('section');this.root.id='pipa-experience';this.root.hidden=true;
-    this.root.innerHTML=`<div class="pipa-layout"><section class="pipa-instrument"><div class="pipa-heading"><div><span class="eyebrow">PIPA · EXPLORATION</span><h2>指间四弦 <small>琵琶试验</small></h2></div><div class="pipa-modes" aria-label="琵琶演奏方式"><button data-pipa-mode="free" aria-pressed="false">自由演奏</button><button data-pipa-mode="guided" aria-pressed="true">音乐引导</button><button data-pipa-mode="dream" aria-pressed="false">梦想模式</button></div></div><div class="pipa-stage"><canvas id="pipa-canvas" aria-label="四根虚拟琴弦，可按住鼠标或触屏划弦"></canvas><div class="pipa-stage-heading"><span id="pipa-gesture-hint">左手撑弦 · 右手食指拨弦</span><span id="pipa-tracking">鼠标划弦也可试奏</span></div><div class="pipa-live-note" aria-live="polite"><span id="pipa-note">A · E · D · A</span><small id="pipa-note-detail">四根空弦</small></div></div><div class="pipa-controls"><button id="pipa-reset" class="icon-button" aria-label="琵琶从头开始">↺</button><button id="pipa-play" class="primary-button">开启声音</button><span id="pipa-progress">单拨 · 连拨 · 扫弦</span><button id="pipa-backing" class="accompaniment-toggle" aria-pressed="false" hidden>伴奏 <span aria-hidden="true"></span></button><label class="pipa-volume">音量<input id="pipa-volume" type="range" min="0" max="100" value="70" aria-label="琵琶音量"></label></div><div class="pipa-strings" aria-label="四根弦的试奏按钮">${STRINGS.map((s,i)=>`<button data-string="${i}" aria-label="拨${s.name} ${s.pitch}"><span>${s.name} <small>${s.finger}</small></span><strong>${s.pitch}</strong><kbd>${i+1}</kbd></button>`).join('')}</div></section><aside class="pipa-sidebar"><div id="pipa-camera-slot"></div><section class="pipa-song-panel"><span class="eyebrow">琵琶曲库</span><h3 id="pipa-song-title">茉莉花</h3><p id="pipa-song-hint">任意一弦推进一音，扫弦计一次</p><button id="pipa-library" class="subtle-button">选择乐曲 ↗</button></section></aside></div><p class="pipa-footnote">左手张开，避开拇指附近的交汇处拨弦 · 1–4 试奏 · 空格暂停</p>`;
+    this.root.innerHTML=`<div class="pipa-layout"><section class="pipa-instrument"><div class="pipa-heading"><div><span class="eyebrow">PIPA · EXPLORATION</span><h2>指间四弦 <small>琵琶试验</small></h2></div><div class="pipa-modes" aria-label="琵琶演奏方式"><button data-pipa-mode="free" aria-pressed="false">自由演奏</button><button data-pipa-mode="guided" aria-pressed="true">音乐引导</button><button data-pipa-mode="dream" aria-pressed="false">梦想模式</button></div></div><div class="pipa-stage"><canvas id="pipa-canvas" aria-label="四根虚拟琴弦，可按住鼠标或触屏划弦"></canvas><div class="pipa-stage-heading"><span id="pipa-gesture-hint">左手撑弦 · 右手食指拨弦</span><span id="pipa-tracking">鼠标划弦也可试奏</span><button id="pipa-lock" class="subtle-button" aria-pressed="false">固定琴弦</button></div><div class="pipa-live-note" aria-live="polite"><span id="pipa-note">A · E · D · A</span><small id="pipa-note-detail">四根空弦</small></div></div><div class="pipa-controls"><button id="pipa-reset" class="icon-button" aria-label="琵琶从头开始">↺</button><button id="pipa-play" class="primary-button">开启声音</button><span id="pipa-progress">单拨 · 连拨 · 扫弦</span><button id="pipa-backing" class="accompaniment-toggle" aria-pressed="false" hidden>伴奏 <span aria-hidden="true"></span></button><label class="pipa-volume">音量<input id="pipa-volume" type="range" min="0" max="100" value="70" aria-label="琵琶音量"></label></div><div class="pipa-strings" aria-label="四根弦的试奏按钮">${STRINGS.map((s,i)=>`<button data-string="${i}" aria-label="拨${s.name} ${s.pitch}"><span>${s.name} <small>${s.finger}</small></span><strong>${s.pitch}</strong><kbd>${i+1}</kbd></button>`).join('')}</div></section><aside class="pipa-sidebar"><div id="pipa-camera-slot"></div><section class="pipa-song-panel"><span class="eyebrow">琵琶曲库</span><h3 id="pipa-song-title">茉莉花</h3><p id="pipa-song-hint">任意一弦推进一音，扫弦计一次</p><button id="pipa-library" class="subtle-button">选择乐曲 ↗</button></section></aside></div><p class="pipa-footnote">左手自然展开 · 右手食指碰弦或划弦 · 1–4 试奏</p>`;
     document.querySelector('main').append(this.root);this.canvas=this.el('pipa-canvas');
     this.transport=new Transport(this.audio,()=>this.render());this.transport.mode=this.mode;
     this.el('pipa-library').onclick=()=>this.openLibrary();
+    this.el('pipa-lock').onclick=()=>{if(this.stabilizer.locked)this.stabilizer.lock(null);else if(this.left)this.stabilizer.lock(this.left);else{this.text('pipa-tracking','先让左手入镜');return;}this.detector.reset();this.lastStroke=null;this.render();};
     this.createLibrary();
     this.loadLibrary();
     this.el('pipa-play').onclick=()=>this.start();
@@ -36,14 +37,16 @@ export class PipaExperience {
   el(id){return this.root.querySelector('#'+id);}
   text(id,value){const el=this.el(id);if(el.textContent!==value)el.textContent=value;}
   resetInput(){this.detector.reset();this.mouse.reset();this.lastStroke=null;this.left=null;this.right=null;this.pointer=null;}
-  setActive(value){this.epoch++;this.active=value;this.root.hidden=!value;this.transport.pause();this.audio.stopAll();this.resetInput();this.render();}
+  setActive(value){this.stabilizer.reset();this.epoch++;this.active=value;this.root.hidden=!value;this.transport.pause();this.audio.stopAll();this.resetInput();this.render();}
   setMode(mode){this.epoch++;this.transport.pause();this.audio.stopAll();this.mode=mode;this.transport.mode=mode;this.transport.reset();this.resetInput();this.clearNote();this.render();}
   loadSong(song,display={}){this.epoch++;this.song={...song,cues:song.cues.map(n=>({...n,slot:3-Math.floor(n.slot/2)}))};this.songTitle=display.title||song.title;this.transport.load(this.song);this.resetInput();this.clearNote();this.render();}
   async ensureAudio(){try{await this.audio.init(p=>this.text('pipa-play',`音色 ${Math.round(p*100)}%`));return true;}catch{this.text('pipa-tracking','声音未能开启，请重试');return false;}finally{this.render();}}
   async start(){const epoch=this.epoch;if(!await this.ensureAudio()||epoch!==this.epoch||!this.active)return;if(this.mode!=='free'){if(['waiting','playing'].includes(this.transport.state))this.transport.pause();else this.transport.start();}this.render();}
   async manualPluck(index){const epoch=this.epoch;if(!await this.ensureAudio()||epoch!==this.epoch||!this.active)return;this.playHits([{string:index,stroke:++this.manual,velocity:.8}],'manual');}
   playHits(hits,source){
-    if(!this.active||!this.audio.ready||document.querySelector('dialog[open]'))return;
+    if(!this.active||document.querySelector('dialog[open]'))return;
+    for(const hit of hits){this.flashes[hit.string]=performance.now();this.detectedCounts[hit.string]++;}
+    if(!this.audio.ready)return;
     for(const hit of hits){
       const i=hit.string,stroke=`${source}:${hit.stroke}`;
       if(this.mode!=='free'){
@@ -58,11 +61,12 @@ export class PipaExperience {
   }
   receive(assigned,now,aspect){
     if(!this.active)return;
-    this.left=assigned.find(h=>h.hand==='Left')?.points;this.right=assigned.find(h=>h.hand==='Right')?.points?.[8];this.handAt=performance.now();
-    if(assigned.some(h=>h.identityChanged))this.detector.reset();
+    const pose=this.stabilizer.update(assigned,now,aspect);
+    this.left=pose.left;this.right=pose.right;this.handAt=performance.now();
     this.playHits(this.detector.update(this.left,this.right,now,aspect),'camera');
-    this.text('pipa-tracking',!this.left?'左手张开撑弦':!this.right?'右手食指入镜':this.detector.status==='spread'?'展开四指，让弦分开':this.detector.status==='steady'?'左手保持稳定':'四弦已就绪');
+    this.text('pipa-tracking',!this.left?'左手自然展开':!this.right?'右手食指入镜':this.stabilizer.locked?'琴弦已固定':pose.held?'琴弦稳定中':'四弦已就绪');
   }
+
   movePointer(event){
     const rect=this.canvas.getBoundingClientRect(),box=this.geometry(rect.width,rect.height);
     const point={x:1-(event.clientX-rect.left-box.x)/box.w,y:(event.clientY-rect.top-box.y)/box.h};
@@ -87,7 +91,7 @@ export class PipaExperience {
         const wave=reduced||glow<=0?0:Math.sin(age*.06)*glow*7;
         c.strokeStyle=`rgba(${glow?'240,204,174':'187,164,211'},${.6+glow*.4})`;c.lineWidth=1.3+glow*1.2;
         c.shadowColor='#ddbba6';c.shadowBlur=glow*16;c.beginPath();c.moveTo(a.x,a.y);c.quadraticCurveTo((a.x+b.x)/2+wave,(a.y+b.y)/2-wave,b.x,b.y);c.stroke();c.shadowBlur=0;
-        const p=lerpPoint(a,b,.28),q=lerpPoint(a,b,.9);c.lineWidth=7;c.strokeStyle='rgba(198,173,218,.07)';c.beginPath();c.moveTo(p.x,p.y);c.lineTo(q.x,q.y);c.stroke();
+        const p=lerpPoint(a,b,.14),q=lerpPoint(a,b,1);c.lineWidth=7;c.strokeStyle='rgba(198,173,218,.07)';c.beginPath();c.moveTo(p.x,p.y);c.lineTo(q.x,q.y);c.stroke();
         c.fillStyle='#e5d4dc';c.beginPath();c.arc(b.x,b.y,4,0,Math.PI*2);c.fill();c.font='12px sans-serif';c.textAlign='center';c.fillText(`${s.name} · ${this.mode==='guided'&&this.transport.cue?.slot===i?this.transport.cue.pitch:s.pitch}`,b.x,b.y-15);
         this.root.querySelector(`[data-string="${i}"]`).classList.toggle('sounding',glow>.4);
       });
@@ -98,6 +102,7 @@ export class PipaExperience {
   }
   render(){
     if(!this.transport)return;
+    this.el('pipa-lock').setAttribute('aria-pressed',String(!!this.stabilizer.locked));this.text('pipa-lock',this.stabilizer.locked?'解除固定':'固定琴弦');
     const musical=this.mode!=='free',dream=this.mode==='dream',t=this.transport;
     this.root.querySelectorAll('[data-pipa-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pipaMode===this.mode)));
     this.el('pipa-backing').hidden=!dream;this.el('pipa-backing').setAttribute('aria-pressed',String(t.dreamAccompaniment));
@@ -141,7 +146,8 @@ export class PipaExperience {
       this.loadSong(song,entry);this.library.querySelector('#pipa-library-status').textContent='';return true;
     }catch{if(token===this.loadToken){this.library.querySelector('#pipa-library-status').textContent='乐谱未能载入，请重新选择';this.library.querySelector('#pipa-library-retry').hidden=false;}return false;}
   }
-  pause(){this.epoch++;this.transport.pause();this.audio.stopAll();this.resetInput();}
-  snapshot(){return {songId:this.song?.songId,title:this.songTitle,cue:this.transport.cue?{midi:this.transport.cue.midi,string:this.transport.cue.slot}:null,active:this.active,mode:this.mode,state:this.transport.state,index:this.transport.index,cues:this.song?.cues.length,audioReady:this.audio.ready,attacks:this.audio.attacks,counts:[...this.counts],tracking:this.detector.status,stroke:this.detector.sequence,accompaniment:this.transport.dreamAccompaniment,voices:this.audio.voices.size};}
+  resetHands(){this.stabilizer.reset();this.resetInput();this.render();}
+  pause(clearHands=false){if(clearHands)this.stabilizer.reset();this.epoch++;this.transport.pause();this.audio.stopAll();this.resetInput();this.render();}
+  snapshot(){return {songId:this.song?.songId,title:this.songTitle,cue:this.transport.cue?{midi:this.transport.cue.midi,string:this.transport.cue.slot}:null,active:this.active,mode:this.mode,state:this.transport.state,index:this.transport.index,cues:this.song?.cues.length,audioReady:this.audio.ready,attacks:this.audio.attacks,counts:[...this.counts],detectedCounts:[...this.detectedCounts],tracking:this.detector.status,stringsLocked:!!this.stabilizer.locked,stroke:this.detector.sequence,accompaniment:this.transport.dreamAccompaniment,voices:this.audio.voices.size};}
 }
 const lerpPoint=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t});

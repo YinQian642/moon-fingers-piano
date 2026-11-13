@@ -10,8 +10,8 @@
     },
     {
       "path": "dist/app.js",
-      "bytes": 21812,
-      "sha256": "65bf3fbdf0dfb15b134bd7f940f2ef6ac1258fe5a08e6e443f00836790d7ce82"
+      "bytes": 21824,
+      "sha256": "66b533b3d72cda587834070f3642f9d3f9fc3e949615d0006e1571ea27c3bfea"
     },
     {
       "path": "dist/assets/clair-de-lune.ly",
@@ -230,8 +230,8 @@
     },
     {
       "path": "dist/index.html",
-      "bytes": 10300,
-      "sha256": "31b4db7726ecda5ca21abb5bc78be20e36f935d50f7e7af959601da5f768a3bd"
+      "bytes": 10504,
+      "sha256": "932e87f13e9ff57b7bf5b91ef0fb219b59752c188ee043eb786b18a2c5d66687"
     },
     {
       "path": "dist/lib/audio.js",
@@ -265,18 +265,18 @@
     },
     {
       "path": "dist/lib/pipa-audio.js",
-      "bytes": 1963,
-      "sha256": "885c0cb4f0d941a970a366f46511679d55b30d6ba2b2e96e287e583d04ad904e"
+      "bytes": 1957,
+      "sha256": "57dc03d751ed9d23b77afeec066a18d00fad520bdcc9a51118ce3da336095fa8"
     },
     {
       "path": "dist/lib/pipa-gestures.js",
-      "bytes": 4471,
-      "sha256": "437abae7365b7b047e2260faf5a3a4c298a821f4132339fe597e29cf70e0a1eb"
+      "bytes": 7385,
+      "sha256": "8d4373c65b957b07b5f4ac9120dfe291bc1e7591216ea0f07295e0b559e21c6c"
     },
     {
       "path": "dist/lib/pipa.js",
-      "bytes": 15485,
-      "sha256": "78a7a796ad13329666df78e29d3fdd4897692a2a251af2125019b2d26e5c9967"
+      "bytes": 16320,
+      "sha256": "6b1ae3ea742b46c312e9cda5254c415a22935a139d130df6b9ffc0272c5130ad"
     },
     {
       "path": "dist/lib/visuals.js",
@@ -285,8 +285,8 @@
     },
     {
       "path": "dist/pipa.css",
-      "bytes": 5224,
-      "sha256": "6ff9c8d9f14c6fd89669792056f6faa5e3fa4496e9d22be11113f8f78d5b79a9"
+      "bytes": 5611,
+      "sha256": "5c458a4f5094f10dfc8e4b8d65fada776f7efe9b5a55a8914db69daf759e89dc"
     },
     {
       "path": "dist/style.css",

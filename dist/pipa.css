@@ -9,3 +9,6 @@ body[data-instrument="pipa"] main>.workspace,body[data-instrument="pipa"] .keybo
 
 .pipa-strings button.expected{border-color:#d2b1cb;box-shadow:inset 0 0 20px #b892c522}.pipa-strings button.expected strong{color:#f4dcc3}
 @media(max-width:450px){.pipa-heading{align-items:flex-start;flex-direction:column}.pipa-modes{align-self:stretch}.pipa-modes button{flex:1}}
+
+#pipa-lock{pointer-events:auto;font-size:11px;padding:0 0 0 8px;color:#d8c5e4;white-space:nowrap}#pipa-lock[aria-pressed="true"]{color:#f1cba3}.pipa-stage-heading #pipa-tracking{margin-left:auto}
+@media(max-width:450px){.pipa-stage-heading{display:grid;grid-template-columns:1fr auto}.pipa-stage-heading #pipa-tracking{margin-left:0;grid-row:2}#pipa-lock{grid-column:2;grid-row:1 / 3}}

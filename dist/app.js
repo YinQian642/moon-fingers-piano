@@ -119,8 +119,8 @@ async function startCamera(){
   }catch(e){if(token===cameraToken){stopCamera();safeText('camera-message',cameraError(e));}}
   finally{if(token===cameraToken)startingCamera=false;}
 }
-function stopCamera(){cameraToken++;if(videoFrameRequest!==null){video.cancelVideoFrameCallback?.(videoFrameRequest);videoFrameRequest=null;}startingCamera=false;if(stream){stream.getTracks().forEach(t=>{t.onended=null;t.stop();});stream=null;}if(detector&&!detector.ready){detector.close();detector=null;}video.srcObject=null;pipa.pause();pinch.reset();dreamStroke.reset();associator.reset();handCtx.clearRect(0,0,handCanvas.width,handCanvas.height);$('camera-placeholder').hidden=false;$('hand-badges').hidden=true;$('camera-dot').classList.remove('on');safeText('hand-count','未开启');safeText('camera-message','');$('camera-button').querySelector('span').textContent='开启摄像头';transport.pause();}
-$('camera-button').onclick=startCamera;$('sensitivity').oninput=e=>{pinch.threshold=Number(e.target.value)/100;pinch.reset();};$('swap-hands').onchange=()=>{pinch.reset();dreamStroke.reset();associator.reset();pipa.resetInput();};
+function stopCamera(){cameraToken++;if(videoFrameRequest!==null){video.cancelVideoFrameCallback?.(videoFrameRequest);videoFrameRequest=null;}startingCamera=false;if(stream){stream.getTracks().forEach(t=>{t.onended=null;t.stop();});stream=null;}if(detector&&!detector.ready){detector.close();detector=null;}video.srcObject=null;pipa.pause(true);pinch.reset();dreamStroke.reset();associator.reset();handCtx.clearRect(0,0,handCanvas.width,handCanvas.height);$('camera-placeholder').hidden=false;$('hand-badges').hidden=true;$('camera-dot').classList.remove('on');safeText('hand-count','未开启');safeText('camera-message','');$('camera-button').querySelector('span').textContent='开启摄像头';transport.pause();}
+$('camera-button').onclick=startCamera;$('sensitivity').oninput=e=>{pinch.threshold=Number(e.target.value)/100;pinch.reset();};$('swap-hands').onchange=()=>{pinch.reset();dreamStroke.reset();associator.reset();pipa.resetHands();};
 const CONNECTIONS=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[0,17],[17,18],[18,19],[19,20]];
 function detectHands(now){
   if(!stream||!detector?.ready||detector.busy||startingCamera||video.readyState<2||lastFrame===video.currentTime)return;
@@ -141,7 +141,7 @@ function receiveHands(result,now){
   }
   if(instrument==='pipa'){
     pipa.receive(assigned.map(t=>({...t,hand:$('swap-hands').checked?(t.hand==='Left'?'Right':'Left'):t.hand})),now,w/h);
-    if(now-lastHandUi>350){safeText('hand-count',`${seen.size} / 2`);safeText('left-hand',seen.has('Left')?'左手 · 撑弦':'—');safeText('right-hand',seen.has('Right')?'右手 · 拨弦':'—');safeText('recognition-status',`${Math.round(detector.inferenceMs)} ms · ${pipa.counts.reduce((a,b)=>a+b,0)} 次拨弦`);lastHandUi=now;}return;
+    if(now-lastHandUi>350){safeText('hand-count',`${seen.size} / 2`);safeText('left-hand',seen.has('Left')?'左手 · 撑弦':'—');safeText('right-hand',seen.has('Right')?'右手 · 拨弦':'—');safeText('recognition-status',`${Math.round(detector.inferenceMs)} ms · ${pipa.detectedCounts.reduce((a,b)=>a+b,0)} 次拨弦`);lastHandUi=now;}return;
   }
   lastInputBatch=frameHits;
   if(mode==='free')frameReleases.forEach(slot=>piano.release(KEYS[slot].midi));
