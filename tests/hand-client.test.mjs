@@ -77,3 +77,12 @@ test('a complete but corrupt HTTP response is retried with cache reload', async 
   assert.deepEqual(cacheModes,['default','reload']);
   assert.deepEqual([...bytes],[2]);
 });
+
+test('a queued request can receive headers later than the body idle deadline', async () => {
+  const fetcher = (url, {signal}) => new Promise((resolve, reject) => {
+    const timer = setTimeout(() => resolve(new Response(Uint8Array.of(42))), 120);
+    signal.addEventListener('abort', () => { clearTimeout(timer); reject(Error('aborted')); });
+  });
+  const bytes = await downloadBytes('test', {expectedLength:1, idleMs:30, retries:0, fetcher});
+  assert.deepEqual([...bytes], [42]);
+});

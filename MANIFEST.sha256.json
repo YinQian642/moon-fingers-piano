@@ -11,7 +11,7 @@
     {
       "path": "dist/app.js",
       "bytes": 21876,
-      "sha256": "f0b5adef468c427d6ee3b6e7c92278e9f460daa215139e424d7e34fe80df0f6a"
+      "sha256": "c16d7dfc4f9f02dc252a5c01f8b3c403b276fe1ea287ee04354bb060ea4b49e1"
     },
     {
       "path": "dist/assets/clair-de-lune.ly",
@@ -231,7 +231,7 @@
     {
       "path": "dist/index.html",
       "bytes": 10661,
-      "sha256": "3690553dac5ec338281740fb6c7bb7514b1fa5373dfbaf6c60e6320041ae97eb"
+      "sha256": "446f7828b0a97b68b00aebc48258548d1aec86958f6da49052b4fb251c9b9a18"
     },
     {
       "path": "dist/lib/audio.js",
@@ -245,13 +245,13 @@
     },
     {
       "path": "dist/lib/hand-assets.js",
-      "bytes": 7554,
-      "sha256": "4942e06f969fb84bc6b4920322ddcaba9d64a3002b9fa9553bfbfc34257e01cd"
+      "bytes": 7781,
+      "sha256": "1650bf895e0e8bbe5a70339a263b8514df9cc7c9c9fef45b0230ebd4af8a3f79"
     },
     {
       "path": "dist/lib/hand-client.js",
       "bytes": 5284,
-      "sha256": "b51cd0d217e3a565ecd69751f47c90dc4d19c36586e687f371f9a09c2c474f8b"
+      "sha256": "8ba2c228d6e0909849d3153d032d21b9943ae2b4e47eac54a6d41634b8df4102"
     },
     {
       "path": "dist/lib/hand-runtime.js",

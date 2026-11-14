@@ -20,9 +20,9 @@ export async function downloadBytes(url, {
     let timer, stalled = false;
     const abort = () => controller.abort();
     signal?.addEventListener('abort', abort, {once: true});
-    function touch() {
+    function touch(timeout = idleMs) {
       clearTimeout(timer);
-      timer = setTimeout(() => { stalled = true; abort(); }, idleMs);
+      timer = setTimeout(() => { stalled = true; abort(); }, timeout);
     }
     function append(bytes) {
       if (!bytes.length) return;
@@ -36,7 +36,9 @@ export async function downloadBytes(url, {
       onProgress(received, attempt);
     }
     try {
-      touch();
+      // A request may queue behind another large transfer before headers arrive.
+      // Apply the shorter progress watchdog only after that transfer starts.
+      touch(expectedLength ? Math.max(idleMs, 120000) : idleMs);
       const resume = expectedLength && received > 0 && received < expectedLength;
       const headers = resume ? {Range: `bytes=${received}-`} : {};
       const response = await fetcher(url, {

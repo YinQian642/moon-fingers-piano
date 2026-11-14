@@ -1,4 +1,4 @@
-import {loadHandAssets} from './hand-assets.js?v=4';
+import {loadHandAssets} from './hand-assets.js?v=5';
 import {createHandDetector} from './hand-runtime.js?v=3';
 
 export class HandWorker {
