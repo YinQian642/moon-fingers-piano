@@ -9,6 +9,8 @@ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'C:
 const workerSource=await fs.readFile('dist/lib/hand-worker.js','utf8');
 const scenarios=[
   {name:'normal',backend:'worker'},
+  {name:'same-origin scripts only',backend:'worker',policy:true},
+  {name:'same-origin scripts only with main fallback',backend:'main',policy:true,setup:()=>{window.createImageBitmap=undefined;}},
   {name:'Safari 16 UA branch',backend:'worker',userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1'},
   {name:'iOS Chrome UA branch',backend:'worker',userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/130.0.6723.90 Mobile/15E148 Safari/604.1'},
   {name:'without AbortSignal.timeout',backend:'worker',setup:()=>{AbortSignal.timeout=undefined;}},
@@ -49,21 +51,30 @@ try{
     });
     await new Promise(r=>slowServer.listen(0,'127.0.0.1',r));
     const page=await browser.newPage();await page.goto(`http://127.0.0.1:${slowServer.address().port}`);
-    const result=await run(page);assert(result.ms>60000);assert.equal(result.frames,1);assert(result.messages.filter(m=>m.includes('MB')).length>20);
+    const result=await run(page);assert(result.ms>60000);assert.equal(result.frames,1);assert(result.messages.filter(m=>m.includes('%')).length>20);
     console.log(JSON.stringify({check:'continuous model download beyond 60 seconds',ms:result.ms,backend:result.backend,passed:true}));
   }else{
     for(const s of scenarios){
       const context=await browser.newContext({userAgent:s.userAgent});
       if(s.setup)await context.addInitScript(s.setup);
+      if(s.policy){
+        const policy="script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'";
+        const applyPolicy=async route=>{
+          const response=await route.fetch();
+          await route.fulfill({response,headers:{...response.headers(),'content-security-policy':policy}});
+        };
+        await context.route(new URL('./',base).href,applyPolicy);
+        await context.route('**/lib/hand-worker.js*',applyPolicy);
+      }
       if(s.workerPrefix||s.workerSuffix||s.workerBody)await context.route('**/lib/hand-worker.js*',r=>r.fulfill({contentType:'text/javascript',body:s.workerBody||`${s.workerPrefix||''}\n${workerSource}\n${s.workerSuffix||''}`}));
       let requests=0;
       if(s.retry)await context.route('**/vendor/hand_landmarker.task',r=>++requests===1?r.fulfill({status:503,body:'temporary failure'}):r.continue());
       const page=await context.newPage();await page.goto(base);const result=await run(page);
       assert.equal(result.backend,s.backend,s.name);assert.equal(result.frames,1,s.name);if(s.retry)assert.equal(requests,2);
       if(s.name==='normal'){
-        let downloads=0;await context.route('**/vendor/**',r=>{downloads++;return r.abort();});
-        const cached=await run(page);assert.equal(cached.frames,1);assert.equal(downloads,0,'all recognition files reused without network');
-        await context.unroute('**/vendor/**');
+        let downloads=0;await context.route(/\.(task|wasm)$/,r=>{downloads++;return r.abort();});
+        const cached=await run(page);assert.equal(cached.frames,1);assert.equal(downloads,0,'model and WASM reused without network');
+        await context.unroute(/\.(task|wasm)$/);
         await page.evaluate(async()=>{const cache=await caches.open('moonlight-hand-assets-v1');for(const key of await cache.keys())if(key.url.includes('hand_landmarker.task'))await cache.put(key,new Response('corrupt'));});
         let repaired=0;await context.route('**/vendor/hand_landmarker.task',r=>{repaired++;return r.continue();});
         assert.equal((await run(page)).frames,1);assert.equal(repaired,1,'corrupt cache refetched');

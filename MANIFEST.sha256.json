@@ -11,7 +11,7 @@
     {
       "path": "dist/app.js",
       "bytes": 21876,
-      "sha256": "f30bad872981a05f7f1f0ea756ccd8b588354bd617cd99374eb637dc850e206d"
+      "sha256": "6e1b5a6e5b841d6ec53402751f14068bd5530ae175b3d88ae1a78a55efa1d534"
     },
     {
       "path": "dist/assets/clair-de-lune.ly",
@@ -231,7 +231,7 @@
     {
       "path": "dist/index.html",
       "bytes": 10661,
-      "sha256": "e0230ea79638bd6698512d116236ae70ff147410e570684217832682c8d31941"
+      "sha256": "a69b6d90af7b9f7e67c471afb664bde463923f2d790dc224c4b725b23aa2efb9"
     },
     {
       "path": "dist/lib/audio.js",
@@ -245,13 +245,13 @@
     },
     {
       "path": "dist/lib/hand-assets.js",
-      "bytes": 5328,
-      "sha256": "43b21b702959237cabaf3aef1e8033632af60abf6f360c32529b439e0e86c64f"
+      "bytes": 6243,
+      "sha256": "c1d84106f324dae3a70354dea4d3f9570a595cf3b5ea3cd1c98d4196942fdc7c"
     },
     {
       "path": "dist/lib/hand-client.js",
-      "bytes": 5316,
-      "sha256": "c19982b73ee7f812109f366c09705b9c634d4c1af5211881b4a1d364bde61a91"
+      "bytes": 5284,
+      "sha256": "50df25e63c34ca98e479954bf0b45c95c9bbbb16258c0c790ce5ed5a9e0fe818"
     },
     {
       "path": "dist/lib/hand-runtime.js",
@@ -260,8 +260,8 @@
     },
     {
       "path": "dist/lib/hand-worker.js",
-      "bytes": 968,
-      "sha256": "fbbf8af7d0e7a34e53c225eae6473e7239b691edc5ad3dc26ca4811e6e3e0636"
+      "bytes": 972,
+      "sha256": "4c486c8710e14f692eb8f2b2481122b2795c1d4d6478f7e9bad5730296450dc8"
     },
     {
       "path": "dist/lib/library.js",
@@ -337,6 +337,11 @@
       "path": "dist/vendor/vision_bundle.mjs",
       "bytes": 137735,
       "sha256": "40f4123dfcd75cfa58add046919cc6f52fde66f009ff582997c09ba54c6ba27c"
+    },
+    {
+      "path": "dist/vendor/vision_bundle_bytes.mjs",
+      "bytes": 137860,
+      "sha256": "4ecdfb6c6917b9f48776226ea70c4a5ce12a8f3830f858a79cc77c01c4940432"
     },
     {
       "path": "dist/vendor/wasm/vision_wasm_internal.js",

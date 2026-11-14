@@ -2,7 +2,7 @@ import {KEYS,buildSong,pitchName,Transport} from './lib/music.js';
 import {archivedSong} from './lib/library.js';
 import {PipaExperience} from './lib/pipa.js';
 import {Piano} from './lib/audio.js';
-import {HandWorker} from './lib/hand-client.js?v=2';
+import {HandWorker} from './lib/hand-client.js?v=3';
 import {Sky} from './lib/visuals.js';
 import {PinchDetector,HandAssociator,DreamStrokeGate,cameraError} from './lib/gestures.js';
 const $=id=>document.getElementById(id),piano=new Piano(),pinch=new PinchDetector();

@@ -22,7 +22,7 @@ test('a stalled download is aborted and retried',async()=>{
   assert.equal(calls,2);assert(aborted);assert.deepEqual([...bytes],[7,8]);
 });
 test('HTTP errors retry but exhausted failures are actionable',async()=>{
-  let calls=0;await assert.rejects(downloadBytes('test',{fetcher:async()=>{calls++;return new Response('',{status:503});}}),/下载失败/);assert.equal(calls,3);
+  let calls=0;await assert.rejects(downloadBytes('test',{fetcher:async()=>{calls++;return new Response('',{status:503});}}),/加载失败/);assert.equal(calls,3);
 });
 test('user cancellation aborts the body and never retries',async()=>{
   const controller=new AbortController();let calls=0;
@@ -37,4 +37,43 @@ test('worker startup timeout permits fallback and cancellation cleans up',async 
   const h=new HandWorker(),controller=new AbortController();h.assets={};
   const pending=h.startWorker(controller.signal);expire();await assert.rejects(pending,/启动超时/);h.stopWorker();assert(worker.terminated);
   const cancelled=h.startWorker(controller.signal);controller.abort();await assert.rejects(cancelled,/已取消/);h.stopWorker();assert(worker.terminated);
+});
+
+for (const supportsRange of [true, false]) {
+  test('interrupted body retries the missing range, server supports Range: ' + supportsRange, async () => {
+    const payload = Uint8Array.of(1,2,3,4,5);
+    let calls = 0;
+    const fetcher = async (url, options) => {
+      if (++calls === 1) {
+        let sent = false;
+        return new Response(new ReadableStream({
+          pull(controller) {
+            if (sent) return controller.error(Error('connection closed'));
+            sent = true;
+            controller.enqueue(payload.slice(0,3));
+          }
+        }));
+      }
+      assert.equal(options.headers.Range, 'bytes=3-');
+      return supportsRange
+        ? new Response(payload.slice(3), {status:206, headers:{'Content-Range':'bytes 3-4/5'}})
+        : new Response(payload);
+    };
+    const bytes = await downloadBytes('test', {fetcher, expectedLength:5});
+    assert.deepEqual(bytes, payload);
+    assert.equal(calls, 2);
+  });
+}
+
+test('a complete but corrupt HTTP response is retried with cache reload', async () => {
+  const cacheModes = [];
+  const bytes = await downloadBytes('test', {
+    expectedLength:1, verify:bytes=>bytes[0]===2,
+    fetcher:async (url,options)=>{
+      cacheModes.push(options.cache);
+      return new Response(Uint8Array.of(cacheModes.length));
+    }
+  });
+  assert.deepEqual(cacheModes,['default','reload']);
+  assert.deepEqual([...bytes],[2]);
 });

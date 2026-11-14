@@ -1,5 +1,5 @@
-import {loadHandAssets} from './hand-assets.js';
-import {createHandDetector} from './hand-runtime.js';
+import {loadHandAssets} from './hand-assets.js?v=3';
+import {createHandDetector} from './hand-runtime.js?v=3';
 
 export class HandWorker {
   constructor(onStatus=()=>{}){this.onStatus=onStatus;this.ready=false;this.busy=false;this.frames=0;this.inferenceMs=0;this.generation=0;}
@@ -8,7 +8,7 @@ export class HandWorker {
     const generation=++this.generation,controller=new AbortController();this.controller=controller;
     this.loading=(async()=>{
       const assets=await loadHandAssets(controller.signal,text=>{if(!controller.signal.aborted)this.onStatus(text);});
-      if(controller.signal.aborted){assets.release();throw Error('识别已取消');}this.assets=assets;
+      if(controller.signal.aborted){throw Error('识别已取消');}this.assets=assets;
       try{
         if(typeof Worker==='undefined'||typeof createImageBitmap!=='function')throw Error('Worker image input unavailable');
         await this.startWorker(controller.signal);
@@ -24,7 +24,7 @@ export class HandWorker {
   }
   startWorker(signal){
     return new Promise((resolve,reject)=>{
-      const worker=this.worker=new Worker(new URL('./hand-worker.js?v=2',import.meta.url));
+      const worker=this.worker=new Worker(new URL('./hand-worker.js?v=3',import.meta.url));
       let settled=false;
       const finish=error=>{if(settled)return;settled=true;clearTimeout(timer);signal.removeEventListener('abort',abort);error?reject(error):resolve();};
       const abort=()=>finish(Error('识别已取消'));
@@ -84,6 +84,6 @@ export class HandWorker {
   stopWorker(){clearTimeout(this.frameTimer);this.worker?.terminate();this.worker=null;this.resolveFrame?.(null);this.resolveFrame=this.rejectFrame=null;}
   close(){
     ++this.generation;this.controller?.abort();this.stopWorker();this.mainDetector?.close();this.mainDetector=null;
-    this.assets?.release();this.assets=null;this.ready=false;this.busy=false;this.loading=null;
+    this.assets=null;this.ready=false;this.busy=false;this.loading=null;
   }
 }
