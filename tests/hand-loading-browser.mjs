@@ -21,7 +21,7 @@ const scenarios=[
   {name:'without SIMD',backend:'worker',setup:()=>{WebAssembly.validate=()=>false;}},
   {name:'worker initialization hangs',backend:'main',workerBody:'self.onmessage=()=>{};',setup:()=>{const native=setTimeout;window.setTimeout=(fn,ms,...args)=>native(fn,ms===20000?300:ms,...args);}},
   {name:'first worker frame fails',backend:'main',workerSuffix:'const original=self.onmessage;self.onmessage=e=>{if(e.data.type==="frame"){e.data.bitmap.close();self.postMessage({type:"error",phase:"frame",message:"simulated image transfer failure"});}else original(e);};'},
-  {name:'HTTP retry',backend:'worker',retry:true},
+  {name:'full model unavailable, recover verified parts',backend:'worker',retry:true},
 ];
 async function run(page){
   return page.evaluate(async()=>{
@@ -70,7 +70,7 @@ try{
       let requests=0;
       if(s.retry)await context.route('**/vendor/hand_landmarker.task',r=>++requests===1?r.fulfill({status:503,body:'temporary failure'}):r.continue());
       const page=await context.newPage();await page.goto(base);const result=await run(page);
-      assert.equal(result.backend,s.backend,s.name);assert.equal(result.frames,1,s.name);if(s.retry)assert.equal(requests,2);
+      assert.equal(result.backend,s.backend,s.name);assert.equal(result.frames,1,s.name);if(s.retry)assert.equal(requests,1);
       if(s.name==='normal'){
         let downloads=0;await context.route(/\.(task|wasm)$/,r=>{downloads++;return r.abort();});
         const cached=await run(page);assert.equal(cached.frames,1);assert.equal(downloads,0,'model and WASM reused without network');

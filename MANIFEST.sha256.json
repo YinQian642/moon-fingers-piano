@@ -11,7 +11,7 @@
     {
       "path": "dist/app.js",
       "bytes": 21876,
-      "sha256": "6e1b5a6e5b841d6ec53402751f14068bd5530ae175b3d88ae1a78a55efa1d534"
+      "sha256": "f0b5adef468c427d6ee3b6e7c92278e9f460daa215139e424d7e34fe80df0f6a"
     },
     {
       "path": "dist/assets/clair-de-lune.ly",
@@ -231,7 +231,7 @@
     {
       "path": "dist/index.html",
       "bytes": 10661,
-      "sha256": "a69b6d90af7b9f7e67c471afb664bde463923f2d790dc224c4b725b23aa2efb9"
+      "sha256": "3690553dac5ec338281740fb6c7bb7514b1fa5373dfbaf6c60e6320041ae97eb"
     },
     {
       "path": "dist/lib/audio.js",
@@ -245,13 +245,13 @@
     },
     {
       "path": "dist/lib/hand-assets.js",
-      "bytes": 6243,
-      "sha256": "c1d84106f324dae3a70354dea4d3f9570a595cf3b5ea3cd1c98d4196942fdc7c"
+      "bytes": 7554,
+      "sha256": "4942e06f969fb84bc6b4920322ddcaba9d64a3002b9fa9553bfbfc34257e01cd"
     },
     {
       "path": "dist/lib/hand-client.js",
       "bytes": 5284,
-      "sha256": "50df25e63c34ca98e479954bf0b45c95c9bbbb16258c0c790ce5ed5a9e0fe818"
+      "sha256": "b51cd0d217e3a565ecd69751f47c90dc4d19c36586e687f371f9a09c2c474f8b"
     },
     {
       "path": "dist/lib/hand-runtime.js",
@@ -322,6 +322,271 @@
       "path": "dist/vendor/MIDI-LICENSE.txt",
       "bytes": 1107,
       "sha256": "6debbf1ddd278dcf5d8e7b6c42c7a827cb944943401fc37ee017e172bbccbaea"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/0.bin",
+      "bytes": 524288,
+      "sha256": "c6ee5eded4144392e5bd4f53f97d9c9ff5fb3f81a8e8a0456a6ab2a99089dc4b"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/1.bin",
+      "bytes": 524288,
+      "sha256": "1882c852773885381125c9beaa5e83716584b827fa47b0cefb12dbb2ba00daf6"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/10.bin",
+      "bytes": 524288,
+      "sha256": "698a30554e94ca658e95d757f824b7ca6a2e38bb8940882ad97aed0374a186d3"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/11.bin",
+      "bytes": 524288,
+      "sha256": "5706084b1814628efc9e6d7ca1e5504292aee9d41a59253d28b714b18e47921e"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/12.bin",
+      "bytes": 524288,
+      "sha256": "733f8eae3ad03556070307cb74220bb339cd0611bf90bb31b2943f6967ae82e3"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/13.bin",
+      "bytes": 524288,
+      "sha256": "3e3ccf7603d2bb76aff3d4e44071b42ad03f4db2315e16f7ae64288760b4153f"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/14.bin",
+      "bytes": 524288,
+      "sha256": "09000c88cb921a1e572691f83a36be1c552165543ed3fc8bdd5791e29a96eacc"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/15.bin",
+      "bytes": 524288,
+      "sha256": "5952150f0fbbf61eaf7d89fa0f66e75e5aa7a8a6d3899dfe63cb16a61481e2ed"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/16.bin",
+      "bytes": 524288,
+      "sha256": "4b715b0a1fd1c25f5ad2e30887ba0c02e7cfb1ece08095c9a9b575e09090eedc"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/17.bin",
+      "bytes": 524288,
+      "sha256": "245e48b5a5abc586cf2b55a8be454e8b5dcd1764237fc6143e8d7efbe478bb9e"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/18.bin",
+      "bytes": 11454,
+      "sha256": "c915be725e73f3c9327b306e5dac98b815bcf90e0e811eea3b0374818d162721"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/2.bin",
+      "bytes": 524288,
+      "sha256": "3b93cbb14c3ba61894e464e6d50ef26fd5330f470257eceba6b88f11c0a18e1f"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/3.bin",
+      "bytes": 524288,
+      "sha256": "9fee7b022926389cf199b354b7152584deb8f30ad2afa1aa27c2eda2bdc62fb5"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/4.bin",
+      "bytes": 524288,
+      "sha256": "8309e9052da8aa417c0610165091593a0c3f453c29608c03884e30a9db87f124"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/5.bin",
+      "bytes": 524288,
+      "sha256": "cb492b2d0ad365aa68f3449150a6433d4e24e79d0ee04eefb31a27c4db1a78f8"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/6.bin",
+      "bytes": 524288,
+      "sha256": "e538dc6f114a96ee07a29809404001b8eb82b7c94c0be6545a1e271116cbcf81"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/7.bin",
+      "bytes": 524288,
+      "sha256": "5f28406b0221e03a27d34195483da9a5c34595c15b3feb7f7714d789e314f5ce"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/8.bin",
+      "bytes": 524288,
+      "sha256": "198a55a2b53e4a7e2052d3242c7c79d9a66bb9ca8c6e1c9e4fed52077632d893"
+    },
+    {
+      "path": "dist/vendor/hand-parts/3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4/9.bin",
+      "bytes": 524288,
+      "sha256": "895073ca55fab4ec3f978ebf968ea6337f5f6a672cf121cd7b7420ee6dde79aa"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/0.bin",
+      "bytes": 524288,
+      "sha256": "d29684d6194225fb8e1afeb71ad7afcd86bf7ed82b713dfd3703a03d9c621ac2"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/1.bin",
+      "bytes": 524288,
+      "sha256": "8eb22f240fa2ed969d7261e88970a9875d3e93bbec162faa59ba8282c9edaddd"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/10.bin",
+      "bytes": 524288,
+      "sha256": "2e93d54afbb63cc6bb54b2c8ca8816d58002d8cbbdf7c41c6d66644ca70164da"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/11.bin",
+      "bytes": 524288,
+      "sha256": "856fea95521e41147cb8f57aa185f020097839290fba98fb364a3cd22b4f0787"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/12.bin",
+      "bytes": 524288,
+      "sha256": "516f017cc0ed874d9a5a2f74035e699f63ae2d4053883e49cbb2155766234101"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/13.bin",
+      "bytes": 524288,
+      "sha256": "6ec177c02f6fa0d180ef6471dcc1789ce573872c600ef816c4233c5221b89be1"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/14.bin",
+      "bytes": 524288,
+      "sha256": "f1905f5b3e2b28e6db046045d18e6e28aeab8ccd6847369bc978642607b77773"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/15.bin",
+      "bytes": 524288,
+      "sha256": "409bb01e1c23e1aaf9ef9df6f8adaff4d975f4938358c619892773a4e555a27c"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/16.bin",
+      "bytes": 524288,
+      "sha256": "415bc530f5cf79e5585d158b924f864b39a10d695be872c1089e47d36e9fd89c"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/17.bin",
+      "bytes": 524288,
+      "sha256": "a58cbc6ce04ff237740dd333e7b5c64c13c959f016646eb32cfb88ba6eb486b2"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/18.bin",
+      "bytes": 136848,
+      "sha256": "ef1fda792a970602ad7a5a1cd8a70a5f26ce8d489b7bdeed6cf818041b8a016f"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/2.bin",
+      "bytes": 524288,
+      "sha256": "d271720a7dbca980688cf6fc6c3071f4059351c5d45e5cd1a3fa6dac836a047c"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/3.bin",
+      "bytes": 524288,
+      "sha256": "9fdb963eb255ed15df37df60b1fcc667472cb767c9076aa4ad893aeb59d1903c"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/4.bin",
+      "bytes": 524288,
+      "sha256": "34c19eda442f7e9e123e2ac7a2fb5f57a04c99b17416fa9ff6d9bf9a017cfd52"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/5.bin",
+      "bytes": 524288,
+      "sha256": "1a077d1585d1a7e47dba6f072e968048a5ac61c42406f287ab30408d9479176c"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/6.bin",
+      "bytes": 524288,
+      "sha256": "6931e4d77e334ca782ddda822916acd3edf33370af5c93c4d8de3b55654b1337"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/7.bin",
+      "bytes": 524288,
+      "sha256": "dc7f8f2633d96b1e6090db28fddeffa09b934d8a1f6e754dc27ff8ae53c88424"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/8.bin",
+      "bytes": 524288,
+      "sha256": "4b0183be7d7906f7eaa4c2261b45d8b33bba5d67f5911bf1027983c3d26eea36"
+    },
+    {
+      "path": "dist/vendor/hand-parts/f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7/9.bin",
+      "bytes": 524288,
+      "sha256": "ad3fbf8b680095133df99eec20caff217cdb7b0c46fbb6ec659d9475bebc747d"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/0.bin",
+      "bytes": 524288,
+      "sha256": "a4efc9913b405e33928c17f52c0574bcd4ae101269a10923b53845618b321077"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/1.bin",
+      "bytes": 524288,
+      "sha256": "9974cb24255496572d7c96abea2dec8ed5e2d513b157458b6cac1a37d4c89dbe"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/10.bin",
+      "bytes": 524288,
+      "sha256": "50aeda3b38cf1b131655b44451f99703837e6a5568b0552717f5afb0c627a324"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/11.bin",
+      "bytes": 524288,
+      "sha256": "3f196dc55aa5797ab95c835c16ad8eac8841864351b84a0e47313c617641fda6"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/12.bin",
+      "bytes": 524288,
+      "sha256": "92a7ecebeccc5c4379f79be40ad62e3a442bc3eb19e432fb4f06a6bb2b0cb7fc"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/13.bin",
+      "bytes": 524288,
+      "sha256": "9017de597428f1f4c4f137f1b6be78c999f1cee11abd496214378de8bfb14bc1"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/14.bin",
+      "bytes": 479073,
+      "sha256": "694766d1a4472672c2b2f9901bea00b1e30c30d2709a826cf3c59b20c81185a3"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/2.bin",
+      "bytes": 524288,
+      "sha256": "1cc5cae03dec2f074020fe463a66c4a4df21e2361af49fea05504b88d11bb2d4"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/3.bin",
+      "bytes": 524288,
+      "sha256": "430ed3d00429d674c3dfb87aab591b7cc96591634be6549921a0de228c0e5208"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/4.bin",
+      "bytes": 524288,
+      "sha256": "d7838c54fb592b2e782c44006c02f37cc1ca5bac804d805d77179c95612b4852"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/5.bin",
+      "bytes": 524288,
+      "sha256": "cbb09a1cecaeb580edc494e586bc3bb52d9cd02a1800437c3de158cbd4b0536e"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/6.bin",
+      "bytes": 524288,
+      "sha256": "d474538a0322cbd0b52c0abb96ac9852160a83ce2f0b6843e061d938b424938a"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/7.bin",
+      "bytes": 524288,
+      "sha256": "dd0aeacd20046d0ded5ab6b18a798e0dfd918adafa6b247dd77e1684ed8ee69b"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/8.bin",
+      "bytes": 524288,
+      "sha256": "d3817c514abdd963e299c73077354cb49d56ccab2a36c72079c65f831a126547"
+    },
+    {
+      "path": "dist/vendor/hand-parts/fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1/9.bin",
+      "bytes": 524288,
+      "sha256": "39ff5c5b0d02f57a423c456314e67df71186bd6800bfe84d0d1405a27d10ea11"
     },
     {
       "path": "dist/vendor/hand_landmarker.task",

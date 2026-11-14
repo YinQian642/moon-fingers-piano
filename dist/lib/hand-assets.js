@@ -10,7 +10,7 @@ function check(signal) {
 
 export async function downloadBytes(url, {
   signal, onProgress = () => {}, idleMs = 30000, retries = 2, fetcher = fetch,
-  expectedLength, verify, label = '识别资源'
+  expectedLength, verify, recover, label = '识别资源'
 } = {}) {
   let chunks = [], received = 0;
   function reset() { chunks = []; received = 0; }
@@ -81,6 +81,11 @@ export async function downloadBytes(url, {
       return bytes;
     } catch (error) {
       check(signal);
+      if (recover && (received === 0 || attempt === retries)) {
+        clearTimeout(timer);
+        abort();
+        return recover(chunks, received);
+      }
       if (attempt === retries) throw Error(`${label}加载失败（${stalled ? '下载停滞' : error.message}），请重新开启摄像头。`);
     } finally {
       clearTimeout(timer);
@@ -94,6 +99,31 @@ async function valid(bytes, spec) {
   if (bytes.byteLength !== spec[1]) return false;
   const digest = await crypto.subtle.digest('SHA-256', bytes);
   return [...new Uint8Array(digest)].map(x => x.toString(16).padStart(2, '0')).join('') === spec[2];
+}
+
+async function recoverParts(vendor, spec, prefix, received, signal, report) {
+  const partSize = 512 * 1024;
+  const bytes = new Uint8Array(spec[1]);
+  let offset = 0;
+  for (const chunk of prefix) { bytes.set(chunk, offset); offset += chunk.length; }
+  let nextPart = Math.floor(received / partSize);
+  let completed = nextPart * partSize;
+  async function readNext() {
+    while (nextPart * partSize < bytes.length) {
+      const index = nextPart++;
+      const start = index * partSize;
+      const url = new URL(`hand-parts/${spec[2]}/${index}.bin`, vendor);
+      const part = await downloadBytes(url, {
+        expectedLength: Math.min(partSize, bytes.length - start), signal, label: '识别资源分段'
+      });
+      bytes.set(part, start);
+      completed += part.length;
+      report(Math.max(received, completed), 1);
+    }
+  }
+  await Promise.all([readNext(), readNext()]);
+  if (!await valid(bytes, spec)) throw Error('识别资源分段校验失败，请重新开启摄像头。');
+  return bytes;
 }
 
 export async function loadHandAssets(signal, onStatus = () => {}) {
@@ -115,17 +145,18 @@ export async function loadHandAssets(signal, onStatus = () => {}) {
         await cache.delete(key);
       }
     } catch { /* Storage access is optional. */ }
-    const bytes = await downloadBytes(url, {
-      signal: group.signal, expectedLength: spec[1], verify: bytes => valid(bytes, spec),
-      label: index === 0 ? '手势模型' : '识别引擎',
-      onProgress(n, attempt) {
+    function report(n, attempt) {
         sizes[index] = n;
         const now = Date.now();
         if (now - lastStatus < 200 && n !== spec[1]) return;
         lastStatus = now;
         const percent = Math.floor(100 * (sizes[0] + sizes[1]) / total);
         onStatus(`${attempt ? '重新连接，' : ''}加载识别资源… ${percent}%`);
-      }
+    }
+    const bytes = await downloadBytes(url, {
+      signal: group.signal, expectedLength: spec[1], verify: bytes => valid(bytes, spec),
+      label: index === 0 ? '手势模型' : '识别引擎', onProgress: report,
+      recover: (prefix, received) => recoverParts(vendor, spec, prefix, received, group.signal, report)
     });
     check(group.signal);
     try { await cache?.put(key, new Response(bytes)); } catch { /* Storage may be full. */ }

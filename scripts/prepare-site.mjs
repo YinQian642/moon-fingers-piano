@@ -1,6 +1,7 @@
 // Rebuild the deployable library from the repository's authoritative archives.
 import {validateLibrary} from '../music-library/tools/archive.mjs';
-import {readFileSync, writeFileSync} from 'node:fs';
+import {mkdirSync, readFileSync, writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 const cwd = fileURLToPath(new URL('../', import.meta.url));
@@ -23,5 +24,16 @@ if (upstream.split(factoryOptions).length !== 2) throw Error('Review the WASM fa
 const adapted = upstream.replace(factoryOptions, 'n.assetLoaderPath,e,{wasmBinary:n.wasmBinary,locateFile:t=>');
 writeFileSync(new URL('vision_bundle_bytes.mjs', vendor),
   '// Modified by Moon Fingers Piano: let callers supply verified WASM bytes to the Emscripten factory.\n' + adapted);
+// Serve small immutable objects when an edge connection cannot deliver a large file.
+for (const file of ['hand_landmarker.task','wasm/vision_wasm_internal.wasm','wasm/vision_wasm_nosimd_internal.wasm']) {
+  const bytes = readFileSync(new URL(file, vendor));
+  const digest = createHash('sha256').update(bytes).digest('hex');
+  const dir = new URL(`hand-parts/${digest}/`, vendor);
+  mkdirSync(dir, {recursive:true});
+  const partSize = 512 * 1024;
+  for (let start = 0; start < bytes.length; start += partSize) {
+    writeFileSync(new URL(`${start / partSize}.bin`, dir), bytes.subarray(start, start + partSize));
+  }
+}
 run('scripts/update-manifest.mjs');
 run('verify-dist.mjs');
